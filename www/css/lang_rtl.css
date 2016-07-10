@@ -1,0 +1,10 @@
+ /* התאמה לעברית  ותיקון לסילד בר כדי שלא יפגע בו*/
+    div, #sidebar ul li a, .ui-input-text input, .ui-input-search input, .ui-checkbox .ui-btn, .ui-radio .ui-btn, .ui-listview > li > a.ui-btn {
+        text-align: right;
+        direction: rtl;
+    }
+    .owl-carousel, .owl-wrapper-outer, .owl-pagination {
+        direction: ltr;
+        text-align: center;
+    }
+    /*עד כאן*/
