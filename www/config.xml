@@ -14,8 +14,6 @@
         אבנר פניני
     </author>
     <access origin="*" />
-    <allow-intent href="*" />
-    <allow-navigation href="*" />
     
     <preference name="phonegap-version" value="cli-5.2.0" />
     <preference name="orientation"      value="default" />
