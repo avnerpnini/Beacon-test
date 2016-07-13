@@ -72,7 +72,7 @@ function selectLanguage(lang){
 }
 
 
-
+{
 var word = [
 //הדבקה כאן
 new Array("יש לאן ","Way To Go","Way To Go"),//0
@@ -125,7 +125,7 @@ new Array("תודה רבה שהורדתם את האפלקיציה שלנו!","Th
 new Array("האפליקציה מיועדת להפעלת משחק הניווט הסלולרי של חברת 'יש לאן'. ","The application is meant for running the 'Way to Go' cellular navigation game.","L'application est destinéee à la course d'orientation cellulaire \"Way to Go\""),//47
 new Array("על מנת לתאם פעילות לקבוצות, או לברר מתי והיכן ניתן לבצע את הפעילות עבור יחידים - מומלץ לצור איתנו קשר.","Contact us to schedule a group game, or to check times and locations for individual play.","Pour organiser une Course d'Orientation pour des groupes ou vérifier où et quand il est possible de participer à une course d’orientation pour des individuels, il est conseillé de prendre contact avec nous."),//48
 new Array("כל הזכויות שמורות לחברת 'יש לאן' 2016","2016 'Way to Go', all rights reserved","Tous les droits sont réservés à la Société Yesh Lean 2016"),//49
-null,//50
+new Array("כמות השחקנים בצוות","How many players in the team","Combien de joueurs dans l'équipe"),//50
 null,//51
 null,//52
 null,//53
@@ -174,7 +174,7 @@ null,//95
 null,//96
 null,//97
 null,//98
-null,//99
+new Array("כמות המשתתפים לא תקין או חסר","Number of participants invaild or missing","Nombre de participants non valide ou manquante"),//99
 new Array("שם פרטי לא תקין או חסר","First name invalid or missing","Prénom non valide ou manquant"),//100
 new Array("שם משפחה לא תקין או חסר","Last name invalid or missing","Nom de famille non valide ou manquant"),//101
 new Array("מקום מגורים לא תקין או חסר- ניתן להשאיר שדה זה ריק","Address invaild or missing- you may leave this field empty","Adresse non valide ou manquante"),//102
@@ -211,7 +211,7 @@ new Array("יוצאים לדרך, בהצלחה!","Starting game, good luck!","C'
 new Array("רישום משתמש נכשל-נסה שנית!","User registration failed, please try again!","L'inscription a échoué- Recommencer!"),//133
 new Array("לקבלת עזרה פנה למדריך","For help, ask a guide","Pour recevoir de l'aide, demander à l’organisateur"),//134
 new Array("רענון נתונים עקב איבוד רצף בשלבים","רענון נתונים עקב איבוד רצף בשלבים","רענון נתונים עקב איבוד רצף בשלבים"),//135
-new Array("כל הכבוד! עוד רגע וסיימתם! חזרו חזרה לנקודת ההתחלה וסרקו את הברקוד לסיום הניווט","Great job! Almost done! Go back to the starting point and scan the QR code to finish the game","Bravo ! Vous avez bientôt fini. Retournez au point de départ et scannez le code-barres de fin !"),//136
+new Array("כל הכבוד! עוד רגע וסיימתם! חזרו חזרה לנקודת הזינוק וסרקו את הברקוד לסיום הניווט","Great job! Almost done! Go back to the starting point and scan the QR code to finish the game","Bravo ! Vous avez bientôt fini. Retournez au point de départ et scannez le code-barres de fin !"),//136
 new Array("התחלתם את ניווט ","You have started navigation in","Vous avez commencé la course d'orientation"),//137
 new Array("פתחו את המפה שברשותכם, לכו לנקודה","Look at your map and go to point","Ouvrir la carte en votre possession et rejoindre le point"),//138
 new Array("חפשו שם את הברקוד, לחצו על הכפתור וסרקו אותו","Find the QR code there and scan it","Recherchez le code-barres, appuyez sur le bouton et scannez-le"),//139
@@ -472,4 +472,4 @@ null,//393
 null,//394
 //הדבקה כאן
 ];
-    
+    }

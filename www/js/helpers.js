@@ -401,6 +401,8 @@ function inAnswerDivSet(theQuestion, isContinue, send){
             $('#inAnswerDiv').html("<h4>" + send + "<h4>");
             $('#continueButton').html(putWord(315));
         }
+
+        $("html, body").animate({ scrollTop: 0 }, 400);//scrool to top
     }
 
 //add mistke to counter if n is omitted adding 1 mistke otherwish add n mistakes

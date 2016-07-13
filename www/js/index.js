@@ -268,9 +268,9 @@ function checkRegisterValues(showMsg){
     else
         RemoveRedBorder("lName");
 
-    if (!(localStorage.getItem("address") == null) && (localStorage.getItem("address")).length == 1){
+    if ((localStorage.getItem("address") < 1) || (localStorage.getItem("address") > 30)){//adrees changed to num of players
         redBorder("address");
-        msg += putWord(102) + "\n";
+        msg += putWord(99) + "\n";
     }
     else
         RemoveRedBorder("address");
@@ -395,10 +395,13 @@ function startsNavRegister(text, source) {
     qrSource = source;
     var str = text;
     //navIDkey במידה וימומש יום אחד צריך להתגלת כאן איפה שהוא
-    if (str.search("default=1") >= 0) {   //defualt nav id
-        console.log("default id source:" + source);
+    if (str.search("default=") >= 0) {   //defualt nav id
+        var defaultPos = str.indexOf("default=")+8;
+        var endOfDefualtVal = str.indexOf("&",defaultPos) > 0 ? str.indexOf("&",defaultPos): str.length ;
+        var defaultID = str.substring(defaultPos , endOfDefualtVal);
+        console.log("default id "+defaultID+" source:" + source);
         $('#inFeedbackPopup').html("<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\""+putWord(113)+"\"/>");
-        doQuestionAction('{ "action" : "getDefualtNavID"}');
+        doQuestionAction('{ "action" : "getDefualtNavID", "defaultID": '+defaultID+' }');
         console.log("checkNavID");
     }
     else {
@@ -2175,6 +2178,8 @@ function startsNavRegister(text, source) {
             $('#mainDiv').fadeToggle(200, function () { $('#answerDiv').fadeToggle(200); });
         else
             $('#answerDiv').fadeToggle(200, function () { $('#mainDiv').fadeToggle(200); });
+        
+        $("html, body").animate({ scrollTop: 0 }, 400);//scrool to top
     }
 
     //---this function add a copy of a console on the developerDiv...--//
