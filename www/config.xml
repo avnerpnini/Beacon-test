@@ -20,7 +20,10 @@
     <preference name="orientation"      value="default" />
     <preference name="prerendered-icon" value="true" /><!--ios only-->
     <preference name="detect-data-types" value="false" /><!--ios only-->
-    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="SplashScreenDelay" value="7000" />
+    <preference name="FadeSplashScreenDuration" value="1000"/>
+    <preference name="SplashMaintainAspectRatio" value="true" />
+
     <platform name="ios" >
         <preference name="fullscreen"      value="true" />
     </platform>
