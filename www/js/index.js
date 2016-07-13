@@ -787,7 +787,6 @@ function startsNavRegister(text, source) {
         $("#passwordDivStart").attr("onclick", "alert('"+putWord(130)+"')");
         $('#inFeedbackPopup').html("<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\""+putWord(113)+"\"/><h4> "+putWord(131)+"<h4>");
         $('#lnkfeedbackPopup').click();
-        //$("#feedbackPopup").popup({dismissible:true});//למחוק debug
         $("#passwordDivStart").attr("onclick", "alert('"+putWord(130)+"')");
         doQuestionAction('{ "action" : "addUser",\
                         "navID" : " ' + sClean(navID, true) + ' " ,\
@@ -862,6 +861,7 @@ function startsNavRegister(text, source) {
             //alert(data);
             navigator.notification.alert(putWord(133)+"\n"+ putWord(134)+"\n"+dataArr["ERROR"], function () { },  putWord(105), putWord(106));
             $("#feedbackPopup").popup("close");
+            $("#passwordDivStart").attr("onclick", "checkPasswordDivValues()");//fixing bug "can't start 2 times"
         }
     }
 
