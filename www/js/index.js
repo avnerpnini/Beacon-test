@@ -34,10 +34,11 @@ function onDeviceReady(){
     saveRegisterValues("email");
     saveRegisterValues("address");
     startCach();
+    /*
     if (typeof(device) !=  "undefined" && device.platform == "iOS") //do vibration on ios only on qr button
         $(".qrScannerButton").click(function () { navigator.vibrate(1);}); 
     else   //do vibration on android buttons
-        $("a").click(function () { navigator.vibrate(1);});
+        $("a").click(function () { navigator.vibrate(1);});*/
     if (typeof(device) !=  "undefined" ){
         Dcordova = device.cordova;
         Dplatform = device.platform;
@@ -49,6 +50,9 @@ function onDeviceReady(){
             appVersion = version;
             checkForFixes();
         });
+    }
+    if (Dplatform == 'android') {
+        StatusBar.backgroundColorByHexString("#3388cc");
     }
     else{
          checkForFixes()
@@ -355,14 +359,15 @@ function closeApp(i){
 
 //define the menu key on android
 function menuKey() {
-    navigator.vibrate(1);
+    //navigator.vibrate(1);
     $("#sidebar").panel("toggle");//open aidebar whan android menu vutton click
 }
 
 //define the back button. in ios the button is in the haeder in android he also the back android button
 function onBackKeyDown(){
+    /*
     if (typeof(device) !=  "undefined" && device.platform != "iOS") //do vibration on android only
-        $("a").click(function () { navigator.vibrate(1);});
+        $("a").click(function () { navigator.vibrate(1);});*/
 
     window.scrollTo(0, 0);
     hash = window.location.hash;
