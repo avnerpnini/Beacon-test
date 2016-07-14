@@ -144,11 +144,6 @@
         opacity: 0.99;
     }
     
-    .warpertakePhoto {
-        display: inline-table;
-        width: 45%;
-        margin: 2%;
-    }
     
     /*for sortable list*/    
     #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
