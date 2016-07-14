@@ -323,8 +323,8 @@ new Array("פעולה לא אושרה","Invalid action","Action invalide"),//244
 new Array("מתוך  ","of ","parmi"),//245
 new Array("פותח סורק...","Opening scanner…","Ouvrir le scan"),//246
 new Array("בחר מהגלרייה","Choose from Gallery","Choisissez parmi Galerie"),//247
-new Array("לידעתכם! התמונה תשותף עם שאר המשתתפים, כדאי להשקיע... :-)","Attention! Photo shared with other participants…","Attention! Photo partagé avec d'autres participants ..."),//248
-new Array("","",""),//249
+new Array("לידעתכם! התמונה תשותף עם שאר המשתתפים, כדאי להשקיע... :-)","Attention! Photo shared with other participants…","Attention! Photo partagé avec d'autres participants..."),//248
+new Array("כמעט נגמר! מעדכן נתונים... חברו את המכשיר לרשת","Almost done! Updating data... connect the device to the network","Presque fini! Mise à jour des données... connecter l'appareil au réseau"),//249
 new Array("","",""),//250
 new Array("","",""),//251
 new Array("","",""),//252
@@ -470,7 +470,6 @@ new Array("","",""),//391
 new Array("","",""),//392
 new Array("","",""),//393
 new Array("","",""),//394
-
 
 //הדבקה כאן
 ];

@@ -35,13 +35,24 @@
             $(".queueStatus").html(localStorage.prior)//update the developerDiv
         }
 
-        this.isEmpty = function () {
-            for (var i = ((this.prioArr).length - 1); i >= 0; i--) {
-                if ((this.prioArr[i]).length > 0) {
-                    return false;
+        //untilPrior check if the queue is emty until specific priorty
+        this.isEmpty = function (untilPrior) {
+            if (typeof (untilPrior) == "undefined" || isNaN(untilPrior) ) {
+                for (var i = ((this.prioArr).length - 1); i >= 0; i--) {
+                    if ((this.prioArr[i]).length > 0) {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
+            else{
+                 for (var i = 0; i < (this.prioArr).length && i <= untilPrior; i++) {
+                    if ((this.prioArr[i]).length > 0) {
+                        return false;
+                    }
+                }
+                return true;
+            }
         };
 
 

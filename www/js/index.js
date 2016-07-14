@@ -2026,10 +2026,35 @@ function startsNavRegister(text, source) {
             myQueue.addToQueue(2, { action: "addConnection", userID: localStorage.userID, connection: connection_table[l - 1], connectionNum: (l - 1) });
         }
         if (LM == 999){
-            setTimeout('audio[FINISHGAME].play()',500)//play sound;
-            setTimeout("endOfGmaeAlert()",3000);
-            localStorage.finishTime = date;
-            $("#timerIcon").attr("src","images/timer_logo.png");
+            //show tha last screen only whan all the important data uplodad
+            $('#inFeedbackPopup').html("");    
+            if ($("#answerDiv").is(':visible')) {
+                $("#answerDiv").hide();
+                var toShowAfterFinish = '#answerDiv';
+            }
+            else if ($("#mainDiv").is(':visible')) {
+                $("#mainDiv").hide();
+                var toShowAfterFinish = '#mainDiv';
+            }
+            
+            $('#lnkfeedbackPopup').click();
+            setTimeout(function (){
+                $('#lnkfeedbackPopup').click();
+                $('#inFeedbackPopup').html("<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\""+'מעדכן נתונים'+"\"/><br><h4>"+putWord(249)+"</h4>");    
+                }, 1000);
+            
+            var finishInterval = setInterval(function () {
+                if (myQueue.isEmpty(1)) {
+                    $("#feedbackPopup").popup("close");
+                    $(toShowAfterFinish).show();
+                    setTimeout('audio[FINISHGAME].play()', 500)//play sound;
+                    setTimeout("endOfGmaeAlert()", 3000);
+                    localStorage.finishTime = date;
+                    $("#timerIcon").attr("src", "images/timer_logo.png");
+                    clearInterval(finishInterval);
+                }
+            }, 1000)
+            
         }
     }
 
