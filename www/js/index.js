@@ -1266,11 +1266,11 @@ function startsNavRegister(text, source) {
                     $("#scanQRBut2").hide();
                     text += theQuestion.row.main_text;
                     //text += '<br><br><a id="takePhoto" onclick="takePicture()" style="text-decoration: none" href="#"><input id="123" style="" type="button" data-icon="camera" data-theme="b" data-iconpos="left" value="putWord(142)"></a>';
+                    text += '<div id="takePhotoDiv" style="padding-top: 30px;text-align:center"><div class="warpertakePhoto"  onclick="takePicture()" ><input id="takePhoto" type="button" data-icon="camera" data-theme="e" data-iconpos="left" value="'+putWord(142)+'">';
+                    text += '</div><div class="warpertakePhoto"  onclick="takePictureFromGalery()"><input id="takePhotoFromGalery" type="button" data-icon="grid" data-theme="e" data-iconpos="left" value="'+putWord(247)+'"></div></div>';
                     text += '<div id="cameraPhotoDiv" style="display:none;text-align:center;padding-top: 30px;" ><img id="cameraPhoto" class="type2pic" src="css/images/ajax-loader.gif" style="height: 30px;width:30px;-webkit-box-shadow: none;" alt="'+putWord(113)+'"/></div>';
-                    text += '<div id="takePhotoDiv" style="padding-top: 30px;text-align:center"><div class="warpertakePhoto"  onclick="takePicture()" ><input id="takePhoto" type="button" data-icon="camera" data-theme="e" data-iconpos="left" value="<br>'+putWord(142)+'<br><br>">';
-                    text += '</div><div class="warpertakePhoto"  onclick="takePictureFromGalery()"><input id="takePhotoFromGalery" type="button" data-icon="grid" data-theme="e" data-iconpos="left" value="<br>'+putWord(247)+'<br><br>"></div></div>';
-                    text += '<div id="sendPic" style="display:none;padding-top: 15px;" ><a onclick="sendPhoto()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(143)+'</a></div>';
                     text += '<div class="didYouKnow" dir="auto" style="font-size:0.6em; max-width:60%">'+putWord(248)+'</div>';
+                    text += '<div id="sendPic" style="display:none;padding-top: 15px;" ><a onclick="sendPhoto()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(143)+'</a></div>';
                     var n = theQuestion.row.after_text.search("<br>");
                     if(n<0 || n <= 6)
                         text += '<br>';
