@@ -61,7 +61,7 @@
         width: 100px;
     }
     
-    #didYouKnow{
+    #didYouKnow, .didYouKnow {
         background-color: rgb(141, 209, 225);
         border-style: solid;
         -webkit-border-radius: 10px;
@@ -142,6 +142,12 @@
         margin-top: 5px;
         margin-right: 0px;
         opacity: 0.99;
+    }
+    
+    .warpertakePhoto {
+        display: inline-table;
+        width: 45%;
+        margin: 2%;
     }
     
     /*for sortable list*/    

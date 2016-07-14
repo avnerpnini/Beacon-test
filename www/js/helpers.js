@@ -326,16 +326,32 @@ function YTresize(){
 function takePicture() {
         // Take picture using device camera and retrieve image as base64-encoded string
         navigator.camera.getPicture(takePictureSuccess, takePictureFail, {
+            destinationType: Camera.DestinationType.FILE_URI,
             quality: 50,
             correctOrientation: true,
             targetWidth: 1200,
             targetHeight: 1200,
-            allowEdit: false,
-            saveToPhotoAlbum: false,
-            destinationType: Camera.DestinationType.FILE_URI
+            allowEdit: true,
+            saveToPhotoAlbum: false
+            
             //destinationType: 1//1 = file_URI
         });
     }
+
+function takePictureFromGalery() {
+        // Take picture using device camera and retrieve image as base64-encoded string
+        navigator.camera.getPicture(takePictureSuccess, takePictureFail, {
+            destinationType: Camera.DestinationType.FILE_URI,
+            quality: 50,
+            correctOrientation: true,
+            targetWidth: 1200,
+            targetHeight: 1200,
+            sourceType : 0,//from PHOTOLIBRARY
+            allowEdit: true
+        });
+    }
+
+
 
 //user send photo
 function sendPhoto(){
@@ -360,7 +376,7 @@ function takePictureSuccess(imageURI){
             $("#sendPic").show();
             $("#takePhotoDiv").show();
             $("#takePhoto").val(putWord(310));
-            $("#takePhoto").button("refresh");
+            $(".takePhoto").button("refresh");
         }, 2000);
       
     }

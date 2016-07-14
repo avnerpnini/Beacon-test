@@ -125,55 +125,55 @@ new Array("תודה רבה שהורדתם את האפלקיציה שלנו!","Th
 new Array("האפליקציה מיועדת להפעלת משחק הניווט הסלולרי של חברת 'יש לאן'. ","The application is meant for running the 'Way to Go' cellular navigation game.","L'application est destinéee à la course d'orientation cellulaire \"Way to Go\""),//47
 new Array("על מנת לתאם פעילות לקבוצות, או לברר מתי והיכן ניתן לבצע את הפעילות עבור יחידים - מומלץ לצור איתנו קשר.","Contact us to schedule a group game, or to check times and locations for individual play.","Pour organiser une Course d'Orientation pour des groupes ou vérifier où et quand il est possible de participer à une course d’orientation pour des individuels, il est conseillé de prendre contact avec nous."),//48
 new Array("כל הזכויות שמורות לחברת 'יש לאן' 2016","2016 'Way to Go', all rights reserved","Tous les droits sont réservés à la Société Yesh Lean 2016"),//49
-new Array("כמות השחקנים בצוות","How many players in the team","Combien de joueurs dans l'équipe"),//50
-null,//51
-null,//52
-null,//53
-null,//54
-null,//55
-null,//56
-null,//57
-null,//58
-null,//59
-null,//60
-null,//61
-null,//62
-null,//63
-null,//64
-null,//65
-null,//66
-null,//67
-null,//68
-null,//69
-null,//70
-null,//71
-null,//72
-null,//73
-null,//74
-null,//75
-null,//76
-null,//77
-null,//78
-null,//79
-null,//80
-null,//81
-null,//82
-null,//83
-null,//84
-null,//85
-null,//86
-null,//87
-null,//88
-null,//89
-null,//90
-null,//91
-null,//92
-null,//93
-null,//94
-null,//95
-null,//96
-null,//97
-null,//98
+new Array("כמות השחקנים בצוות","How many players in the team","Players per team "),//50
+new Array("","",""),//51
+new Array("","",""),//52
+new Array("","",""),//53
+new Array("","",""),//54
+new Array("","",""),//55
+new Array("","",""),//56
+new Array("","",""),//57
+new Array("","",""),//58
+new Array("","",""),//59
+new Array("","",""),//60
+new Array("","",""),//61
+new Array("","",""),//62
+new Array("","",""),//63
+new Array("","",""),//64
+new Array("","",""),//65
+new Array("","",""),//66
+new Array("","",""),//67
+new Array("","",""),//68
+new Array("","",""),//69
+new Array("","",""),//70
+new Array("","",""),//71
+new Array("","",""),//72
+new Array("","",""),//73
+new Array("","",""),//74
+new Array("","",""),//75
+new Array("","",""),//76
+new Array("","",""),//77
+new Array("","",""),//78
+new Array("","",""),//79
+new Array("","",""),//80
+new Array("","",""),//81
+new Array("","",""),//82
+new Array("","",""),//83
+new Array("","",""),//84
+new Array("","",""),//85
+new Array("","",""),//86
+new Array("","",""),//87
+new Array("","",""),//88
+new Array("","",""),//89
+new Array("","",""),//90
+new Array("","",""),//91
+new Array("","",""),//92
+new Array("","",""),//93
+new Array("","",""),//94
+new Array("","",""),//95
+new Array("","",""),//96
+new Array("","",""),//97
+new Array("","",""),//98
 new Array("כמות המשתתפים לא תקין או חסר","Number of participants invaild or missing","Nombre de participants non valide ou manquante"),//99
 new Array("שם פרטי לא תקין או חסר","First name invalid or missing","Prénom non valide ou manquant"),//100
 new Array("שם משפחה לא תקין או חסר","Last name invalid or missing","Nom de famille non valide ou manquant"),//101
@@ -217,7 +217,7 @@ new Array("פתחו את המפה שברשותכם, לכו לנקודה","Look a
 new Array("חפשו שם את הברקוד, לחצו על הכפתור וסרקו אותו","Find the QR code there and scan it","Recherchez le code-barres, appuyez sur le bouton et scannez-le"),//139
 new Array("יפה מאוד! המשיכו בניווט אל נקודה","Very good! Continue to point","Bravo! Continuez l'orientation vers le point"),//140
 new Array("הגעתם? סרקו את הברקוד שבנקודה..","Have you arrived? Please scan the QR code…","Vous êtes arrivés ? Appuyez sur le bouton pour scanner le code-barres au point"),//141
-new Array("צלם תמונה","Take picture","Prendre une photo"),//142
+new Array("צלם","Take picture","Prendre une photo"),//142
 new Array("שלח תמונה והמשך","Send picture and continue","Envoyer la photo et continuer"),//143
 new Array("סיום בהגדרה אישית דרך מזהה 10","סיום בהגדרה אישית דרך מזהה 10","סיום בהגדרה אישית דרך מזהה 10"),//144
 new Array("המשך...","Continue…","Suite…"),//145
@@ -322,59 +322,59 @@ new Array("קוד סיום שגוי - הקוד צריך להיות זהה לקו
 new Array("פעולה לא אושרה","Invalid action","Action invalide"),//244
 new Array("מתוך  ","of ","parmi"),//245
 new Array("פותח סורק...","Opening scanner…","Ouvrir le scan"),//246
-null,//247
-null,//248
-null,//249
-null,//250
-null,//251
-null,//252
-null,//253
-null,//254
-null,//255
-null,//256
-null,//257
-null,//258
-null,//259
-null,//260
-null,//261
-null,//262
-null,//263
-null,//264
-null,//265
-null,//266
-null,//267
-null,//268
-null,//269
-null,//270
-null,//271
-null,//272
-null,//273
-null,//274
-null,//275
-null,//276
-null,//277
-null,//278
-null,//279
-null,//280
-null,//281
-null,//282
-null,//283
-null,//284
-null,//285
-null,//286
-null,//287
-null,//288
-null,//289
-null,//290
-null,//291
-null,//292
-null,//293
-null,//294
-null,//295
-null,//296
-null,//297
-null,//298
-null,//299
+new Array("בחר מהגלרייה","Choose from Gallery","Choisissez parmi Galerie"),//247
+new Array("לידעתכם! התמונה תשותף עם שאר המשתתפים, כדאי להשקיע... :-)","Attention! Photo shared with other participants…","Attention! Photo partagé avec d'autres participants ..."),//248
+new Array("","",""),//249
+new Array("","",""),//250
+new Array("","",""),//251
+new Array("","",""),//252
+new Array("","",""),//253
+new Array("","",""),//254
+new Array("","",""),//255
+new Array("","",""),//256
+new Array("","",""),//257
+new Array("","",""),//258
+new Array("","",""),//259
+new Array("","",""),//260
+new Array("","",""),//261
+new Array("","",""),//262
+new Array("","",""),//263
+new Array("","",""),//264
+new Array("","",""),//265
+new Array("","",""),//266
+new Array("","",""),//267
+new Array("","",""),//268
+new Array("","",""),//269
+new Array("","",""),//270
+new Array("","",""),//271
+new Array("","",""),//272
+new Array("","",""),//273
+new Array("","",""),//274
+new Array("","",""),//275
+new Array("","",""),//276
+new Array("","",""),//277
+new Array("","",""),//278
+new Array("","",""),//279
+new Array("","",""),//280
+new Array("","",""),//281
+new Array("","",""),//282
+new Array("","",""),//283
+new Array("","",""),//284
+new Array("","",""),//285
+new Array("","",""),//286
+new Array("","",""),//287
+new Array("","",""),//288
+new Array("","",""),//289
+new Array("","",""),//290
+new Array("","",""),//291
+new Array("","",""),//292
+new Array("","",""),//293
+new Array("","",""),//294
+new Array("","",""),//295
+new Array("","",""),//296
+new Array("","",""),//297
+new Array("","",""),//298
+new Array("","",""),//299
 new Array("לא השלמתם את המשימה","You have not completed the task","Vous n'avez pas fini la mission"),//300
 new Array("יש לסמן קווים עבור כל הריבועים","Connect all the squares","Vous devez marquer des lignes pour tous les carrés"),//301
 new Array("כיוון החץ במעלות:","Direction:","Pointer la flèche vers l’azimut:"),//302
@@ -394,82 +394,84 @@ new Array("חזור","Back","Retour"),//315
 new Array("הפעל צליל","Sound on","Faire fonctionner le son"),//316
 new Array("השתק צליל","Mute","Annuler le son"),//317
 new Array("הזמן עבר!","TIME UP","Votre temps est écoulé"),//318
-null,//319
-null,//320
-null,//321
-null,//322
-null,//323
-null,//324
-null,//325
-null,//326
-null,//327
-null,//328
-null,//329
-null,//330
-null,//331
-null,//332
-null,//333
-null,//334
-null,//335
-null,//336
-null,//337
-null,//338
-null,//339
-null,//340
-null,//341
-null,//342
-null,//343
-null,//344
-null,//345
-null,//346
-null,//347
-null,//348
-null,//349
-null,//350
-null,//351
-null,//352
-null,//353
-null,//354
-null,//355
-null,//356
-null,//357
-null,//358
-null,//359
-null,//360
-null,//361
-null,//362
-null,//363
-null,//364
-null,//365
-null,//366
-null,//367
-null,//368
-null,//369
-null,//370
-null,//371
-null,//372
-null,//373
-null,//374
-null,//375
-null,//376
-null,//377
-null,//378
-null,//379
-null,//380
-null,//381
-null,//382
-null,//383
-null,//384
-null,//385
-null,//386
-null,//387
-null,//388
-null,//389
-null,//390
-null,//391
-null,//392
-null,//393
-null,//394
+new Array("","",""),//319
+new Array("","",""),//320
+new Array("","",""),//321
+new Array("","",""),//322
+new Array("","",""),//323
+new Array("","",""),//324
+new Array("","",""),//325
+new Array("","",""),//326
+new Array("","",""),//327
+new Array("","",""),//328
+new Array("","",""),//329
+new Array("","",""),//330
+new Array("","",""),//331
+new Array("","",""),//332
+new Array("","",""),//333
+new Array("","",""),//334
+new Array("","",""),//335
+new Array("","",""),//336
+new Array("","",""),//337
+new Array("","",""),//338
+new Array("","",""),//339
+new Array("","",""),//340
+new Array("","",""),//341
+new Array("","",""),//342
+new Array("","",""),//343
+new Array("","",""),//344
+new Array("","",""),//345
+new Array("","",""),//346
+new Array("","",""),//347
+new Array("","",""),//348
+new Array("","",""),//349
+new Array("","",""),//350
+new Array("","",""),//351
+new Array("","",""),//352
+new Array("","",""),//353
+new Array("","",""),//354
+new Array("","",""),//355
+new Array("","",""),//356
+new Array("","",""),//357
+new Array("","",""),//358
+new Array("","",""),//359
+new Array("","",""),//360
+new Array("","",""),//361
+new Array("","",""),//362
+new Array("","",""),//363
+new Array("","",""),//364
+new Array("","",""),//365
+new Array("","",""),//366
+new Array("","",""),//367
+new Array("","",""),//368
+new Array("","",""),//369
+new Array("","",""),//370
+new Array("","",""),//371
+new Array("","",""),//372
+new Array("","",""),//373
+new Array("","",""),//374
+new Array("","",""),//375
+new Array("","",""),//376
+new Array("","",""),//377
+new Array("","",""),//378
+new Array("","",""),//379
+new Array("","",""),//380
+new Array("","",""),//381
+new Array("","",""),//382
+new Array("","",""),//383
+new Array("","",""),//384
+new Array("","",""),//385
+new Array("","",""),//386
+new Array("","",""),//387
+new Array("","",""),//388
+new Array("","",""),//389
+new Array("","",""),//390
+new Array("","",""),//391
+new Array("","",""),//392
+new Array("","",""),//393
+new Array("","",""),//394
+
+
 //הדבקה כאן
 ];
     }
