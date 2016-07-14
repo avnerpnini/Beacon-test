@@ -323,33 +323,32 @@ function YTresize(){
 
     }
 
-function takePicture() {
+function takePicture(isFromGalery) {
         // Take picture using device camera and retrieve image as base64-encoded string
-        navigator.camera.getPicture(takePictureSuccess, takePictureFail, {
-            destinationType: Camera.DestinationType.FILE_URI,
-            quality: 50,
-            correctOrientation: true,
-            targetWidth: 1200,
-            targetHeight: 1200,
-            allowEdit: true,
-            saveToPhotoAlbum: false
+        if (isFromGalery == true)
+              navigator.camera.getPicture(takePictureSuccess, takePictureFail, {
+                destinationType: Camera.DestinationType.FILE_URI,
+                quality: 50,
+                correctOrientation: true,
+                targetWidth: 1200,
+                targetHeight: 1200,
+                sourceType : 0,//from PHOTOLIBRARY
+                allowEdit: true
+            });
+        else
+            navigator.camera.getPicture(takePictureSuccess, takePictureFail, {
+                destinationType: Camera.DestinationType.FILE_URI,
+                quality: 50,
+                correctOrientation: true,
+                targetWidth: 1200,
+                targetHeight: 1200,
+                allowEdit: true,
+                saveToPhotoAlbum: false
             
-            //destinationType: 1//1 = file_URI
-        });
+                //destinationType: 1//1 = file_URI
+            });
     }
 
-function takePictureFromGalery() {
-        // Take picture using device camera and retrieve image as base64-encoded string
-        navigator.camera.getPicture(takePictureSuccess, takePictureFail, {
-            destinationType: Camera.DestinationType.FILE_URI,
-            quality: 50,
-            correctOrientation: true,
-            targetWidth: 1200,
-            targetHeight: 1200,
-            sourceType : 0,//from PHOTOLIBRARY
-            allowEdit: true
-        });
-    }
 
 
 
