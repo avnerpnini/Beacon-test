@@ -51,11 +51,11 @@ function onDeviceReady(){
             checkForFixes();
         });
     }
-    if (Dplatform == 'android') {
-        StatusBar.backgroundColorByHexString("#3388cc");
+    if (Dplatform == 'Android') {
+        StatusBar.backgroundColorByHexString("#6f9ac0");
     }
     else{
-         checkForFixes()
+        setTimeout("if(typeof(device) ==  'undefined'){ checkForFixes();}", 3000);//fix bug of checkForFixes twice
     }
     //save data that use to android back button if slide opne back buttton close him
     isSlidebarOpen = false;

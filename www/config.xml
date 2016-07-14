@@ -98,7 +98,7 @@
         <plugin name="cordova-plugin-statusbar" source="npm" version="2.1.3" /><!--splashscreen is usefull-->
         <platform name="ios">
             <preference name="StatusBarOverlaysWebView" value="false" />
-            <preference name="StatusBarBackgroundColor" value="#3388cc" />
+            <preference name="StatusBarBackgroundColor" value="#6f9ac0" />
         </platform>
 
 

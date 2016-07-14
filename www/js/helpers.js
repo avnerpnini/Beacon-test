@@ -331,7 +331,7 @@ function takePicture() {
             correctOrientation: true,
             targetWidth: 1200,
             targetHeight: 1200,
-            allowEdit: true,
+            allowEdit: false,
             saveToPhotoAlbum: false
             
             //destinationType: 1//1 = file_URI
@@ -374,7 +374,7 @@ function takePictureSuccess(imageURI){
             $("#cameraPhoto").css("width","");
             $("#cameraPhotoDiv").show();
             $("#sendPic").show();
-            //$("#takePhotoDiv").show();
+            $("#takePhotoDiv").show();
             $("#takePhoto").val(putWord(310));
             $("#takePhoto").button("refresh");
             $("#takePhotoFromGalery").button("refresh");
@@ -385,10 +385,11 @@ function takePictureSuccess(imageURI){
 function takePictureFail(message){
         console.log("Take Picture Fail because "+ message);
         var text = '<div id="askSkipPhotoTaskDiv" style=""><input id="askSkipPhotoTask" onclick="askSkipPhotoTask()" type="button" data-icon="forward" data-theme="a" data-iconpos="left" value="'+putWord(311)+'"></div>';
-        if ($("#askSkipPhotoTaskDiv").length)
-            $("#changeContentInMainDiv").append(text);
+        if ($("#askSkipPhotoTaskDiv").length <1)
+            $("#sendPic").after(text);
         $("#askSkipPhotoTask").button();
     }
+
    
 //set the inAnswerDiv
 function inAnswerDivSet(theQuestion, isContinue, send){
