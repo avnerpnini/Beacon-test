@@ -1295,7 +1295,13 @@ function startsNavRegister(text, source) {
                     //--
                     text += theQuestion.row.after_text;
                     if (theQuestion.row.p1 == 999) {
-                        finishGame(text ,putWord(144));
+                        var myInterval = setInterval(function () {
+                            if ($("#mainDiv").is(':visible')) {
+                                finishGame(text ,putWord(144));
+                                clearInterval(myInterval);
+                            }
+                        }, 1000);
+                                    
                     }
                     else if(theQuestion.row.p1 != -1){
                         text += '<br><a id="continue" style=""  onclick="checkAnswer()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(145)+'</a>';
@@ -2027,7 +2033,7 @@ function startsNavRegister(text, source) {
         }
         if (LM == 999){
             //show the last screen only whan all the important data uplodad
-            $('#inFeedbackPopup').html("");    
+            /*$('#inFeedbackPopup').html("");    
             if ($("#answerDiv").is(':visible')) {
                 $("#answerDiv").hide();
                 var toShowAfterFinish = '#answerDiv';
@@ -2035,7 +2041,7 @@ function startsNavRegister(text, source) {
             else if ($("#mainDiv").is(':visible')) {
                 $("#mainDiv").hide();
                 var toShowAfterFinish = '#mainDiv';
-            }
+            }*/
             
             $('#lnkfeedbackPopup').click();
             setTimeout(function (){
@@ -2046,7 +2052,7 @@ function startsNavRegister(text, source) {
             var finishInterval = setInterval(function () {
                 if (myQueue.isEmpty(2)) {
                     $("#feedbackPopup").popup("close");
-                    $(toShowAfterFinish).show();
+                    //$(toShowAfterFinish).show();
                     setTimeout('audio[FINISHGAME].play()', 500)//play sound;
                     setTimeout("endOfGmaeAlert()", 3000);
                     localStorage.finishTime = date;
