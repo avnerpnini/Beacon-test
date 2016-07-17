@@ -2034,9 +2034,9 @@ function startsNavRegister(text, source) {
         if (LM == 999){
             $('#backInFeedbackPopup').hide();
             $('#lnkfeedbackPopup').click();
+            $('#inFeedbackPopup').html("<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\""+'מעדכן נתונים'+"\"/><br><h4>"+putWord(249)+"</h4>");    
             setTimeout(function (){
                 $('#lnkfeedbackPopup').click();
-                $('#inFeedbackPopup').html("<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\""+'מעדכן נתונים'+"\"/><br><h4>"+putWord(249)+"</h4>");    
                 }, 1000);
             
             var finishInterval = setInterval(function () {
