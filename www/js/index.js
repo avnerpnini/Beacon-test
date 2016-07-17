@@ -2412,7 +2412,18 @@ function startsNavRegister(text, source) {
                     //var comArr = JSON.parse(dataArr['command']);
                     for (var i = 0; i < dataArr['command'].length; i++) {
                         if (dataArr['command'][i]["c"] == "DR") {//data refresh
-                            dataRefresh(true, dataArr['command'][i]["p1"], dataArr['command'][i]["p2"]);
+                            if (dataArr['command'][i]["p1"] == 999) {
+                                $('#backInFeedbackPopup').hide();
+                                $('#mainDiv').hide();
+                                $('#answerDiv').show();
+                                var send = "<img src='images/V.png' id='VXimg'/><br><br>"+putWord(146);
+                                $('#inAnswerDiv').html("<h4>" + send + "<h4>");
+                                $('#continueButton').hide();
+                                finishGame("[סיום משחק - עקב בקשה מהשרת]", "[סיום משחק - עקב בקשה מהשרת]");
+                            }
+                            else {
+                                dataRefresh(true, dataArr['command'][i]["p1"], dataArr['command'][i]["p2"]);
+                            }
                         }
                         else if (dataArr['command'][i]["c"] == "SL") {//send location
                             sendLocation(true);
