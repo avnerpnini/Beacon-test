@@ -2026,7 +2026,7 @@ function startsNavRegister(text, source) {
             myQueue.addToQueue(2, { action: "addConnection", userID: localStorage.userID, connection: connection_table[l - 1], connectionNum: (l - 1) });
         }
         if (LM == 999){
-            //show tha last screen only whan all the important data uplodad
+            //show the last screen only whan all the important data uplodad
             $('#inFeedbackPopup').html("");    
             if ($("#answerDiv").is(':visible')) {
                 $("#answerDiv").hide();
@@ -2044,7 +2044,7 @@ function startsNavRegister(text, source) {
                 }, 1000);
             
             var finishInterval = setInterval(function () {
-                if (myQueue.isEmpty(1)) {
+                if (myQueue.isEmpty(2)) {
                     $("#feedbackPopup").popup("close");
                     $(toShowAfterFinish).show();
                     setTimeout('audio[FINISHGAME].play()', 500)//play sound;

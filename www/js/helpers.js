@@ -643,26 +643,3 @@ function sendBugReport(){
     addConnection(time, send , "[bugReport]", -5, 0, 0, 0);
 }
 
-function fffff(){
-    if (myQueue.isEmpty(2)) {
-        var send = "<img src='images/V.png' id='VXimg'/><br><br>"+putWord(146);
-        $('#inAnswerDiv').html("<h4>" + send + "<h4>");
-        $('#continueButton').hide();
-    }
-    else{
-        var send = "<img src='images/V.png' id='VXimg'/><br><br>" + '';
-        $('#inAnswerDiv').html("<h4>" + send + "<h4>");
-        $('#continueButton').hide();
-
-        var finishInterval = setInterval(function () {
-            if (myQueue.isEmpty(2)) {
-                send = "<img src='images/V.png' id='VXimg'/><br><br>" + putWord(146);
-                $('#inAnswerDiv').html("<h4>" + send + "<h4>");
-                $('#continueButton').hide();
-                clearInterval(finishInterval);
-            }
-
-        }, 3000)
-    }
-    
-}
