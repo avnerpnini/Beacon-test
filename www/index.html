@@ -334,10 +334,6 @@ imagecach.js לאחר ניסוי
                 </div>
             </div>
 
-
-                
-
-
             <!-- חלון לאפשרויות מדריך-->
             <a id="lnkGuidePopup"  data-transition="flow" style="text-decoration: none;display:none " href="#guidePopup" data-rel="popup" data-position-to="window" data-transition="pop">feedback</a>
             <div data-role="popup" data-history="false" id="guidePopup" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="width:300px;">
@@ -346,7 +342,7 @@ imagecach.js לאחר ניסוי
                     <ul>
                         <li data-icon='false'><a onclick="guideFinishGame()" data-word="39"></a></li><!--סיים ניווט-->
                         <li data-icon='false'><a onclick="jumpLevel()" href="#" data-word="42"></a></li><!--דילוג על משימה-->
-                        <li data-icon='false'><a href="#" data-word="43"></a></li><!-- צריך ליצור פונקציה שמבקשת את מספר המשתמש שממנו רוצים להחליף - מוודא שהמתמש החדש והמוחלף באותו מזהה ובמידה וכן מבצעת שכלוף ללא מחיקת נתונים של הישן --><!--המשך ניווט של מכשיר אחר-->
+                        <li data-icon='false'><a onclick="openSwitchFromAnotherUserPopup()" data-word="43"></a></li><!-- צריך ליצור פונקציה שמבקשת את מספר המשתמש שממנו רוצים להחליף - מוודא שהמתמש החדש והמוחלף באותו מזהה ובמידה וכן מבצעת שכלוף ללא מחיקת נתונים של הישן --><!--המשך ניווט של מכשיר אחר-->
                         <li data-icon='false' ><a href="#developerDiv" onclick="$('#developerDiv').show();$('#content').css('margin-top', '35px');" data-word="44"></a></li><!--הצג מסך מתכנת-->
                     </ul>
                 </div>
@@ -378,6 +374,32 @@ imagecach.js לאחר ניסוי
                     <br>יומן:( <a href="" onclick="showConsoleText()" >הצג יומן</a> | <a href="" onclick="localStorage.consoleText=null;showConsoleText()" >נקה יומן</a> ) <br>
                     <div id="console" style="text-align: left; direction: ltr"></div>
 
+                </div>
+            </div>
+
+            <!-- חלון להחלפת משתמש ממכשיר אחר -->
+            <a id="lnkSwitchPopup"  data-transition="flow" style="text-decoration: none;display: " href="#switchPopup" data-rel="popup" data-position-to="window" data-transition="pop">feedback</a>
+            <div data-role="popup" data-history="false" id="switchPopup" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="max-width: 400px">
+                <a id="backInSwitchPopup" href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
+                <div id="inSwitchDivStep1" role="main" class="ui-content" style="text-align: center">
+                    <h3>החלפת משתמש</h3>
+                    <h4>רשום כאן את מזהה המשתמש אותו תרצה להעביר למכשיר זה:</h4>
+                    <input id="switchPopupInput1">
+                    <h4>רשום שוב את מזהה המשתמש אותו תרצה להעביר:</h4>
+                    <input id="switchPopupInput2">
+                    <h4 style="color: #f00">שים לב! זוהי פעולה בלתי הפיכה, יש לוודא היטב את הנתונים!</h4>
+                    <a id="switcContinueButton1" onclick="askForSwitchFromAnotherUser();" class="ui-btn ui-corner-all ui-shadow ui-btn-b"><span data-word="38"></span></a><!--המשך..-->
+                </div>
+                <div id="inSwitchDivStep2" role="main" class="ui-content" style="text-align: center">
+                    <h3 id="H3InSwitchDivStep2"></h3>
+                    <h4 style="color: #f00">שים לב! זוהי פעולה בלתי הפיכה, יש לוודא היטב את הנתונים!</h4>
+                    <br><br>
+                    <a id="switcContinueButton2" style="display: inline;margin: 20px" onclick="" class="ui-btn ui-corner-all ui-shadow ui-btn-b">אישור</a>
+                    <a id="" href="#" data-rel="back" style="display: inline;margin: 20px" onclick="" class="ui-btn ui-corner-all ui-shadow ui-btn-b">ביטול</a>
+                </div>
+                <div id="inSwitchDivStep3" role="main" class="ui-content" style="text-align: center">
+                    <h3>מבצע עדכון...</h3>
+                    <img src="css/images/ajax-loader.gif" style="height: 30px;" alt="טוען"/>
                 </div>
             </div>
             

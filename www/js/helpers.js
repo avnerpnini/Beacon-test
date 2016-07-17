@@ -643,3 +643,87 @@ function sendBugReport(){
     addConnection(time, send , "[bugReport]", -5, 0, 0, 0);
 }
 
+//this function ask to replace game from other user for this user 
+//for example whan battary is finished
+function switchFromAnotherUser(replaceUserID, requestNum){
+        if (requestNum == 2){
+            $("#inSwitchDivStep1").hide();
+            $("#inSwitchDivStep2").hide();
+            $("#inSwitchDivStep3").show();
+        }
+        var jqxhr = $.post("http://www.nivut.net/A_import_files/questionActionV2.php", { action: "switchFromAnotherUser", userID: localStorage.userID, replaceWith: replaceUserID, requestNum: requestNum} );
+        jqxhr.done(function (data, status) {
+            var dataArr = JSON.parse(data);
+            if (dataArr["success"] == 1) {
+                if (dataArr['requestNum'] == 1) {
+                    $("#inSwitchDivStep1").hide();
+                    $("#inSwitchDivStep2").show();
+                    $("#inSwitchDivStep3").hide();
+                    var text = "האם אתה בטוח שאתה רוצה להעביר את משתשמש " + dataArr['replaceWith'] + " (" + dataArr['replaceWithName'] + ") למכשיר זה?";
+                    $("#H3InSwitchDivStep2").html(text);
+                    $("#switcContinueButton2").attr("onclick", "switchFromAnotherUser(" + dataArr['replaceWith'] + ", 2);");
+                }
+                else if (dataArr['requestNum'] == 2) {
+                    /*$answer['LM'] = $LM;
+                    $answer['level'] = $level;
+                    $answer['mistakes'] = $mistakes;
+                    $answer['startTime'] = $startTime;*/
+
+                    localStorage.LM = dataArr['LM'];
+                    localStorage.level = dataArr['level'];
+                    localStorage.totalMistakeCounter = dataArr['mistakes'];
+                    localStorage.startTime = dataArr['startTime'];
+                    localStorage.routeNum = dataArr['routeNum'];
+                    routeNum = localStorage.routeNum;
+                    localStorage.removeItem('endOfLoadQuestion');//remove 'endOfLoadQuestion' if exsist to enable continue
+                    $(".LM").html(localStorage.LM); $(".level").html(localStorage.level); $(".quesID").html(localStorage.quesID); $(".point").html(localStorage.point); 
+                    $(".routeNum").html(localStorage.routeNum);$(".userStatus").html(localStorage.point + "|" + localStorage.LM + "|" + localStorage.level + "|" + localStorage.quesID + "</h5>");
+
+                    dataRefresh(true, "", "", true);
+
+                    setTimeout('$("#switchPopup").popup("close");', 1000)
+                    alert("שינוי משתמש הצליח!");
+                }
+                else {
+                    alert("שגיאה חסר מספר בקשה מהשרת");
+                    $("#switchPopup").popup("close");
+                }
+            }
+            else {
+                alert("לא התקבל אישור מהשרת להחלפת משתמש\n סיבת הסרוב: " + dataArr['ERROR']);
+                $("#switchPopup").popup("close");
+            }
+        });
+        jqxhr.fail(function (jqXHR, textStatus, errorThrown) {
+            console.log("switchFromAnotherUser error because: " + textStatus + ", " + errorThrown);
+            alert("switchFromAnotherUser error because: " + textStatus + ", " + errorThrown);
+        });
+}
+
+function openSwitchFromAnotherUserPopup() { 
+    $("#inSwitchDivStep1").show();
+    $("#inSwitchDivStep2").hide();
+    $("#inSwitchDivStep3").hide();
+    $("#guidePopup").popup("close");
+    $("#guidePopup").on("popupafterclose", function () { $("#lnkSwitchPopup").click(); });
+    setTimeout('$( "#guidePopup" ).off("popupafterclose");', 3000); //cancel event after 3 second
+}
+
+function askForSwitchFromAnotherUser(){
+    if ($("#switchPopupInput1").val() != $("#switchPopupInput2").val()){
+       alert("שים לב! יש לרשום את אותו מזהה המשתמש אותו אתנה מעוניין להחליף ולודא שאתם רושם את המזהה הנכון");        
+    }
+    else if(isNaN($("#switchPopupInput1").val()) ){
+        alert("שים לב! יש לרשום מספר חוקי - מספר המשתמש מופיע בטבלת מעקב ובתפריט האפליקציה");        
+    }
+    else if($("#switchPopupInput1").val() == localStorage.userID){
+        alert("שים לב! רשמת את מזהה המשתמש של מכשיר זה! יש לרשום את מזהה המכשיר אותו אתה רוצה להחליף");        
+    }
+    else if($("#switchPopupInput1").val() == ""){
+        alert("שים לב! השארת שדה ריק");        
+    }
+    else{
+         switchFromAnotherUser($("#switchPopupInput1").val(), 1);
+        
+    }
+}
