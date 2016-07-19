@@ -121,7 +121,7 @@ function onDeviceReady(){
         testQuestion(QueryString["quesID"]);
     }
 
-    fix the 100% height bug taked from http://stackoverflow.com/questions/21552308/set-content-height-100-jquery-mobile/27617438#27617438
+    //fix the 100% height bug taked from http://stackoverflow.com/questions/21552308/set-content-height-100-jquery-mobile/27617438#27617438
     var screen = $.mobile.getScreenHeight();
     var header = $(".ui-header").hasClass("ui-header-fixed") ? $(".ui-header").outerHeight()  - 1 : $(".ui-header").outerHeight();
     var footer = $(".ui-footer").hasClass("ui-footer-fixed") ? $(".ui-footer").outerHeight() - 1 : $(".ui-footer").outerHeight();
