@@ -1,14 +1,4 @@
 <!--
-משימות:
-2.9
-.
-
-
-העברת משחק מפלאפון אחר
-דורש להתחיל משחק עם אותו מזהה ניווט בטלפון חדש
-שליחת בקשה לשרת וקבלה בחזרה רענון נתונים לפי תחנה אחרונה של המשתמש שהוחלף
-בנוסף לבצע העתקה של כל התקשורת של המשתמש הישן אל החדש 
-לסמן על המתמש הישן שהוא סיים
 
 לקחים מהגרסה החדשה
 uuid לא תקין בגרסה ישנה דרך חדשה כרגע יש שם פרצה ב upload.php
@@ -24,8 +14,6 @@ uuid לא תקין בגרסה ישנה דרך חדשה כרגע יש שם פרצ
 אם אין חיבור לאינטרט לא הריץ מחסנית 
 
 להכניס צילומי מסך עדכניים לחנות
-
-- בניית כל סוגי המשימות בשלב ראשון בצורה מהירה בהמשך ליצור שיפורים
 
 מסך תשובה לפעמים קטוע שפותחים וסוגרים תפריט זה מסתדר - לחשוב על פתרון
 
@@ -85,9 +73,9 @@ imagecach.js לאחר ניסוי
                     <li id="askSkipPhotoTaskLi" style="display:none" data-icon='false'><a onclick="askSkipPhotoTask()" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-forward" data-ajax="false" href="" data-word="5"></a></li><!--דלג על צילום-->
                     <li data-icon='false'><a onclick="removNav()" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-delete" data-ajax="false" href="#" data-word="6"></a></li><!--מחק ניווט-->
                     <li data-icon='false'><a id="muteBut" onclick="toogleMute()" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-audio" data-ajax="false" href="#" data-word="7"></a></li><!--השתק צליל-->
-                    <li data-icon='false'><a onclick="$('#lnkLanguagePopupPass').click();" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-right ui-icon-gear" data-ajax="false" href="#">Language</a></li>
-                    <li data-icon='false'><a onclick="goToOldVersion()" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-back" data-ajax="false" href="" data-word="9"></a></li><!--עבור לגרסה ישנה-->
-                    <li data-icon='false' ><a href="#" onclick="$('#lnkInfoPopup').click();" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-info" data-ajax="false" data-word="36"></a></li><!--מידע כללי-->
+                    <li id="languageLi" data-icon='false'><a onclick="$('#lnkLanguagePopupPass').click();" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-right ui-icon-gear" data-ajax="false" href="#">Language</a></li>
+                    <li id="oldVersionLi" data-icon='false'><a onclick="goToOldVersion()" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-back" data-ajax="false" href="" data-word="9"></a></li><!--עבור לגרסה ישנה-->
+                    <li id="globalInfoLi" data-icon='false' ><a href="#" onclick="$('#lnkInfoPopup').click();" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-info" data-ajax="false" data-word="36"></a></li><!--מידע כללי-->
                     <li data-icon='false'><a onclick="$('#lnkGuidePopupPass').click();" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-forbidden" data-ajax="false" href="#" data-word="8"></a></li><!--הפעל מדריך-->
                     <li style="display:none" data-icon='false' ><a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-refresh" data-ajax="false" onclick="$('#questionsTimerDiv').slideDown();">  TTT </a></li>
                     <li style="display:none" data-icon='false' ><a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-refresh" data-ajax="false" onclick='$( "#questionsTimerDiv" ).animate({width: "70%", marginLeft: "10%", marginTop: "200px", borderWidth: "10px"}, 500 );'>  next refresh TTT </a></li>
