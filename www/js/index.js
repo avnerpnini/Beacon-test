@@ -121,30 +121,6 @@ function onDeviceReady(){
         testQuestion(QueryString["quesID"]);
     }
 
-    //fix the 100% height bug taked from http://stackoverflow.com/questions/21552308/set-content-height-100-jquery-mobile/27617438#27617438
-    var screen = $.mobile.getScreenHeight();
-    var header = $(".ui-header").hasClass("ui-header-fixed") ? $(".ui-header").outerHeight()  - 1 : $(".ui-header").outerHeight();
-    var footer = $(".ui-footer").hasClass("ui-footer-fixed") ? $(".ui-footer").outerHeight() - 1 : $(".ui-footer").outerHeight();
-    /* content div has padding of 1em = 16px (32px top+bottom). This step
-       can be skipped by subtracting 32px from content var directly. */
-    var contentCurrent = $(".ui-content").outerHeight() - $(".ui-content").height();
-    var content = screen - header - footer - contentCurrent;
-    $(".ui-content").height(content);
-    //
-    
-    //fix the 100% height bug taked from http://stackoverflow.com/questions/21552308/set-content-height-100-jquery-mobile/27617438#27617438
-/*    function ScaleContentToDevice(){
-        scroll(0, 0);
-        var content = $.mobile.getScreenHeight() - $(".ui-header").outerHeight() - $(".ui-footer").outerHeight() - $(".ui-content").outerHeight() + $(".ui-content").height();
-        $(".ui-content").height(content);
-    }
-    $(document).on( "pagecontainershow", function(){
-        ScaleContentToDevice();        
-    });
-
-    $(window).on("resize orientationchange", function(){
-        ScaleContentToDevice();
-    });*/
  };
 
 //for Open panel on swipe
@@ -190,6 +166,12 @@ function resize(){
         $(".owl-pic_p").hide();
     }
     //$("#mainPage").css("height", "100%");//fix screen cut bug
+
+    //fix the page height
+    setTimeout('$.mobile.resetActivePageHeight();',500);
+    setTimeout('$.mobile.resetActivePageHeight();',1000);
+    setTimeout('$.mobile.resetActivePageHeight();',2000);
+    
 }
 
 var timoetForCheckForFixes = null;
