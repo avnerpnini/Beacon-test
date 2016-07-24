@@ -2107,6 +2107,11 @@ function startsNavRegister(text, source) {
                 if(localStorage.backToNewVersion == 1){
                     myQueue.addToQueue(0, { action: "getNextLevel", userID: localStorage.userID });
                 }
+                 //show in all img the cach file
+                $('img').each(function () {
+                    if (($(this).attr('src')).search("http://") >= 0)
+                        ImgCache.useCachedFile($(this));
+                });
             }
         }
         else
