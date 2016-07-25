@@ -296,7 +296,8 @@ function checkRegisterValues(showMsg){
 
     var pattern = /\d{10}/g;
     var phone = localStorage.getItem("phone");
-    if (((localStorage.getItem("phone") == null) || phone.length != 10 || phone.substring(0,1)!=0 || phone.substring(1,2)!=5 || !pattern.test(phone))){
+    if ( ((localStorage.getItem("language") == HEBREW) && ((localStorage.getItem("phone") == null) || phone.length != 10 || phone.substring(0,1)!=0 || phone.substring(1,2)!=5 || !pattern.test(phone)))
+          || (localStorage.getItem("language") != HEBREW && (localStorage.getItem("phone") == null || phone.length < 10) ) ){
         redBorder("phone");
         msg += putWord(104) + "\n";
     }

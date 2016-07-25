@@ -179,7 +179,7 @@ new Array("שם פרטי לא תקין או חסר","First name invalid or missi
 new Array("שם משפחה לא תקין או חסר","Last name invalid or missing","Nom de famille non valide ou manquant"),//101
 new Array("מקום מגורים לא תקין או חסר- ניתן להשאיר שדה זה ריק","Address invaild or missing- you may leave this field empty","Adresse non valide ou manquante"),//102
 new Array("כתובת דואר אלקטרוני לא תקינה- ניתן להשאיר שדה זה ריק","Email invalid- you may leave this field emtpy","Email non valide ou manquant"),//103
-new Array("מספר פלאפון לא תקין או חסר","Phone number invalid or missing","Numéro de téléphone non valide ou manquant"),//104
+new Array("מספר פלאפון לא תקין או חסר (במידה והמספר שלכם אינו מספר ישראלי רגיל החליפו שפה דרך: תפריט -> LANGUAGE. לאחר מכן תוכלו להמשיך ברישום)","Phone number invalid or missing","Numéro de téléphone non valide ou manquant"),//104
 new Array("לא ניתן להמשיך","Unable to continue","Il n'est pas possible de continuer"),//105
 new Array("אישור","OK","Validation"),//106
 new Array("יש לרשום סיסמא","Enter password","Vous devez entrer le code"),//107
@@ -470,7 +470,6 @@ new Array("","",""),//391
 new Array("","",""),//392
 new Array("","",""),//393
 new Array("","",""),//394
-
 //הדבקה כאן
 ];
     }
