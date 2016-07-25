@@ -614,6 +614,8 @@ function startsNavRegister(text, source) {
                 break;
         }
         pageInView = pageNum;
+        //fix the page height
+        setTimeout('$.mobile.resetActivePageHeight();', 1000);
     }
 
     //this function define whice button is clicked when user puse enter
@@ -1433,10 +1435,8 @@ function startsNavRegister(text, source) {
                 //remove previus level from local stoarge
                 if (preLevelName && levelName != preLevelName)
                     localStorage.removeItem(preLevelName);
-                $('img').each(function () {
-                    if (($(this).attr('src')).search("http://") >= 0)
-                        ImgCache.useCachedFile($(this));
-                });
+
+                refreshFromCache();
 
                  //show the questiob in the right context rtl or ltr
                 if( theQuestion.row.direction == "ltr" || (theQuestion.row.ID == 1 && localStorage.getItem("language") != HEBREW && localStorage.getItem("language") != null )){ //ltr
@@ -1874,11 +1874,7 @@ function startsNavRegister(text, source) {
             }
         }
         
-        //show in all img the cach file
-        $('img').each(function () {
-            if (($(this).attr('src')).search("http://") >= 0)
-                ImgCache.useCachedFile($(this));
-        });
+        refreshFromCache();
     }
 
   
@@ -2107,11 +2103,11 @@ function startsNavRegister(text, source) {
                 if(localStorage.backToNewVersion == 1){
                     myQueue.addToQueue(0, { action: "getNextLevel", userID: localStorage.userID });
                 }
-                 //show in all img the cach file
-                $('img').each(function () {
-                    if (($(this).attr('src')).search("http://") >= 0)
-                        ImgCache.useCachedFile($(this));
-                });
+                //show in all img the cach file
+
+                refreshFromCache();
+                setTimeout('refreshFromCache()',2000);
+                setTimeout('refreshFromCache()',4000);
             }
         }
         else
@@ -2222,6 +2218,8 @@ function startsNavRegister(text, source) {
             $('#answerDiv').fadeToggle(200, function () { $('#mainDiv').fadeToggle(200); });
         
         $("html, body").animate({ scrollTop: 0 }, 400);//scrool to top
+        //fix the page height
+        setTimeout('$.mobile.resetActivePageHeight();', 1000);
     }
 
     //---this function add a copy of a console on the developerDiv...--//

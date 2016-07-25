@@ -222,17 +222,17 @@ function loadXMLDoc(action) {
         tabletCompatibility();
     }
     if (action == "checkAnswer") {
-        xmlhttp.open("POST", "http://www.nivutsms.net/A_import_files/questionAction.php?function=" + action + "&p1=" + userID + "&p2=" + answer + "&p3=" + questionID +"&random="+Math.random(), true);
+        xmlhttp.open("POST", "http://www.nivut.net/A_import_files/questionAction.php?function=" + action + "&p1=" + userID + "&p2=" + answer + "&p3=" + questionID +"&random="+Math.random(), true);
     }
     else if (action == "getNavName"){
-        xmlhttp.open("POST", "http://www.nivutsms.net/A_import_files/questionAction.php?function=" + action + "&p1=" + navID +"&random="+Math.random(), true);
+        xmlhttp.open("POST", "http://www.nivut.net/A_import_files/questionAction.php?function=" + action + "&p1=" + navID +"&random="+Math.random(), true);
     }
     else if (action == "getQuestion"){
         $('#mainDiv').html(nav);
-        xmlhttp.open("POST", "http://www.nivutsms.net/A_import_files/questionAction.php?function=" + action + "&p1=" + userID + "&p2=" + Duuid +"&random="+Math.random(), true);
+        xmlhttp.open("POST", "http://www.nivut.net/A_import_files/questionAction.php?function=" + action + "&p1=" + userID + "&p2=" + Duuid +"&random="+Math.random(), true);
     }
     else
-        xmlhttp.open("POST", "http://www.nivutsms.net/A_import_files/questionAction.php?function=" + action +"&random="+Math.random(), true);
+        xmlhttp.open("POST", "http://www.nivut.net/A_import_files/questionAction.php?function=" + action +"&random="+Math.random(), true);
     
     if (action=="addUser"){
         if(userID>0){
@@ -712,7 +712,7 @@ function uploadPhoto(imageURI) {
     options.params = params;
 
     var ft = new FileTransfer();
-    ft.upload(imageURI, encodeURI("http://www.nivutsms.net/A_import_files/upload.php?userID="+userID+"&uuid="+Duuid +"&questionID="+questionID), win, fail, options);
+    ft.upload(imageURI, encodeURI("http://www.nivut.net/A_import_files/upload.php?userID="+userID+"&uuid="+Duuid +"&questionID="+questionID), win, fail, options);
 }
 
 function win(r) {
