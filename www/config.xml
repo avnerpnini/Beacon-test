@@ -42,13 +42,16 @@
         </platform>
         <platform name="ios">
             <!-- iPhone 6 / 6+ -->
+            <icon src="icon.png" />
             <icon src="images/icons/ios/180.png" width="180" height="180" />
             <icon src="images/icons/ios/60.png"  width="60" height="60" />
             <icon src="images/icons/ios/120.png" width="120" height="120" />
             <icon src="images/icons/ios/76.png"  width="76" height="76" />
+            <icon src="images/icons/ios/72.png"  width="72" height="72" />
             <icon src="images/icons/ios/152.png" width="152" height="152" />
             <icon src="images/icons/ios/29.png"  width="29"   height="29" />
             <icon src="images/icons/ios/58.png"  width="58"   height="58" />
+            <icon src="images/icons/ios/57.png"  width="57"   height="57" />
             <icon src="images/icons/ios/40.png"  width="40"  height="40" />
             <icon src="images/icons/ios/80.png"  width="80"  height="80" />
             <!-- IOS 6.1
