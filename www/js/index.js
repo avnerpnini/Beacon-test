@@ -2107,7 +2107,9 @@ function startsNavRegister(text, source) {
 
                 refreshFromCache();
                 setTimeout('refreshFromCache()',2000);
+                setTimeout('$.mobile.resetActivePageHeight();', 2500);
                 setTimeout('refreshFromCache()',4000);
+                setTimeout('$.mobile.resetActivePageHeight();', 4500);
             }
         }
         else
