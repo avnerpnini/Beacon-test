@@ -2,8 +2,8 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "nivut.net.wtg"
-        versionCode = "3004"
-        version   = "2.0.6">
+        versionCode = "3005"
+        version   = "2.1.0">
     <name>יש לאן</name>
 
     <description>
