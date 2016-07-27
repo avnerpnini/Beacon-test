@@ -1528,7 +1528,8 @@ function startsNavRegister(text, source) {
             else {
                 var get = sClean($("#userAnswer").val());
                 var send = "<img src='images/X.png' id='VXimg'/><br><br>"+putWord(156)+" \"" + arr[0]+ "\".<br><br>";
-                addConnection(time, arr[get - 1], send, theQuestion.LM, theQuestion.level, 1, theQuestion.row.ID);
+                addMistake();
+                addConnection(time, arr[get - 1], send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 inAnswerDivSet(theQuestion, true, send);
                 //$('#inAnswerDiv').html("<h4>" + send + "<h4>" + '<a id="continueButton" onclick="toggleAnswer();" class="ui-btn ui-corner-all ui-shadow ui-btn-b">putWord(145)</a>');
             }
@@ -1709,8 +1710,9 @@ function startsNavRegister(text, source) {
             else{
                 var send = "<img src='images/X.png' id='VXimg'/>";
                 send += "<br>"+putWord(180)+"<br><br><div style='display:none'> ("+putWord(176)+" "+min+" "+putWord(177)+" "+ max +" "+putWord(178)+" "+ arr[0] + " "+putWord(179)+": "+theQuestion.row.right_answer+") </div>";
+                addMistake();
                 inAnswerDivSet(theQuestion, true, send);
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, 1, theQuestion.row.ID);
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
             }
             stopWatch();
         }
@@ -1865,12 +1867,14 @@ function startsNavRegister(text, source) {
                 else if(diff <= 100){
                     var send = "<img src='images/V.png' id='VXimg'/><br><br>"+putWord(191)+" " + diff + " "+putWord(192);
                     send += "<h5>("+putWord(193)+" " + rightAns + ")</h5>";
-                    addConnection(time, get, send, theQuestion.LM, theQuestion.level, 1, theQuestion.row.ID);
+                    addMistake();
+                    addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 }
                 else{
                     var send = "<img src='images/X.png' id='VXimg'/><br><br>"+putWord(194)+" " + diff + " "+putWord(192);
                     send += "<h5>("+putWord(193)+" " + rightAns + ")</h5>";
-                    addConnection(time, get, send, theQuestion.LM, theQuestion.level, 2, theQuestion.row.ID);
+                    addMistake(2);
+                    addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 }
                 inAnswerDivSet(theQuestion, true, send);
             }
