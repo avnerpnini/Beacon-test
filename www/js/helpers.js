@@ -651,7 +651,7 @@ function switchFromAnotherUser(replaceUserID, requestNum){
             $("#inSwitchDivStep2").hide();
             $("#inSwitchDivStep3").show();
         }
-        var jqxhr = $.post("http://www.nivut.net/A_import_files/questionActionV2.php", { action: "switchFromAnotherUser", userID: localStorage.userID, replaceWith: replaceUserID, requestNum: requestNum} );
+        var jqxhr = $.post(baseUrl + "/A_import_files/questionActionV2.php", { action: "switchFromAnotherUser", userID: localStorage.userID, replaceWith: replaceUserID, requestNum: requestNum} );
         jqxhr.done(function (data, status) {
             var dataArr = JSON.parse(data);
             if (dataArr["success"] == 1) {

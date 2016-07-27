@@ -136,7 +136,7 @@
             var peek = queue.peekQueue();
             queueIsruning = true;
             if (peek && peek[1].action != "downloadPic" && peek[1].action != "uploadPic") {
-                var jqxhr = $.post("http://www.nivut.net/A_import_files/questionActionV2.php", { action: peek[1].action, priority: peek[0], command: peek[1] });
+                var jqxhr = $.post(baseUrl + "/A_import_files/questionActionV2.php", { action: peek[1].action, priority: peek[0], command: peek[1] });
                 //if ajax sucseed
                 jqxhr.done(function (data, status) {
                     //הוספת התקשרות
@@ -280,7 +280,7 @@
                     }
                 };
                 */
-                ft.upload(peek[1].url, encodeURI("http://www.nivut.net/A_import_files/upload.php?userID="+ localStorage.userID+"&Duuid="+Duuid +"&questionID="+peek[1].quesID), uploadSuccess, uploadFail, options);
+                ft.upload(peek[1].url, encodeURI(baseUrl + "/A_import_files/upload.php?userID="+ localStorage.userID+"&Duuid="+Duuid +"&questionID="+peek[1].quesID), uploadSuccess, uploadFail, options);
                 peek[1].ftAbortTimeout = setTimeout("ft.abort();", 30000);
 
                 function uploadSuccess(r) {

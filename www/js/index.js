@@ -1,5 +1,5 @@
 var navID = null,appVersion, isSlidebarOpen, timerLeftPanelTimeout,timerForQuestionsTimeout, hash, interval, requireRoute, requirePassword, password, pageInView = 1, url = window.location.href, isOpenScanner = false, agreeToUpdates = true,
-routeNum, Dcordova, Dplatform, Duuid, Dversion, Dmodel, requireAdditionalData, qrSource, levelsArr, connection_table = [], cameraImageURI, ft, firstOrientation, watchID;
+routeNum, Dcordova, Dplatform, Duuid, Dversion, Dmodel, requireAdditionalData, qrSource, levelsArr, connection_table = [], cameraImageURI, ft, firstOrientation, watchID, baseUrl = "http://www.nivut.net";
 //localStorage.endOfLoadQuestion = false;
 
 var NUMOFPRIORITYS = 4, HOURSFORGAME = 24;SECONDS_FOR_CHECK_COMMAND = 30;
@@ -179,7 +179,7 @@ var timoetForCheckForFixes = null;
 function checkForFixes() {
      if (!timoetForCheckForFixes)
         timoetForCheckForFixes = new connectAgainTimoet("checkForFixes()");
-    var jqxhr = $.post("http://www.nivut.net/A__V2/check_fixes.php?appVersion="+appVersion);
+    var jqxhr = $.post(baseUrl + "/A__V2/check_fixes.php?appVersion="+appVersion);
     //if ajax sucseed
     jqxhr.done(function (data, status) {
         var dataArr = JSON.parse(data);
@@ -475,7 +475,7 @@ function startsNavRegister(text, source) {
                 doQuestionAction(parm);
             });
 
-        var jqxhr = $.post("http://www.nivut.net/A_import_files/questionActionV2.php", parmParse);
+        var jqxhr = $.post(baseUrl + "/A_import_files/questionActionV2.php", parmParse);
 
         jqxhr.done(function (data, status) {
             if (parmParse['action'] == "getDefualtNavID") {
@@ -935,7 +935,7 @@ function startsNavRegister(text, source) {
         var result = "", downloadFrom = [], i = 0; //var putIn = []; למחוק
         for (var key in obj) {
             if (key == "p1" && obj["type"] == 2 && obj[key] != "") {//match to picture in type 2
-                obj[key] = '<img id="type2pic" src="http://www.nivut.net/A_images/' + obj[key] + '">';
+                obj[key] = '<img id="type2pic" src="' +baseUrl + '/A_images/' + obj[key] + '">';
             }
             var allMatches = null;
             if (obj[key] != null)
@@ -1127,7 +1127,7 @@ function startsNavRegister(text, source) {
                     text += theQuestion.row.main_text;
                     text = text.replace("[point]", theQuestion.point);
                     if (theQuestion.row.p1 != "")
-                        text += '<br><img class="type2pic" src="http://www.nivut.net/A_images/' + theQuestion.row.p1 + '"><br>';
+                        text += '<br><img class="type2pic" src="'+baseUrl + '/A_images/' + theQuestion.row.p1 + '"><br>';
                     var n = theQuestion.row.after_text.search("<br>");
                     if(n<0 || n <= 6)
                         text += '<br>';
@@ -1717,7 +1717,7 @@ function startsNavRegister(text, source) {
         //-----------------------------------------------------------------------
         else if (questionType == 9) {
             var d = new Date();var Y = d.getFullYear(); ;var n =  d.getMonth() + 1;var j = d.getDate();var picDate = Y + "-" + n + "-" + j;
-            var picPath = "http://www.nivut.net/A_usersUploads/" + picDate + "-nav" + localStorage.navID + "-ques" + theQuestion.row.ID + "-user" + localStorage.userID + ".jpg";
+            var picPath = baseUrl + "/A_usersUploads/" + picDate + "-nav" + localStorage.navID + "-ques" + theQuestion.row.ID + "-user" + localStorage.userID + ".jpg";
             var get = "<a href='" + picPath +"' target='_blank'><img src='" + picPath + "' style='height:75px'></a>";
             var send = "<img src='images/V.png' id='VXimg'/><br><br>"+putWord(181);
             addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID, questionType);
@@ -1884,7 +1884,7 @@ function startsNavRegister(text, source) {
     //the deaties will be showen in "inAnswerDiv" at specific div
     function  worngQRDetails(wrongQR, rightQR, LM, point){
         
-        var jqxhr = $.post("http://www.nivut.net/A_import_files/questionActionV2.php", { action: "worngQRDetails", navID: localStorage.navID, route: localStorage.routeNum, worngQR: wrongQR});
+        var jqxhr = $.post(baseUrl + "/A_import_files/questionActionV2.php", { action: "worngQRDetails", navID: localStorage.navID, route: localStorage.routeNum, worngQR: wrongQR});
 
         jqxhr.done(function (data, status) {
             
@@ -2417,7 +2417,7 @@ function startsNavRegister(text, source) {
 
     //this function check for commands from the server 
    function checkForCommands() {
-        var jqxhr = $.post("http://www.nivut.net/A_import_files/questionActionV2.php", { action: "checkForCommands", userID: localStorage.userID });
+        var jqxhr = $.post(baseUrl + "/A_import_files/questionActionV2.php", { action: "checkForCommands", userID: localStorage.userID });
 
         jqxhr.done(function (data, status) {
             var dataArr = JSON.parse(data);
