@@ -735,3 +735,14 @@ function refreshFromCache(){
             ImgCache.useCachedFile($(this));
     });
 }
+
+function onBackHeaderButtonClicked(){
+    if (pageInView == 1 && localStorage.gameFinished != 'true'){
+            $('#lnkInfoPopup').click();
+    }
+    else if  (pageInView == 4  || (pageInView == 1 && localStorage.gameFinished == 'true')){
+        $('#panel-left').panel('open');
+    }
+    else
+        onBackKeyDown();
+}

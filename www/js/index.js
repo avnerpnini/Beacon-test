@@ -26,6 +26,12 @@ function onDeviceReady(){
         location.reload();
     }
     $("#backHeaderButton").show();
+
+    if (localStorage.gameFinished == 'true') {
+        $("#backHeaderButton").removeClass("ui-icon-info");
+        $("#backHeaderButton").addClass("ui-icon-user");
+    }
+
     $(".only_on_nav_runing").hide();
     setWords();//set lenguage
     saveRegisterValues("fName");
@@ -109,11 +115,6 @@ function onDeviceReady(){
         beforeclose: function( event, ui ) { clearTimeout(timerLeftPanelTimeout) }
     });
 
-    //מאפשר לראות תוצאות לאחר סגירה בסיום משחק
-    if(localStorage.gameFinished == "true"){
-        $("#timerIcon").show();
-         $("#timerIcon").attr("src","images/timer_logo.png");
-    }
     startSlider();
     isDuringeGame();
     //for preview in site - dont have use in the application
@@ -125,21 +126,6 @@ function onDeviceReady(){
 
 //for Open panel on swipe
  $(document).on("pagecreate", "#mainPage", function () {
-     $(document).on("swipeleft swiperight", "#timerIcon", function (e) {
-         // We check if there is no open panel on the page because otherwise
-         // a swipe to close the left panel would also open the right panel (and v.v.).
-         // We do this by checking the data that the framework stores on the page element (panel: open).
-         if ($(".ui-page-active").jqmData("panel") !== "open") {
-             if (e.type === "swipeleft") {
-                 if (pageInView == 4)
-                     $("#panel-left").panel("open");
-             }
-             else if (e.type === "swiperight") {
-                 if (pageInView == 4)
-                     $("#panel-left").panel("open");
-             }
-         }
-     });
      $(document).on("swipeleft swiperight", "#pageHeader", function (e) {
          // We check if there is no open panel on the page because otherwise
          // a swipe to close the left panel would also open the right panel (and v.v.).
@@ -571,7 +557,10 @@ function startsNavRegister(text, source) {
                 $("#registerDiv").fadeOut(400, function () { $("#gate").fadeIn(); });
                 $("#backHeaderButton").show();
                 $("#backHeaderButton").removeClass("ui-icon-carat-l");
-                $("#backHeaderButton").addClass("ui-icon-info");
+                if (localStorage.gameFinished == 'true')
+                    $("#backHeaderButton").addClass("ui-icon-user");
+                else
+                    $("#backHeaderButton").addClass("ui-icon-info");
                 //$( "#backHeaderButton" ).button( "option", "icon", "star" );
                 $("#resisterSave").show(); $("#resisterContinue").hide(); $("#resisterStart").hide();
                 $("#routeInputDiv").hide(); $("#passInputDiv").hide(); $("#cantScanQr").show();
@@ -583,6 +572,7 @@ function startsNavRegister(text, source) {
                 $(elmntid).fadeOut(400, function () { $("#registerDiv").fadeIn(); });
                 $("#backHeaderButton").show();
                 $("#backHeaderButton").removeClass("ui-icon-info");
+                $("#backHeaderButton").removeClass("ui-icon-user");
                 $("#backHeaderButton").addClass("ui-icon-carat-l");
                 $("#cantScanQr").hide();
                 $(".only_on_nav_runing").hide();
@@ -609,7 +599,10 @@ function startsNavRegister(text, source) {
                     $("#registerDiv").fadeOut(400, function () { $("#mainDiv").fadeIn(); });
                 else
                     $("#passwordDiv").fadeOut(400, function () { $("#mainDiv").fadeIn(); });
-                $("#backHeaderButton").hide();
+                $("#backHeaderButton").show();
+                $("#backHeaderButton").removeClass("ui-icon-info");
+                $("#backHeaderButton").removeClass("ui-icon-carat-l");
+                $("#backHeaderButton").addClass("ui-icon-user");
                 $(".only_on_nav_runing").show();
                 setEnterEvent("#userAnswer","#sendAnswer");
                 //כל פונקציה שאני שם כאן לחשוב אם לשים אותה גם ב isduringgame
@@ -2054,7 +2047,6 @@ function startsNavRegister(text, source) {
                     setTimeout('audio[FINISHGAME].play()', 500)//play sound;
                     setTimeout("endOfGmaeAlert()", 10000);
                     localStorage.finishTime = date;
-                    $("#timerIcon").attr("src", "images/timer_logo.png");
                     clearInterval(finishInterval);
                 }
             }, 1000)
@@ -2087,7 +2079,7 @@ function startsNavRegister(text, source) {
                 //alert("resume game in new version"); //debug nedd to be function the go back to the game in the new version
 
                 /*move screen from start to game runing*/
-                $("#gate").hide(); $("#backHeaderButton").hide(); $("#cantScanQr").hide(); $("#registerDiv").hide(); $("#resisterSave").hide(); $("#resisterContinue").hide();
+                $("#gate").hide(); $("#backHeaderButton").removeClass("ui-icon-info");$("#backHeaderButton").addClass("ui-icon-user"); $("#cantScanQr").hide(); $("#registerDiv").hide(); $("#resisterSave").hide(); $("#resisterContinue").hide();
                 $("#resisterStart").hide(); $("#routeInputDiv").hide(); $("#passInputDiv").hide(); $("#cantScanQr").hide(); $("#passwordDiv").hide(); $("#mainDiv").fadeIn();
                 /*-------------*/
                 pageInView = 4;
@@ -2131,7 +2123,7 @@ function startsNavRegister(text, source) {
     function testQuestion(quesID) {
         /*move screen from start to game runing*/
         localStorage.clear();
-        $("#gate").hide(); $("#backHeaderButton").hide(); $("#cantScanQr").hide(); $("#registerDiv").hide(); $("#resisterSave").hide(); $("#resisterContinue").hide();
+        $("#gate").hide(); $("#backHeaderButton").removeClass("ui-icon-info");$("#backHeaderButton").addClass("ui-icon-user");; $("#cantScanQr").hide(); $("#registerDiv").hide(); $("#resisterSave").hide(); $("#resisterContinue").hide();
         $("#resisterStart").hide(); $("#routeInputDiv").hide(); $("#passInputDiv").hide(); $("#cantScanQr").hide(); $("#passwordDiv").hide(); $("#mainDiv").fadeIn();
         /*-------------*/
         pageInView = 4;

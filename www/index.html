@@ -116,7 +116,7 @@ imagecach.js לאחר ניסוי
             </div>
             <!-- header -->
             <div data-role="header" id="pageHeader" data-position="fixed" data-tap-toggle="false" data-theme='c'   >
-                <a href="#" id="backHeaderButton" onclick="pageInView == 1 ? $('#lnkInfoPopup').click(): onBackKeyDown()" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext ui-btn-c ui-btn-inline" style="top: 9px;"><span data-word="14"></span></a><!--חזרה-->
+                <a href="#" id="backHeaderButton" onclick="onBackHeaderButtonClicked();" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext ui-btn-c ui-btn-inline" style="top: 9px;"><span data-word="14"></span></a><!--חזרה-->
                 <h1 class="header-title" id="header-title" data-word=0></h1>
                 <a href="#sidebar" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-c ui-btn-inline" style="top: 9px;"><span data-word="15"></span></a><!--תפריט-->
             </div>
@@ -390,9 +390,6 @@ imagecach.js לאחר ניסוי
                     <img src="css/images/ajax-loader.gif" style="height: 30px;" alt="טוען"/>
                 </div>
             </div>
-            
-            <!--info panel icon-->
-            <img id="timerIcon" class="only_on_nav_runing" alt="i" onclick='$("#panel-left").panel("open")' src="images\timer.gif" style="min-height: 7%; height: 40px; width: auto; position:fixed; bottom: 10px;left: -10px; -moz-user-select: none;-webkit-user-drag: none;"/>
         </div><!--content-->
         <!-- back ground image-->
         <img id="backgroundImage" src="" alt="bg" style="width: 100%; position: fixed; bottom: 0px; z-index: -1 "/>    
