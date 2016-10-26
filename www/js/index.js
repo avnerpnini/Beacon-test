@@ -2133,7 +2133,11 @@ function startsNavRegister(text, source) {
     }
 
     function askForQuestionForTest(n) {
-        myQueue.addToQueue(0, { action: "getQuestionForTest", quesID: n, pass: QueryString["pass"]});
+        var point = getUrlParameter('point');
+        if (point)
+            myQueue.addToQueue(0, { action: "getQuestionForTest", quesID: n, pass: QueryString["pass"], point: point});
+        else
+            myQueue.addToQueue(0, { action: "getQuestionForTest", quesID: n, pass: QueryString["pass"]});
     }
 
     var QueryString = function () {

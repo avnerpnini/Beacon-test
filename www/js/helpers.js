@@ -612,7 +612,7 @@ function setQuestionsTimer(sec) {
 function updateUserStatus(navID, LM, level, routeNum) {
     $('#inFeedbackPopup').html("<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\"טוען\"/><h4>מעדכן...<h4>");
     $('#lnkfeedbackPopup').click();
-    doQuestionAction('{ "action" : "updateUserStatus" , "userID" : " ' + localStorage.userID + ' " , "navID" : " ' + navID + ' " , "LM" : " ' + LM + ' ", "level" : "' + level + ' ", "routeNum" : "' + routeNum  + '"}');
+    doQuestionAction('{ "action" : "updateUserStatus" , "userID" : " ' + localStorage.userID + ' " , "navID" : "' + navID + '" , "LM" : " ' + LM + ' ", "level" : "' + level + ' ", "routeNum" : "' + routeNum  + '"}');
 }
 
 
@@ -746,3 +746,19 @@ function onBackHeaderButtonClicked(){
     else
         onBackKeyDown();
 }
+
+//get url get parametrs
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
