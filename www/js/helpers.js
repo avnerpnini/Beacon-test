@@ -551,7 +551,7 @@ function setQuestionsTimer(sec) {
     if (!$("#questionsTimerDiv").length > 0 && d3.getTime() > (sec * 1000)+2500) {
         $("#content").append('<!--questions timer-->'
                                 + '<div id="questionsTimerDiv" style="box-shadow: 0 0 20px rgba(0,0,0,.4);margin-left: 10% ; width:70%; margin-top: 200px;position: fixed;top: 5px;left: 5px;z-index: 1000;background-color: red;padding: 20px;border-radius: 6px;text-align: center;color: white;font-weight: bold">'
-                                + '<a style="color:white;font-size:2em;" id="questionsTimer">'+putWord(312)+':<br> ' + sec +  putWord(313)+'</a> '
+                                + '<a style="color:white;font-size:2em;" id="questionsTimer">'+putWord(312)+':<br> ' + sec + " "+  putWord(313)+'</a> '
                                 + '<img id="questionsTimerImg" alt="timer" style="width: 30px;box-shadow: none;margin-bottom:0px;margin-bottom: -3px;margin-top: 5px;" src="images/timer_icon.png" />'
                             + '</div>');
         audio[ATTENTION].play();
