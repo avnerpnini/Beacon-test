@@ -115,6 +115,19 @@ function onDeviceReady(){
         beforeclose: function( event, ui ) { clearTimeout(timerLeftPanelTimeout) }
     });
 
+    //prevent duoble click on buttons - because it make bug
+    $("#mainDiv > .ui-btn, #continueButton").click(
+        function (e) {
+            var a = $(this);
+            $(a).addClass('ui-state-disabled');
+            setTimeout(function () {
+                $(a).removeClass('ui-state-disabled');
+            }, 3000);
+
+        }
+    );
+    //ui-state-disabled
+
     startSlider();
     isDuringeGame();
     //for preview in site - dont have use in the application
@@ -897,7 +910,7 @@ function startsNavRegister(text, source) {
                 if (!( (parseInt(newLM) == parseInt(lastLM) && parseInt(newLevel) == parseInt(lastLevel) + 1) || (parseInt(newLevel) == 1 && parseInt(newLM) == parseInt(lastLM)+1 ) || parseInt(newLevel) == 999)) {
                      var d = new Date();
                     var time = d.getTime() / 1000;
-                    addConnection(time,  putWord(135), "", -3, 0, 0, 0);
+                    addConnection(time,  putWord(135) + " lastLM: " + lastLM + ", lastLevel: "+lastLevel + ", newLM: "+newLM + ", newLevel: "+newLevel ,  "", -3, 0, 0, 0);
                     //levelsArr = [];
                     //localStorage.setItem("levelsArr", JSON.stringify(levelsArr));
                     setTimeout('dataRefresh(true, "", "");', 2000);
@@ -1455,6 +1468,7 @@ function startsNavRegister(text, source) {
             toggleAnswer();
         if(theQuestion != 999)
             var questionType = parseInt(theQuestion.row.type);
+
         //$("#feedbackPopup-screen").removeClass("ui-screen-hidden");//מציג מסך שחור ללר חלון קופץ
         //$("#feedbackPopup-screen").css("opacity",0.5);//אפשר לעבוד על זה שיהיה יותר חלק
         //setTimeout("$('#lnkfeedbackPopup').click();",1000)//חלון קופץ רק לאחרי 1 שניות
@@ -2390,9 +2404,15 @@ function startsNavRegister(text, source) {
         $("#userAnswer").parent().hide();
         $("#scanQRBut2").hide();
         $("#cantScanQr").hide();
+        $('#answerDiv').hide();
+        $('#mainDiv').show();
         $("#changeContentInMainDiv").html(text);
         localStorage.removeItem('endOfLoadQuestion');//remove 'endOfLoadQuestion' if exsist to enable continue
         removQuestions();
+        //abort ajax process if exist an not  DONE-4
+        if(jqxhr && jqxhr.readyState != 4){
+            jqxhr.abort();
+        }
         showNextQuestion(true);
 
 

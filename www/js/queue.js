@@ -126,6 +126,8 @@
 
     var queueIsruning = false;
     var runComTimer = null;
+    var jqxhr = null;
+    
     //this is a Recursive function that send the command with ajax & make downloads of picture, if the function called again (from out source not Recursive ) whan pervirous function is runing dont do tha ajax again
     //self parmaeter is true whan we have Recursive calling
      function runCom(queue, self) {
@@ -136,7 +138,7 @@
             var peek = queue.peekQueue();
             queueIsruning = true;
             if (peek && peek[1].action != "downloadPic" && peek[1].action != "uploadPic") {
-                var jqxhr = $.post(baseUrl + "/A_import_files/questionActionV2.php", { action: peek[1].action, priority: peek[0], command: peek[1] });
+                jqxhr = $.post(baseUrl + "/A_import_files/questionActionV2.php", { action: peek[1].action, priority: peek[0], command: peek[1] });
                 //if ajax sucseed
                 jqxhr.done(function (data, status) {
                     //הוספת התקשרות
@@ -171,6 +173,7 @@
                             queue.removeFromQueue(peek);
                             downloadPicToStoargeFromQuestionObj(dataArr.row);
                             runCom(myQueue, true);
+                            //setTimeout("runCom(myQueue, true);", 10000);
 
                         }
                         //במקרה של כשלון
