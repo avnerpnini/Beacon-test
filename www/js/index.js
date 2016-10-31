@@ -1039,18 +1039,23 @@ function startsNavRegister(text, source) {
                 $(".quesID").html(localStorage.quesID);
                 $(".point").html(theQuestion.point);
                 $("#userAnswer").attr("type", "");
-                //add timer for questions
+                
+                //add timer for questions with timer define
                 if (parseInt(theQuestion.row.p3) > 0) {
-                    var d = new Date();
-                    if (!isRefresh)
-                        localStorage.setItem("questionShowTime", (d.getTime()/1000));
-                    else{
-                    }
-                    clearTimeout(timerForQuestionsTimeout);
-                    $("#questionsTimerDiv").remove();//removr old timers if exsists
-                    setQuestionsTimer(theQuestion.row.p3);
-                    
+                    var intervalForQuesTimer = setInterval(function () {
+                        if ($('#answerDiv').is(':hidden')) {
+                            var d = new Date();
+                            if (!isRefresh ||  !localStorage.getItem("questionShowTime"))
+                                localStorage.setItem("questionShowTime", (d.getTime() / 1000));
+                            stopAndClearQuestionsTimer();
+                            /*clearTimeout(timerForQuestionsTimeout);
+                            $("#questionsTimerDiv").remove();//removr old timers if exsists*/
+                            clearInterval(intervalForQuesTimer);
+                            setQuestionsTimer(theQuestion.row.p3);
+                        }
+                    }, 500);
                 }
+                    
 
                 //----------------------סריקת ברקוד-------------------------------
                 if(theQuestion.row.ID  == 1){
@@ -2245,10 +2250,12 @@ function startsNavRegister(text, source) {
     }
 
     function toggleAnswer() {
-        if ($('#answerDiv').is(':hidden'))
+        if ($('#answerDiv').is(':hidden')) {
             $('#mainDiv').fadeToggle(200, function () { $('#answerDiv').fadeToggle(200); });
-        else
+        }
+        else {
             $('#answerDiv').fadeToggle(200, function () { $('#mainDiv').fadeToggle(200); });
+        }
         
         $("html, body").animate({ scrollTop: 0 }, 400);//scrool to top
         //fix the page height
@@ -2406,8 +2413,9 @@ function startsNavRegister(text, source) {
         }
         
         //claer question timer
-        clearTimeout(timerForQuestionsTimeout);
-        audio[CLOCK].pause();
+        stopAndClearQuestionsTimer();
+        /*clearTimeout(timerForQuestionsTimeout);
+        audio[CLOCK].pause();*/
 
         var l = connection_table.push(a);
         localStorage.setItem("connection_table", JSON.stringify(connection_table));
@@ -2584,8 +2592,10 @@ function startsNavRegister(text, source) {
         addConnection(time, "["+putWord(239)+"-"+note+"]", send, 999, 999, 0, 0);
         localStorage.gameFinished = true;
         //claer quesyion time out
+        stopAndClearQuestionsTimer();
+        /*
         clearTimeout(timerForQuestionsTimeout);
-        audio[CLOCK].pause();
+        audio[CLOCK].pause();*/
         //למחוק נתונים כדי שיטען משחק חדש להבא
     }
 

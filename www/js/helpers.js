@@ -415,6 +415,8 @@ function inAnswerDivSet(theQuestion, isContinue, send){
             }
             $('#inAnswerDiv').html("<h4>" + send + "<h4>");
             $('#continueButton').html(putWord(314));
+            stopAndClearQuestionsTimer();
+            localStorage.removeItem("questionShowTime");
         }
         else{
             $('#inAnswerDiv').html("<h4>" + send + "<h4>");
@@ -606,6 +608,13 @@ function setQuestionsTimer(sec) {
                 }, 4000);
         }
     }
+}
+
+
+function stopAndClearQuestionsTimer(){
+    clearTimeout(timerForQuestionsTimeout);
+    $("#questionsTimerDiv").remove();//removr old timers if exsists
+    audio[CLOCK].pause();
 }
 
 //ask to make user status update. like change navID, change route etc
