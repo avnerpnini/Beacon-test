@@ -1287,7 +1287,7 @@ function startsNavRegister(text, source) {
                     text += '</div><div class="warpertakePhoto"  onclick="takePictureFromGalery()"><input id="takePhotoFromGalery" type="button" data-icon="grid" data-theme="e" data-iconpos="left" value="'+putWord(247)+'"></div></div>';
                     text += '<div id="cameraPhotoDiv" style="display:none;text-align:center;padding-top: 30px;" ><img id="cameraPhoto" class="type2pic" src="css/images/ajax-loader.gif" style="height: 30px;width:30px;-webkit-box-shadow: none;" alt="'+putWord(113)+'"/></div>';
                     text += '<div class="didYouKnow" dir="auto" style="font-size:0.7em;">'+putWord(248)+'</div>';
-                    text += '<div id="sendPic" style="display:none;padding-top: 15px;" ><a onclick="sendPhoto()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(143)+'</a></div>';
+                    text += '<div id="sendPic" style="display:none;padding-top: 15px;" ><a id="sendPicButton" onclick="sendPhoto()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(143)+'</a></div>';
                     var n = theQuestion.row.after_text.search("<br>");
                     if(n<0 || n <= 6)
                         text += '<br>';
@@ -1455,6 +1455,21 @@ function startsNavRegister(text, source) {
                     $("#changeContentInMainDiv").css( "direction", "rtl");
                     $(".mulAnsDiv").css( "text-align", "right");
                 }
+                    
+                //prevent double click on buttons - because it make bug
+                if ($("#continue, #sendPicButton").length > 0) {
+                    $("#continue, #sendPicButton").click(
+                    function (e) {
+                        var a = $(this);
+                        $(a).addClass('ui-state-disabled');
+                        setTimeout(function () {
+                            $(a).removeClass('ui-state-disabled');
+                        }, 3000);
+
+                    });
+                }
+
+
             }
           
             //{"success":1,"LM":1,"level":2,"row":{"ID":"210","type":"1","category":"","sub_category":"","main_text":"","after_text":"","right_answer":"0","after_answer_text":"","p1":"","p2":"","p3":""}}
