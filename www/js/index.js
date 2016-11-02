@@ -56,8 +56,9 @@ function onDeviceReady(){
             appVersion = version;
             checkForFixes();
         });
-        startCach();
+        
     }
+    startCach();
     if (Dplatform == 'Android') {
         StatusBar.backgroundColorByHexString("#6f9ac0");
     }

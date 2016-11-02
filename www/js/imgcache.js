@@ -1,5 +1,5 @@
 /*! imgcache.js
-   Copyright 2012-2015 Christophe BENOIT
+   Copyright 2012-2016 Christophe BENOIT
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
@@ -14,9 +14,8 @@
 /*jslint browser:true*/
 /*global console,LocalFileSystem,device,FileTransfer,define,module*/
 
-/*avner i maked small change on row #660 - added error object*/
 var ImgCache = {
-        version: '1.0rc1',
+        version: '1.0.0',
         // options to override before using the library (but after loading this script!)
         options: {
             debug: false,                           /* call the log method ? */
@@ -64,6 +63,9 @@ var ImgCache = {
         if (ImgCache.options.skipURIencoding) {
             return uri;
         } else {
+            if (uri.length >= 2 && uri[0] === '"' && uri[uri.length - 1] === '"') {
+              uri = uri.substr(1, uri.length - 2);
+            }
             var encodedURI = encodeURI(uri);
             /*
             TODO: The following bit of code will have to be checked first (#30)
@@ -110,7 +112,7 @@ var ImgCache = {
     };
 
     // returns extension from filename (without leading '.')
-    Helpers.FileGetExtension = function (filename) {
+    Helpers.fileGetExtension = function (filename) {
         if (!filename) {
             return '';
         }
@@ -123,8 +125,18 @@ var ImgCache = {
         return ext;
     };
 
+    Helpers.appendPaths = function (path1, path2) {
+        if (!path2) {
+            path2 = '';
+        }
+        if (!path1 || path1 === '') {
+            return (path2.length > 0 && path2[0] == '/' ? '' : '/') + path2;
+        }
+        return path1 + ( ((path1[path1.length - 1] == '/') || (path2.length > 0 && path2[0] == '/')) ? '' : '/' ) + path2;
+    };
+
     Helpers.hasJqueryOrJqueryLite = function () {
-        return (ImgCache.jQuery || ImgCache.jQueryLite); 
+        return (ImgCache.jQuery || ImgCache.jQueryLite);
     };
 
     Helpers.isCordova = function () {
@@ -136,7 +148,7 @@ var ImgCache = {
     };
 
     Helpers.isCordovaWindowsPhone = function () {
-        return (Helpers.isCordova() && device && device.platform && device.platform.toLowerCase().indexOf('win32nt') >= 0);
+        return (Helpers.isCordova() && device && device.platform && ((device.platform.toLowerCase().indexOf('win32nt') >= 0) || (device.platform.toLowerCase().indexOf('windows') >= 0)));
     };
 
     Helpers.isCordovaIOS = function () {
@@ -162,6 +174,9 @@ var ImgCache = {
     Helpers.EntryToURL = function (entry) {
         if (Helpers.isCordovaAndroidOlderThan4() && typeof entry.toNativeURL === 'function') {
             return entry.toNativeURL();
+        } else if (typeof entry.toInternalURL === 'function') {
+            // Fix for #97
+            return entry.toInternalURL();
         } else {
             return entry.toURL();
         }
@@ -310,19 +325,19 @@ var ImgCache = {
 
     Private.setCurrentSize = function (curSize) {
         ImgCache.overridables.log('current size: ' + curSize, LOG_LEVEL_INFO);
-        if (Private.hasLocalStorage()){
+        if (Private.hasLocalStorage()) {
             localStorage.setItem('imgcache:' + ImgCache.options.localCacheFolder, curSize);
         }
     };
 
     Private.getCachedFilePath = function (img_src) {
-        return ImgCache.options.localCacheFolder + '/' + Private.getCachedFileName(img_src);
+        return Helpers.appendPaths(ImgCache.options.localCacheFolder, Private.getCachedFileName(img_src));
     };
 
     // used for FileTransfer.download only
     Private.getCachedFileFullPath = function (img_src) {
         var local_root = Helpers.EntryGetPath(ImgCache.attributes.dirEntry);
-        return (local_root ? local_root + '/' : '/') + Private.getCachedFileName(img_src);
+        return Helpers.appendPaths(local_root, Private.getCachedFileName(img_src));
     };
 
     Private.getCachedFileName = function (img_src) {
@@ -331,7 +346,7 @@ var ImgCache = {
             return;
         }
         var hash = ImgCache.overridables.hash(img_src);
-        var ext = Helpers.FileGetExtension(Helpers.URIGetFileName(img_src));
+        var ext = Helpers.fileGetExtension(Helpers.URIGetFileName(img_src));
         return hash + (ext ? ('.' + ext) : '');
     };
 
@@ -457,8 +472,7 @@ var ImgCache = {
         }
         var regexp = /\((.+)\)/;
         var img_src = regexp.exec(backgroundImageProperty)[1];
-
-        return img_src.replace(/(['"])/g, "");
+        return img_src.replace(/(['"])/g, '');
     };
 
     Private.loadCachedFile = function ($element, img_src, set_path_callback, success_callback, error_callback) {
@@ -565,12 +579,12 @@ var ImgCache = {
             ImgCache.overridables.log('Failed to initialise LocalFileSystem ' + error.code, LOG_LEVEL_ERROR);
             if (error_callback) { error_callback(); }
         };
-        if (Helpers.isCordova()) {
+        if (Helpers.isCordova() && window.requestFileSystem) {
             // PHONEGAP
             window.requestFileSystem(Helpers.getCordovaStorageType(ImgCache.options.usePersistentCache), 0, _gotFS, _fail);
         } else {
             //CHROME
-            window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+            var savedFS = window.requestFileSystem || window.webkitRequestFileSystem;
             window.storageInfo = window.storageInfo || (ImgCache.options.usePersistentCache ? navigator.webkitPersistentStorage : navigator.webkitTemporaryStorage);
             if (!window.storageInfo) {
                 ImgCache.overridables.log('Your browser does not support the html5 File API', LOG_LEVEL_WARNING);
@@ -584,7 +598,7 @@ var ImgCache = {
                 function () {
                     /* success*/
                     var persistence = (ImgCache.options.usePersistentCache ? window.storageInfo.PERSISTENT : window.storageInfo.TEMPORARY);
-                    window.requestFileSystem(persistence, quota_size, _gotFS, _fail);
+                    savedFS(persistence, quota_size, _gotFS, _fail);
                 },
                 function (error) {
                     /* error*/
@@ -625,7 +639,7 @@ var ImgCache = {
             filePath,
             function (entry) {
                 entry.getMetadata(function (metadata) {
-                    if (metadata && metadata.hasOwnProperty('size')) {
+                    if (metadata && ('size' in metadata)) {
                         ImgCache.overridables.log('Cached file size: ' + metadata.size, LOG_LEVEL_INFO);
                         Private.setCurrentSize(ImgCache.getCurrentSize() + parseInt(metadata.size, 10));
                     } else {
@@ -651,13 +665,15 @@ var ImgCache = {
                     );
                 }
 
-                if (success_callback) { success_callback(); }
+                if (success_callback) {
+                  success_callback(entry.toURL());
+                }
             },
             function (error) {
                 if (error.source) { ImgCache.overridables.log('Download error source: ' + error.source, LOG_LEVEL_ERROR); }
                 if (error.target) { ImgCache.overridables.log('Download error target: ' + error.target, LOG_LEVEL_ERROR); }
                 ImgCache.overridables.log('Download error code: ' + error.code, LOG_LEVEL_ERROR);
-                if (error_callback) { error_callback(error); }
+                if (error_callback) { error_callback(); }
             },
             on_progress
         );
