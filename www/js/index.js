@@ -39,7 +39,7 @@ function onDeviceReady(){
     saveRegisterValues("phone");
     saveRegisterValues("email");
     saveRegisterValues("address");
-    startCach();
+   
     /*
     if (typeof(device) !=  "undefined" && device.platform == "iOS") //do vibration on ios only on qr button
         $(".qrScannerButton").click(function () { navigator.vibrate(1);}); 
@@ -56,6 +56,7 @@ function onDeviceReady(){
             appVersion = version;
             checkForFixes();
         });
+        startCach();
     }
     if (Dplatform == 'Android') {
         StatusBar.backgroundColorByHexString("#6f9ac0");

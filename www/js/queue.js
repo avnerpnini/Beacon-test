@@ -171,7 +171,9 @@
                             else
                                 addQuestion("LM" + dataArr.LM + "l" + dataArr.level, data);
                             queue.removeFromQueue(peek);
-                            downloadPicToStoargeFromQuestionObj(dataArr.row);
+                            //prevent download file to stoarge on test mode
+                            if(peek[1].action != "getQuestionForTest")
+                                downloadPicToStoargeFromQuestionObj(dataArr.row);
                             runCom(myQueue, true);
                             //setTimeout("runCom(myQueue, true);", 10000);
 
