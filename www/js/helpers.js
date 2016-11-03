@@ -744,11 +744,17 @@ function refreshFromCache(){
             ImgCache.useCachedFile($(this));
     });
 
-     $('source').each(function () {
-        if (($(this).attr('src')).search("http://") >= 0){
-            $(this).parent().load();
-            ImgCache.useCachedFile($(this));
+    $('source').each(function () {
+        if (($(this).attr('src')).search("http://") >= 0) {
+            var obj = $(this);
+            ImgCache.useCachedFile(obj,
+                function () {
+                    alert('succ');
+                    $(obj).parent().load(); 
+                }
+            );
         }
+
     });
 }
 
