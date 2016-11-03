@@ -749,7 +749,6 @@ function refreshFromCache(){
             var obj = $(this);
             ImgCache.useCachedFile(obj,
                 function () {
-                    alert('succ');
                     $(obj).parent().load(); 
                 }
             );
