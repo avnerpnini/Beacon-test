@@ -783,3 +783,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
+//call to guide from the rught menu - help tool for the user
+function callToGuide(){
+    window.open('tel:'+localStorage.guidePhone, '_system')
+}

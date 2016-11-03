@@ -30,6 +30,7 @@ function onDeviceReady(){
     if (localStorage.gameFinished == 'true') {
         $("#backHeaderButton").removeClass("ui-icon-info");
         $("#backHeaderButton").addClass("ui-icon-user");
+        localStorage.removeItem('guidePhone');
     }
 
     $(".only_on_nav_runing").hide();
@@ -417,6 +418,7 @@ function startsNavRegister(text, source) {
         console.log("default id "+defaultID+" source:" + source);
         $('#inFeedbackPopup').html("<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\""+putWord(113)+"\"/>");
         doQuestionAction('{ "action" : "getDefualtNavID", "defaultID": '+defaultID+' }');
+        qrSource = qrSource + " " + defaultID;
         console.log("checkNavID");
     }
     else {
@@ -481,7 +483,7 @@ function startsNavRegister(text, source) {
         jqxhr.done(function (data, status) {
             if (parmParse['action'] == "getDefualtNavID") {
                 navID = data;
-                doQuestionAction('{ "action" : "getNavName" , "p1" : " ' + navID + ' " , "key" : " ' + navIDkey + ' " }');
+                doQuestionAction('{ "action" : "getNavName" , "p1" : " ' + navID + ' " , "barcodeID" : " ' + parmParse['defaultID'] + ' " }');
                 //checkNavID(navID);
             }
             else if (parmParse['action'] == "getNavName") {
@@ -519,6 +521,15 @@ function startsNavRegister(text, source) {
         $(".navID").html(navID);
         $(".memory").html(dataArr["memory"]);
         $(".navName").html(localStorage.navName +" ("+localStorage.navID+")");
+
+        var guidePhone = dataArr.helpPhone;
+        if (guidePhone) {
+            $("#callToGuide").show();
+            localStorage.guidePhone = guidePhone;
+        }
+        else{
+            $("#callToGuide").hide();
+        }
 
         requirePassword = dataArr.requirePassword;
         if (requirePassword) {
@@ -2137,8 +2148,10 @@ function startsNavRegister(text, source) {
                 if(localStorage.backToNewVersion == 1){
                     myQueue.addToQueue(0, { action: "getNextLevel", userID: localStorage.userID });
                 }
+                //show guide num
+                if (localStorage.guidePhone)
+                    $("#callToGuide").show();
                 //show in all img the cach file
-
                 refreshFromCache();
                 setTimeout('refreshFromCache()',2000);
                 setTimeout('$.mobile.resetActivePageHeight();', 2500);
@@ -2599,6 +2612,7 @@ function startsNavRegister(text, source) {
         clearTimeout(timerForQuestionsTimeout);
         audio[CLOCK].pause();*/
         //למחוק נתונים כדי שיטען משחק חדש להבא
+
     }
 
 
