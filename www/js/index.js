@@ -813,20 +813,20 @@ function startsNavRegister(text, source) {
         $('#lnkfeedbackPopup').click();
         $("#passwordDivStart").attr("onclick", "alert('"+putWord(130)+"')");
         doQuestionAction('{ "action" : "addUser",\
-                        "navID" : " ' + sClean(navID, true) + ' " ,\
-                        "routeNum" : " ' + sClean(routeNum, true) + ' " ,\
-                        "phoneN" : " ' + sClean(localStorage.getItem("phone"), true) + ' " ,\
-                        "firstN" : " ' + sClean(localStorage.getItem("fName"), true) + ' " ,\
-                        "lastN" : " ' + sClean(localStorage.getItem("lName"), true) + ' " ,\
-                        "city" : " ' + sClean(localStorage.getItem("address"), true) + ' " ,\
-                        "mail" : " ' + sClean(localStorage.getItem("email"), true) + ' " ,\
-                        "agree" : " ' + sClean(agreeToUpdates, true) + ' " ,\
-                        "phoneT" : " ' + "model:" + sClean(Dmodel, true) + " additionalData:" + sClean(additionalData, true) +  " device version:"  + sClean(Dversion, true) + " navIDSource:" + qrSource + '" ,\
-                        "browser" : " ' + sClean(Dcordova, true) + ' " ,\
-                        "version" : " ' + sClean(appVersion, true) + ' " ,\
-                        "OS" : " ' + sClean(Dplatform, true) + ' " ,\
-                        "IP" : " ' + sClean(Duuid, true) + ' " ,\
-                        "date" : " ' + time + ' " }');
+                        "navID" : "' + sClean(navID, true) + '" ,\
+                        "routeNum" : "' + sClean(routeNum, true) + '" ,\
+                        "phoneN" : "' + sClean(localStorage.getItem("phone"), true) + '" ,\
+                        "firstN" : "' + sClean(localStorage.getItem("fName"), true) + '" ,\
+                        "lastN" : "' + sClean(localStorage.getItem("lName"), true) + '" ,\
+                        "city" : "' + sClean(localStorage.getItem("address"), true) + '" ,\
+                        "mail" : "' + sClean(localStorage.getItem("email"), true) + '" ,\
+                        "agree" : "' + sClean(agreeToUpdates, true) + '" ,\
+                        "phoneT" : "' + "model:" + sClean(Dmodel, true) + " additionalData:" + sClean(additionalData, true) +  " device version:"  + sClean(Dversion, true) + " navIDSource:" + qrSource + '" ,\
+                        "browser" : "' + sClean(Dcordova, true) + '" ,\
+                        "version" : "' + sClean(appVersion, true) + '" ,\
+                        "OS" : "' + sClean(Dplatform, true) + '" ,\
+                        "IP" : "' + sClean(Duuid, true) + '" ,\
+                        "date" : "' + time + '" }');
 
         return true;
 
