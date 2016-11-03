@@ -739,9 +739,16 @@ function askForSwitchFromAnotherUser(){
 
 //show in all img the cach file
 function refreshFromCache(){
-    $('img, source').each(function () {
+    $('img').each(function () {
         if (($(this).attr('src')).search("http://") >= 0)
             ImgCache.useCachedFile($(this));
+    });
+
+     $('source').each(function () {
+        if (($(this).attr('src')).search("http://") >= 0){
+            ImgCache.useCachedFile($(this));
+            $(this).load();
+        }
     });
 }
 
