@@ -745,9 +745,9 @@ function refreshFromCache(){
     });
 
      $('source').each(function () {
+        $(this).load();
         if (($(this).attr('src')).search("http://") >= 0){
             ImgCache.useCachedFile($(this));
-            $(this).load();
         }
     });
 }
