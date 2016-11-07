@@ -84,7 +84,7 @@ new Array("דלג על צילום","Skip picture","Passer la photo"),//5
 new Array("מחק ניווט","Restart game","Recommencer"),//6
 new Array("השתק צליל","Mute","silencieux"),//7
 new Array("תפעול מדריך","Staff options","Activer le guide"),//8
-new Array("עבור לגרסה ישנה","Old version","Ancienne version"),//9
+new Array("חייג לעזרה","Call for help","Appel à l'aide"),//9
 new Array("עצה: גע בציור להסבר","Tap icon for explanation","Explications en tapant ici"),//10
 new Array("זמן מתחילת המשחק","Elapsed time","Temps écoulé"),//11
 new Array("כמות הטעויות","Mistakes","Nombre d'erreurs"),//12
