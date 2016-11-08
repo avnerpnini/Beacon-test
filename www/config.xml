@@ -75,7 +75,7 @@
         <platform name="ios">
             <splash src="images/splash/ios/320_480.png" width="320" height="480" />
             <splash src="images/splash/ios/640_960.png" width="640" height="960" />
-            <splash src="Default-568h@2x.png" width="640" height="1136" />
+            <splash src="images/splash/ios/640_1136.png" width="640" height="1136" />
             <splash src="images/splash/ios/750_1334.png" width="750" height="1334" />
             <splash src="images/splash/ios/1242_2208.png" width="1242" height="2208" />
             <splash src="images/splash/ios/2204_1242.png" width="2208" height="1242" />
