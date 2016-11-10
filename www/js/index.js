@@ -1556,8 +1556,8 @@ function startsNavRegister(text, source) {
             if ($("#userAnswer").val() == 1 || theQuestion.row.right_answer == -1) {
                 var get = sClean($("#userAnswer").val());
                 var send = "<img src='images/V.png' id='VXimg'/><br><br>"+putWord(152);
-                addConnection(time, arr[get - 1], send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID);
                 inAnswerDivSet(theQuestion, true, send);
+                addConnection(time, arr[get - 1], send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID);
                 //$('#inAnswerDiv').html("<h4>" + send + "<h4>" + '<a id="continueButton" onclick="toggleAnswer();" class="ui-btn ui-corner-all ui-shadow ui-btn-b">putWord(145)</a>');
             }
             else if ($("#userAnswer").val() == "") {
@@ -1569,8 +1569,8 @@ function startsNavRegister(text, source) {
                 var get = sClean($("#userAnswer").val());
                 var send = "<img src='images/X.png' id='VXimg'/><br><br>"+putWord(156)+" \"" + arr[0]+ "\".<br><br>";
                 addMistake();
-                addConnection(time, arr[get - 1], send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 inAnswerDivSet(theQuestion, true, send);
+                addConnection(time, arr[get - 1], send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 //$('#inAnswerDiv').html("<h4>" + send + "<h4>" + '<a id="continueButton" onclick="toggleAnswer();" class="ui-btn ui-corner-all ui-shadow ui-btn-b">putWord(145)</a>');
             }
         }
@@ -1588,8 +1588,8 @@ function startsNavRegister(text, source) {
                 if (found) {
                     var get = sClean($("#userAnswer").val());
                     var send = "<img src='images/V.png' id='VXimg'/><br><br>"+putWord(152);
-                    addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                     inAnswerDivSet(theQuestion, true, send);
+                    addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                     //$('#inAnswerDiv').html("<h4>" + send + "<h4>" + '<a id="continueButton" onclick="toggleAnswer();" class="ui-btn ui-corner-all ui-shadow ui-btn-b">putWord(145)</a>');
                 }
                 else if ($("#userAnswer").val() == "") {
@@ -1636,8 +1636,8 @@ function startsNavRegister(text, source) {
             if (rightAnsCount >= parseInt(theQuestion.row.p1)) {
                 var get = sClean($("#userAnswer").val());
                 var send = "<img src='images/V.png' id='VXimg'/><br><br>"+putWord(152);
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 inAnswerDivSet(theQuestion, true, send);
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 //$('#inAnswerDiv').html("<h4>" + send + "<h4>" + '<a id="continueButton" onclick="toggleAnswer();" class="ui-btn ui-corner-all ui-shadow ui-btn-b">putWord(145)</a>');
             }
             else if ($("#userAnswer").val() == "") {
@@ -1694,8 +1694,8 @@ function startsNavRegister(text, source) {
 
             send += " "+putWord(171)+" "+ rightAnsCount +" "+putWord(172)+" "+(rightAnssrr.length-1)+".";
             var get = $("#userAnswer").val();
-            addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
             inAnswerDivSet(theQuestion, true, send);
+            addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
             clearInterval(yesNoQuesTimerInterval);
             
         }
@@ -1762,8 +1762,8 @@ function startsNavRegister(text, source) {
             var picPath = baseUrl + "/A_usersUploads/" + picDate + "-nav" + localStorage.navID + "-ques" + theQuestion.row.ID + "-user" + localStorage.userID + ".jpg";
             var get = "<a href='" + picPath +"' target='_blank'><img src='" + picPath + "' style='height:75px'></a>";
             var send = "<img src='images/V.png' id='VXimg'/><br><br>"+putWord(181);
-            addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID, questionType);
             inAnswerDivSet(theQuestion, true, send);
+            addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID, questionType);
         }
         //-----------------------------------------------------------------------
         else if((questionType == 10) ){
@@ -1820,8 +1820,8 @@ function startsNavRegister(text, source) {
 
 
                 var get = $("#userAnswer").val();
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 inAnswerDivSet(theQuestion, true, send);
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 $(".mulAns").listview();
                 $( window ).off("resize", paintLineResize);//off the fix the lines whan window size changed
             }
@@ -1865,8 +1865,8 @@ function startsNavRegister(text, source) {
 
 
                 var get = $("#userAnswer").val();
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 inAnswerDivSet(theQuestion, true, send);
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
            
             }
         }
@@ -1882,8 +1882,8 @@ function startsNavRegister(text, source) {
                 var get = sClean($("#userAnswer").val());
                 var send = "<img src='images/V.png' id='VXimg'/><br><br>"+putWord(189);
                 localStorage.setItem("gematria", doGematria(get));
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID);
                 inAnswerDivSet(theQuestion, true, send);
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID);
             }
         }
         //-----------------------------------------------------------------------
