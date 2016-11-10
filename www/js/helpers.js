@@ -740,12 +740,12 @@ function askForSwitchFromAnotherUser(){
 //show in all img the cach file
 function refreshFromCache(){
     $('img').each(function () {
-        if (($(this).attr('src')).search("http://") >= 0)
+        if (($(this).attr('src')).search("http://") >= 0 || ($(this).attr('src')).search("https://") >= 0)
             ImgCache.useCachedFile($(this));
     });
 
     $('source').each(function () {
-        if (($(this).attr('src')).search("http://") >= 0) {
+        if (($(this).attr('src')).search("http://") >= 0 || ($(this).attr('src')).search("https://") >= 0) {
             var obj = $(this);
             ImgCache.useCachedFile(obj,
                 function () {
