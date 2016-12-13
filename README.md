@@ -1,6 +1,6 @@
 ﻿Way To Gp application
 
-version 2.1.1  
+version 2.1.3 in the futer 
 
 befor updating on the stores
 
