@@ -16,7 +16,7 @@
     <access origin="*" />
     <allow-intent href="*" />
     
-    <preference name="phonegap-version" value="cli-6.3.0" />
+    <preference name="phonegap-version" value="cli-5.2.0" />
     <preference name="orientation"      value="default" />
     <preference name="prerendered-icon" value="true" /><!--ios only-->
     <preference name="detect-data-types" value="false" /><!--ios only-->
