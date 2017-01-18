@@ -5,7 +5,7 @@
         display: none;
     }
 
-    #answerDiv, #mainDiv, #changeContentInMainDiv {
+    #answerDiv, #mainDiv, #changeContentInMainDiv, #changeContentInMainDiv p, .tinymceDiv {
         text-shadow: 1px 1px 1px #000;
         font-size: 21px;
         color: #000000;
@@ -22,7 +22,7 @@
 
     
     
-    #mainDiv img, #changeContentInMainDiv img {
+    #mainDiv img:not(.tinymceImg), #changeContentInMainDiv img:not(.tinymceImg){
         width: 100%;
         border-radius: 10px;
         -moz-box-shadow: 1px 1px 1px rgb(70, 70, 70);
@@ -32,6 +32,30 @@
         margin-bottom: 10px;
         max-width: 500px;
     }
+    
+    
+    .tinymceImg{
+        border-radius: 10px;
+        -moz-box-shadow: 1px 1px 1px rgb(70, 70, 70);
+        -webkit-box-shadow: 1px 1px 1px rgb(70, 70, 70);
+        -webkit-appearance: none;
+        max-width: 500px;
+        width: initial !important;
+    }
+    
+    .notDesignImg{
+        border-radius: 0px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        
+    }
+    
+    .fullWidthImg{
+        height: auto;
+        width: 100% !important;
+    }
+    
+
     
     #answerDiv{
         height: 100%;  
@@ -61,7 +85,7 @@
         width: 100px;
     }
     
-    #didYouKnow, .didYouKnow {
+    #didYouKnow{
         background-color: rgb(141, 209, 225);
         border-style: solid;
         -webkit-border-radius: 10px;
@@ -143,7 +167,6 @@
         margin-right: 0px;
         opacity: 0.99;
     }
-    
     
     /*for sortable list*/    
     #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
