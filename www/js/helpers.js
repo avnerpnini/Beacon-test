@@ -789,7 +789,10 @@ function callToGuide(){
     window.open('tel:'+localStorage.guidePhone, '_system')
 }
 
-
+///////////////////////////////////////////
+////////location calculate functions///////
+//////////////////////////////////////////
+{
 //this script [in Javascript] calculates great-circle distances between the two points – that is, 
 //the shortest distance over the earth’s surface – using the ‘Haversine’ formula.
 //from http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula?noredirect=1&lq=1
@@ -809,4 +812,12 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 
 function deg2rad(deg) {
   return deg * (Math.PI/180)
+}
+
+//this function return the azimut between latlong1 to latlong2
+function getAzimuth(lat1,lon1,lat2,lon2) {
+    return Math.atan2(lon2 - lon1, lat2 - lat1) * 180 / Math.PI;
+}
+
+
 }
