@@ -828,7 +828,7 @@ function getLocationForType12(){
   navigator.geolocation.getCurrentPosition(
     onType12GeolocationSuccess,
     onType12GeolocationError,
-   {maximumAge: timeBetweenLocation * 1000, enableHighAccuracy: true }
+   {maximumAge: 1000, enableHighAccuracy: true }
   );
 }
  function onType12GeolocationSuccess(position){
