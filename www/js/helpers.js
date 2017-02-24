@@ -821,3 +821,28 @@ function getAzimuth(lat1,lon1,lat2,lon2) {
 
 
 }
+
+//this functions for get postion for question type 12
+{//start
+function getLocationForType12(){
+  navigator.geolocation.getCurrentPosition(
+    onType12GeolocationSuccess,
+    onType12GeolocationError,
+   {maximumAge: timeBetweenLocation * 1000, enableHighAccuracy: true }
+  );
+}
+ function onType12GeolocationSuccess(position){
+    Latitude = position.coords.latitude;
+    Longitude = position.coords.longitude;
+    $("#userAnswer").val(Latitude+","+Longitude);
+ }
+ 
+function onType12GeolocationError(){
+    console.log('code: ' + error.code + '\n' +
+        'message: ' + error.message + '\n');
+    alert("Location failed");
+ }
+ 
+ 
+}//end
+
