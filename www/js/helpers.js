@@ -824,17 +824,24 @@ function getAzimuth(lat1,lon1,lat2,lon2) {
 
 //this functions for get postion for question type 12
 {//start
-function getLocationForType12(){
-  navigator.geolocation.getCurrentPosition(
-    onType12GeolocationSuccess,
-    onType12GeolocationError,
-   {maximumAge: 1000, enableHighAccuracy: true }
+var watchIDForType12;
+var locationTimoutForType12;
+function getLocationForType12
+   watchIDForType12 = navigator.geolocation.watchPosition(
+        onType12GeolocationSuccess,
+        onType12GeolocationError,
+       {maximumAge: 1000, enableHighAccuracy: true }
   );
+  locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 30000);
 }
  function onType12GeolocationSuccess(position){
-    Latitude = position.coords.latitude;
-    Longitude = position.coords.longitude;
-    $("#userAnswer").val(Latitude+","+Longitude);
+  if (position.coords.accuracy <= 25){
+     navigator.geolocation.clearWatch(watchIDForType12);
+     clearTimeout(locationTimoutForType12);
+     Latitude = position.coords.latitude;
+     Longitude = position.coords.longitude;
+     $("#userAnswer").val(Latitude+","+Longitude);
+  }
  }
  
 function onType12GeolocationError(){
@@ -843,6 +850,10 @@ function onType12GeolocationError(){
     alert("Location failed");
  }
  
+function cancelGetLocationForType12(){
+    navigator.geolocation.clearWatch(watchIDForType12);
+    alert("זיהוי מיקום נכשל :(");
+}
  
 }//end
 
