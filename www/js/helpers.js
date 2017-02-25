@@ -826,7 +826,7 @@ function getAzimuth(lat1,lon1,lat2,lon2) {
 {//start
 var watchIDForType12;
 var locationTimoutForType12;
-function getLocationForType12
+function getLocationForType12(){
    watchIDForType12 = navigator.geolocation.watchPosition(
         onType12GeolocationSuccess,
         onType12GeolocationError,
