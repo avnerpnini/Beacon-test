@@ -832,7 +832,7 @@ function getLocationForType12
         onType12GeolocationError,
        {maximumAge: 1000, enableHighAccuracy: true }
   );
-  locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 30000);
+  locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 3000);
 }
  function onType12GeolocationSuccess(position){
   if (position.coords.accuracy <= 25){
@@ -851,6 +851,7 @@ function onType12GeolocationError(){
  }
  
 function cancelGetLocationForType12(){
+    alert("זיהוי מיקום נכשל :("); 
     navigator.geolocation.clearWatch(watchIDForType12);
     alert("זיהוי מיקום נכשל :(");
 }
