@@ -1868,6 +1868,7 @@ function startsNavRegister(text, source) {
                 addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);*/
                 alert("לא נכון");
             }
+            return ;
         }
         //-----------------------------------------------------------------------
         else if (questionType == 14){

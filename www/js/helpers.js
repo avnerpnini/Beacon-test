@@ -850,7 +850,7 @@ function onType12GeolocationSuccess(position){
         Latitude = position.coords.latitude;
         Longitude = position.coords.longitude;
         $("#userAnswer").val(JSON.stringify(position));
-        $("#feedbackPopup").popup("close");
+        setTimeout('$("#feedbackPopup").popup("close");', 1000);
         checkAnswer();
     }
 }
@@ -859,11 +859,13 @@ function onType12GeolocationError(){
     console.log('code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
     alert("Location failed");
+    setTimeout('$("#feedbackPopup").popup("close");', 1000);
  }
  
 function cancelGetLocationForType12(){
     navigator.geolocation.clearWatch(watchIDForType12);
     alert("זיהוי מיקום נכשל :(");
+    setTimeout('$("#feedbackPopup").popup("close");', 1000);
 }
  
 }//end
