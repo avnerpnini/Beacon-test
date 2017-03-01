@@ -827,14 +827,17 @@ function getAzimuth(lat1,lon1,lat2,lon2) {
 var watchIDForType12;
 var locationTimoutForType12;
 var positionForType12 = null;
+var type12IsRun = false;//preventDoubleClick
 function getLocationForType12(){
-    watchIDForType12 = navigator.geolocation.watchPosition(
-        onType12GeolocationSuccess,
-        onType12GeolocationError,
-       {maximumAge: 1000, enableHighAccuracy: true, timeout: 20000 }
-    );
-    locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 20* 1000);
-
+    if (!type12IsRun){
+        watchIDForType12 = navigator.geolocation.watchPosition(
+            onType12GeolocationSuccess,
+            onType12GeolocationError,
+           {maximumAge: 1000, enableHighAccuracy: true, timeout: 20000 }
+        );
+        locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 30* 1000);
+    }
+    
     //set the popup
      var inHtml = '<img alt="pic1" src="images/logo_opacity.png" style="width: 200px;   margin: auto;display: block;margin-bottom: 20px"/>' + "<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\""+putWord(113)+"\"/><h4>"+putWord(218)+"</h4><br><div id='acc'></div><br>";
 
@@ -853,6 +856,7 @@ function onType12GeolocationSuccess(position){
         Longitude = position.coords.longitude;
         setTimeout('$("#feedbackPopup").popup("close");', 1000);
         checkAnswer(position);
+        type12IsRun = false;
     }
 }
  
@@ -861,12 +865,14 @@ function onType12GeolocationError(){
         'message: ' + error.message + '\n');
     alert("Location failed");
     setTimeout('$("#feedbackPopup").popup("close");', 1000);
+    type12IsRun = false;
  }
  
 function cancelGetLocationForType12(){
     navigator.geolocation.clearWatch(watchIDForType12);
     alert("זיהוי מיקום נכשל :(");
     setTimeout('$("#feedbackPopup").popup("close");', 1000);
+    type12IsRun = false;
 }
  
 }//end
