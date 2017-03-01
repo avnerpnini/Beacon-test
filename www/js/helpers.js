@@ -856,7 +856,8 @@ function onType12GeolocationSuccess(position){
         Latitude = position.coords.latitude;
         Longitude = position.coords.longitude;
         setTimeout('$("#feedbackPopup").popup("close");', 1000);
-        checkAnswer(position);
+        if (type12IsRun)
+            checkAnswer(position);
         type12IsRun = false;
     }
 }
