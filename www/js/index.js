@@ -1389,14 +1389,18 @@ function startsNavRegister(text, source) {
                     $( window ).on("resize", paintLineResize);//fix the lines whan window size changed
 
                 }
-                //---------------סוג 12 זהוי מיקום----------------------------------------
+                //---------------סוג 12 זיהוי מיקום----------------------------------------
                 else if(questionType  == 12){
-                    $("#userAnswer").parent().show();
+                    $("#userAnswer").parent().hide();
                     $("#sendAnswer").hide();
                     $("#scanQRBut2").hide();
                     $("#cantScanQr").hide();
                     text += theQuestion.row.main_text;
-                    text += '<div onclick="getLocationForType12()">לחץ כ  געלי</div>';
+                    text += '<div style="text-align:center" onclick="getLocationForType12()">';
+                    text += '<img id="sendLocationImg" style="width:200px;box-shadow: none;margin-bottom:-40px" src="images/sendLocation1.png">';
+                    text += '<h5>('+putWord(250)+')</h5>';
+                    text += '</div>';
+                    text += '<style>#sendLocationImg:hover{-webkit-filter: contrast(200%);filter: contrast(200%);}#sendLocationImg:active{    -webkit-filter: contrast(300%); filter: contrast(300%);}</style>'
                     text += theQuestion.row.after_text;
                     text = text.replace("[point]", theQuestion.point);
                     $("#changeContentInMainDiv").html(text);

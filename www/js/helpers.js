@@ -826,6 +826,7 @@ function getAzimuth(lat1,lon1,lat2,lon2) {
 {//start
 var watchIDForType12;
 var locationTimoutForType12;
+var positionForType12 = null;
 function getLocationForType12(){
     watchIDForType12 = navigator.geolocation.watchPosition(
         onType12GeolocationSuccess,
@@ -839,17 +840,17 @@ function getLocationForType12(){
 
     //                '<a id="sendAnswer" onclick="cancelSendLocation()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(222)+'</a>';
     $('#inFeedbackPopup').html(inHtml);
-    setTimeout('$("#feedbackPopup").popup("open");', 1000);
+    $("#feedbackPopup").popup("open");
 }
     
 //on success
 function onType12GeolocationSuccess(position){
+    positionForType12 = position;//save postion if we get not accuracy position
     if (position.coords.accuracy <= 25){
         navigator.geolocation.clearWatch(watchIDForType12);
         clearTimeout(locationTimoutForType12);
         Latitude = position.coords.latitude;
         Longitude = position.coords.longitude;
-        $("#userAnswer").val(JSON.stringify(position));
         setTimeout('$("#feedbackPopup").popup("close");', 1000);
         checkAnswer(position);
     }
