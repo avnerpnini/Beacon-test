@@ -835,7 +835,8 @@ function getLocationForType12(){
   locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 20000);
 }
  function onType12GeolocationSuccess(position){
-  if (position.coords.accuracy <= 25){
+     alert(position.coords.accuracy);
+  if (position.coords.accuracy <= 25000000){
      navigator.geolocation.clearWatch(watchIDForType12);
      clearTimeout(locationTimoutForType12);
      Latitude = position.coords.latitude;

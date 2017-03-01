@@ -1,8 +1,7 @@
-var navID = null,appVersion, isSlidebarOpen, timerLeftPanelTimeout,timerForQuestionsTimeout, hash, interval, requireRoute, requirePassword, password, pageInView = 1, url = window.location.href, isOpenScanner = false, agreeToUpdates = true,
-routeNum, Dcordova, Dplatform, Duuid, Dversion, Dmodel, requireAdditionalData, qrSource, levelsArr, connection_table = [], cameraImageURI, ft, firstOrientation, watchID, baseUrl = "http://www.nivut.net";
+var navID = null, appVersion, isSlidebarOpen, timerLeftPanelTimeout, timerForQuestionsTimeout, hash, interval, requireRoute, requirePassword, password, pageInView = 1, url = window.location.href, isOpenScanner = false, agreeToUpdates = true, routeNum, Dcordova, Dplatform, Duuid, Dversion, Dmodel, requireAdditionalData, qrSource, levelsArr, connection_table = [], cameraImageURI, ft, firstOrientation, watchID, baseUrl = "http://www.nivut.net";
 //localStorage.endOfLoadQuestion = false;
 
-var NUMOFPRIORITYS = 4, HOURSFORGAME = 24;SECONDS_FOR_CHECK_COMMAND = 30;
+var NUMOFPRIORITYS = 4, HOURSFORGAME = 24, SECONDS_FOR_CHECK_COMMAND = 30;
 var myQueue = new makeQueue(NUMOFPRIORITYS);//propryty queue withe 4 levels
 var navIDkey = "";//אשפרות להעביר יום אחד פרמטר נוסף לסריקת ברקוד התחלה כרגע לא ממומש
 "use strict";
@@ -1389,6 +1388,18 @@ function startsNavRegister(text, source) {
                     $( window ).on("resize", paintLineResize);//fix the lines whan window size changed
 
                 }
+                //---------------סוג 12 זהוי מיקום----------------------------------------
+                else if(questionType  == 12){
+                    $("#userAnswer").parent().show();
+                    $("#sendAnswer").hide();
+                    $("#scanQRBut2").hide();
+                    $("#cantScanQr").hide();
+                    text += theQuestion.row.main_text;
+                    text += '<div onclick="getLocationForType12()">לחץ כ  געלי</div>';
+                    text += theQuestion.row.after_text;
+                    text = text.replace("[point]", theQuestion.point);
+                    $("#changeContentInMainDiv").html(text);
+                }
                 //---------------סוג 14 מיון של רשימה----------------------------------------
                 else if (questionType == 14) {
                     $("#userAnswer").parent().hide();
@@ -1738,7 +1749,7 @@ function startsNavRegister(text, source) {
             var max = parseInt(theQuestion.row.right_answer) + parseInt(theQuestion.row.p1);
             if (min<0)
                 min = (min) + 360;
-            if (max>360)
+            if (max>360) 
                max = (max) - 360;
             if((min>max && (arr[0] >= min || arr[0]<=max)) || (min<max && arr[0]>=min && arr[0]<=max)  ){
                 var send = "<img src='images/V.png' id='VXimg'/>";
@@ -1824,6 +1835,28 @@ function startsNavRegister(text, source) {
                 addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 $(".mulAns").listview();
                 $( window ).off("resize", paintLineResize);//off the fix the lines whan window size changed
+            }
+        }
+        //-----------------------------------------------------------------------
+        else if (questionType == 12){
+            var arr = ($("#userAnswer").val()).split(";");
+            var get = sClean($("#userAnswer").val());
+            var right_answer = theQuestion.row.right_answer;
+            var isRight;
+            
+            if(isRight){
+                var send = "<img src='images/V.png' id='VXimg'/>";
+                send += "<br>"+putWord(175)+"<br><br><div style='display:none'> ("+putWord(176)+": "+min+" "+putWord(177)+": "+max+" "+putWord(178)+" "+ arr[0] + " "+putWord(179)+": "+theQuestion.row.right_answer+") </div> ";
+                inAnswerDivSet(theQuestion, true, send);
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID);
+
+            }
+            else{
+                var send = "<img src='images/X.png' id='VXimg'/>";
+                send += "<br>"+putWord(180)+"<br><br><div style='display:none'> ("+putWord(176)+" "+min+" "+putWord(177)+" "+ max +" "+putWord(178)+" "+ arr[0] + " "+putWord(179)+": "+theQuestion.row.right_answer+") </div>";
+                addMistake();
+                inAnswerDivSet(theQuestion, true, send);
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
             }
         }
         //-----------------------------------------------------------------------
