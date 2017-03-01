@@ -833,7 +833,7 @@ function getLocationForType12(){
         watchIDForType12 = navigator.geolocation.watchPosition(
             onType12GeolocationSuccess,
             onType12GeolocationError,
-           {maximumAge: 1000, enableHighAccuracy: true, timeout: 20000 }
+           {maximumAge: 10000, enableHighAccuracy: true, timeout: 20000 }
         );
         locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 30* 1000);
     }
