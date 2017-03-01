@@ -18,6 +18,7 @@ else {
     
 }
 
+
 //called function whan device is ready 
 function onDeviceReady(){
     if(localStorage.needToRefresh == 1){//refresh when changeing page - to fix dealay bug
@@ -1839,24 +1840,33 @@ function startsNavRegister(text, source) {
         }
         //-----------------------------------------------------------------------
         else if (questionType == 12){
-            var arr = ($("#userAnswer").val()).split(";");
-            var get = sClean($("#userAnswer").val());
-            var right_answer = theQuestion.row.right_answer;
-            var isRight;
+            var userAnswer = ($("#userAnswer").val());
+            var get = sClean(userAnswer);
+            var userPostion = JSON.parse(userAnswer);
+            var rightLat = theQuestion.row.lat;
+            var rightLong = theQuestion.row.long;
+            var maxDistance = theQuestion.row.right_answer;
+            
+            var theDistance = getDistanceFromLatLonInMeters(rightLat,rightLong, userPostion.coords.latitude, userPostion.coords.longitude) 
+            var isRight = theDistance <= maxDistance ; 
             
             if(isRight){
+                
+                /*
                 var send = "<img src='images/V.png' id='VXimg'/>";
                 send += "<br>"+putWord(175)+"<br><br><div style='display:none'> ("+putWord(176)+": "+min+" "+putWord(177)+": "+max+" "+putWord(178)+" "+ arr[0] + " "+putWord(179)+": "+theQuestion.row.right_answer+") </div> ";
                 inAnswerDivSet(theQuestion, true, send);
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID);
-
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID);*/
+                alert("נכון");
             }
             else{
+                /*
                 var send = "<img src='images/X.png' id='VXimg'/>";
                 send += "<br>"+putWord(180)+"<br><br><div style='display:none'> ("+putWord(176)+" "+min+" "+putWord(177)+" "+ max +" "+putWord(178)+" "+ arr[0] + " "+putWord(179)+": "+theQuestion.row.right_answer+") </div>";
                 addMistake();
                 inAnswerDivSet(theQuestion, true, send);
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);*/
+                alert("לא נכון");
             }
         }
         //-----------------------------------------------------------------------
@@ -2647,7 +2657,6 @@ function startsNavRegister(text, source) {
         //למחוק נתונים כדי שיטען משחק חדש להבא
 
     }
-
 
     function guideFinishGame(){
     if (localStorage.userID > 0 && !localStorage.gameFinished) {

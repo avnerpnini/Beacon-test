@@ -796,7 +796,7 @@ function callToGuide(){
 //this script [in Javascript] calculates great-circle distances between the two points – that is, 
 //the shortest distance over the earth’s surface – using the ‘Haversine’ formula.
 //from http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula?noredirect=1&lq=1
-function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+function getDistanceFromLatLonInMeters(lat1,lon1,lat2,lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
   var dLon = deg2rad(lon2-lon1); 
@@ -807,7 +807,7 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     ; 
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   var d = R * c; // Distance in km
-  return d;
+  return d*1000;
 }
 
 function deg2rad(deg) {
@@ -827,23 +827,33 @@ function getAzimuth(lat1,lon1,lat2,lon2) {
 var watchIDForType12;
 var locationTimoutForType12;
 function getLocationForType12(){
-   watchIDForType12 = navigator.geolocation.watchPosition(
+    watchIDForType12 = navigator.geolocation.watchPosition(
         onType12GeolocationSuccess,
         onType12GeolocationError,
-       {maximumAge: 1000, enableHighAccuracy: true }
-  );
-  locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 20000);
+       {maximumAge: 1000, enableHighAccuracy: true, timeout: 20000 }
+    );
+    locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 20* 1000);
+
+    //set the popup
+     var inHtml = '<img alt="pic1" src="images/logo_opacity.png" style="width: 200px;   margin: auto;display: block;margin-bottom: 20px"/>' + "<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\""+putWord(113)+"\"/><h4>"+putWord(218)+"</h4><br><div id='acc'></div><br>";
+
+    //                '<a id="sendAnswer" onclick="cancelSendLocation()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(222)+'</a>';
+    $('#inFeedbackPopup').html(inHtml);
+    setTimeout('$("#feedbackPopup").popup("open");', 1000);
 }
- function onType12GeolocationSuccess(position){
-     alert(position.coords.accuracy);
-  if (position.coords.accuracy <= 25){
-     navigator.geolocation.clearWatch(watchIDForType12);
-     clearTimeout(locationTimoutForType12);
-     Latitude = position.coords.latitude;
-     Longitude = position.coords.longitude;
-     $("#userAnswer").val(Latitude+","+Longitude);
-  }
- }
+    
+//on success
+function onType12GeolocationSuccess(position){
+    if (position.coords.accuracy <= 25){
+        navigator.geolocation.clearWatch(watchIDForType12);
+        clearTimeout(locationTimoutForType12);
+        Latitude = position.coords.latitude;
+        Longitude = position.coords.longitude;
+        $("#userAnswer").val(JSON.stringify(position));
+        $("#feedbackPopup").popup("close");
+        checkAnswer();
+    }
+}
  
 function onType12GeolocationError(){
     console.log('code: ' + error.code + '\n' +
