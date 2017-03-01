@@ -1845,36 +1845,26 @@ function startsNavRegister(text, source) {
         //-----------------------------------------------------------------------
         else if (questionType == 12){
             var userPostion = arguments[0]//get the position as the first  argument;
-        console.warn("userPostion: "+userPostion);//debug
             var get = sClean(userAnswer);
-        console.warn("get: "+get);//debug
             var rightLat = theQuestion.row.lat;
             var rightLong = theQuestion.row.long;
-        console.warn("pos: " + rightLat +","+rightLong);//debug
             var maxDistance = theQuestion.row.right_answer;
-        console.warn("maxDistance: " + maxDistance);//debug   
-            var theDistance = getDistanceFromLatLonInMeters(rightLat,rightLong, userPostion.coords.latitude, userPostion.coords.longitude) 
-        console.warn("theDistance: " + theDistance);//debug   
+            var theDistance =  Math.round( getDistanceFromLatLonInMeters(rightLat,rightLong, userPostion.coords.latitude, userPostion.coords.longitude) );
             var isRight = theDistance <= maxDistance ; 
-        console.warn("isRight: " + isRight);//debug   
             
             if(isRight){
-                
-                /*
-                var send = "<img src='images/V.png' id='VXimg'/>";
-                send += "<br>"+putWord(175)+"<br><br><div style='display:none'> ("+putWord(176)+": "+min+" "+putWord(177)+": "+max+" "+putWord(178)+" "+ arr[0] + " "+putWord(179)+": "+theQuestion.row.right_answer+") </div> ";
+                var get = JSON.stringify(userPostion);
+                var send = "<img src='images/V.png' id='VXimg'/><br><br>"+'יפה מאוד, הגעתם למקום הנכון!' + "<!-- The distance was: "+theDistance+" -->";
                 inAnswerDivSet(theQuestion, true, send);
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID);*/
-                alert("נכון, המרחק הוא: "+theDistance+" מטרים");
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
+                    //$('#inAnswerDiv').html("<h4>" + send + "<h4>" + '<a id="continueButton" onclick="toggleAnswer();" class="ui-btn ui-corner-all ui-shadow ui-btn-b">putWord(145)</a>');
             }
             else{
-                /*
-                var send = "<img src='images/X.png' id='VXimg'/>";
-                send += "<br>"+putWord(180)+"<br><br><div style='display:none'> ("+putWord(176)+" "+min+" "+putWord(177)+" "+ max +" "+putWord(178)+" "+ arr[0] + " "+putWord(179)+": "+theQuestion.row.right_answer+") </div>";
                 addMistake();
+                var get = JSON.stringify(userPostion);
+                var send = "<img src='images/X.png' id='VXimg'/><br><br>"+'אופס, אתם לא במקום הנכון'+"<br><br>"+'המרחק שלכם מהנקודה הוא כ-'+theDistance+" מטרים";
                 inAnswerDivSet(theQuestion, true, send);
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);*/
-                alert("לא נכון, המרחק הוא: "+theDistance+" מטרים");
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
             }
             return ;
         }
