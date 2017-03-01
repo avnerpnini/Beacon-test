@@ -830,6 +830,7 @@ var positionForType12 = null;
 var type12IsRun = false;//preventDoubleClick
 function getLocationForType12(){
     if (!type12IsRun){
+        type12IsRun = true;
         watchIDForType12 = navigator.geolocation.watchPosition(
             onType12GeolocationSuccess,
             onType12GeolocationError,
@@ -855,8 +856,7 @@ function onType12GeolocationSuccess(position){
         Latitude = position.coords.latitude;
         Longitude = position.coords.longitude;
         setTimeout('$("#feedbackPopup").popup("close");', 1000);
-        if (type12IsRun)
-            checkAnswer(position);
+        checkAnswer(position);
         type12IsRun = false;
     }
 }

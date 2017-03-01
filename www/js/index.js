@@ -1853,7 +1853,7 @@ function startsNavRegister(text, source) {
             var isRight = theDistance <= maxDistance ; 
             
             if(isRight){
-                var get = JSON.stringify(userPostion) + "[The distance was: "+theDistance+"]";
+                var get = JSON.stringify(userPostion) + "[The distance was: "+theDistance+" meters]";
                 var send = "<img src='images/V.png' id='VXimg'/><br><br>"+'יפה מאוד, הגעתם למקום הנכון!';
                 inAnswerDivSet(theQuestion, true, send);
                 addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
