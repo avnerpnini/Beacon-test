@@ -1861,7 +1861,7 @@ function startsNavRegister(text, source) {
                 send += "<br>"+putWord(175)+"<br><br><div style='display:none'> ("+putWord(176)+": "+min+" "+putWord(177)+": "+max+" "+putWord(178)+" "+ arr[0] + " "+putWord(179)+": "+theQuestion.row.right_answer+") </div> ";
                 inAnswerDivSet(theQuestion, true, send);
                 addConnection(time, get, send, theQuestion.LM, theQuestion.level, 0, theQuestion.row.ID);*/
-                alert("נכון");
+                alert("נכון, המרחק הוא: "+theDistance+" מטרים");
             }
             else{
                 /*
@@ -1870,7 +1870,7 @@ function startsNavRegister(text, source) {
                 addMistake();
                 inAnswerDivSet(theQuestion, true, send);
                 addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);*/
-                alert("לא נכון");
+                alert("לא נכון, המרחק הוא: "+theDistance+" מטרים");
             }
             return ;
         }
