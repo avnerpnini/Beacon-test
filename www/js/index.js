@@ -1864,7 +1864,7 @@ function startsNavRegister(text, source) {
                 var get = JSON.stringify(userPostion);
                 var send = "<img src='images/X.png' id='VXimg'/><br><br>"+'אופס, אתם לא במקום הנכון'+"<br><br>"+'המרחק שלכם מהנקודה הוא כ-'+theDistance+" מטרים";
                 inAnswerDivSet(theQuestion, false, send);
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
+                addConnection(time, get, send, -2, 0, 0, theQuestion.row.ID);
             }
             return ;
         }
