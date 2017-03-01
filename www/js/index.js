@@ -1108,13 +1108,15 @@ function startsNavRegister(text, source) {
                     
                     //add enter only if the end of the main_text is clen from br
                     var n = text.lastIndexOf("<br><br>");
-                    if(n<0 || n <= (text.length-11))
+                    var p = text.lastIndexOf("</p>");
+                    if(p < text.length-11   && (n<0 || n <= (text.length-11)))
                         text += '<br><br>';
                     //--
                     //text += '<ul id="mulAns" data-role="listview" data-inset="true" data-theme="a">';
                     text += theQuestion.row.after_text;
                     var n = theQuestion.row.after_text.lastIndexOf("<br><br>");
-                    if ((n < 0 || n <= (text.length - 11)) && theQuestion.row.after_text.length >1)
+                    var p = theQuestion.row.after_text.lastIndexOf("</p>");
+                    if (p < text.length-11   && (n < 0 || n <= (text.length - 11)) && theQuestion.row.after_text.length >1)
                         text += '<br><br>';
                     //--
 
@@ -1356,7 +1358,8 @@ function startsNavRegister(text, source) {
                     
                     //add enter only if the end of the main_text is clen from br
                     var n = text.lastIndexOf("<br><br>");
-                    if(n<0 || n <= (text.length-11))
+                    var p = text.lastIndexOf("</p>");
+                    if(p < text.length-11   && (n<0 || n <= (text.length-11)))
                         text += '<br><br>';
                     
 
@@ -1397,7 +1400,8 @@ function startsNavRegister(text, source) {
                     var arr1 = (theQuestion.row.p1).split(";");
                     //add enter only if the end of the main_text is clen from br
                     var n = text.lastIndexOf("<br><br>");
-                    if(n<0 || n <= (text.length-11))
+                    var p = text.lastIndexOf("</p>");
+                    if(p < text.length-11  && (n<0 || n <= (text.length-11)))
                         text += '<br><br>';
 
                     text += '<ul id="sortable" style="position: relative;margin: auto">';
@@ -2411,7 +2415,7 @@ function startsNavRegister(text, source) {
             if (level == "")
                 level = localStorage.level;
 
-            var a = new Connection(time, "[התבצע רענון נתונים - בקשה מהשרת. תחנה:" +" "+ localStorage.LM + ", " + "שלב"+": " + localStorage.level +" "+ ". מועבר ל-> תחנה"+": " + LM +", "+"שלב"+": " + level +"]", putRefreshTrackingView, -1, 0, 0, 0);
+            var a = new Connection(time, "[התבצע רענון נתונים - בקשה מהשרת. תחנה:" +" "+ localStorage.LM + ", " + "שלב"+": " + localStorage.level +" "+ ". מועבר ל-> תחנה"+": " + LM +", "+"שלב"+": " + level +"]", putRefreshTrackingView, -3, 0, 0, 0);
             console.log("data refresed from server. LM: " + localStorage.LM + ", level: " + localStorage.level + " becom to -> LM: " + LM + ", level: " + level);
             //alert("lm:" + LM + " lev: " + level);
             if (LM >= 0)
@@ -2420,7 +2424,7 @@ function startsNavRegister(text, source) {
                 localStorage.setItem("level", level);
         }
         else {
-            var a = new Connection(time, "[התבצע רענון נתונים - בקשה מהמשתמש.  תחנה:" +" "+ localStorage.LM + ", "+ "שלב" +" "+ localStorage.level +"]", putRefreshTrackingView, -1, 0, 0, 0);
+            var a = new Connection(time, "[התבצע רענון נתונים - בקשה מהמשתמש.  תחנה:" +" "+ localStorage.LM + ", "+ "שלב" +" "+ localStorage.level +"]", putRefreshTrackingView, -3, 0, 0, 0);
             console.log("data refresed from user. LM: " + localStorage.LM + ", level: " + localStorage.level);
             if(localStorage.LM == 999 && localStorage.level == 999){
                 return;
@@ -2562,12 +2566,12 @@ function startsNavRegister(text, source) {
                 addConnection(time, putWord(233) +" "+ localStorage.LM + ", " + putWord(220)+": " + localStorage.level + ", " + putWord(234) +" "+ localStorage.quesID, "", -3, 0, 0, 0);
             }
             else if (isPhoto != null || isPhoto == true ) {
-                addConnection(time, putWord(235) +" "+ localStorage.LM + ", " + putWord(220)+": " + localStorage.level + ", " + putWord(234) +" "+ localStorage.quesID, "", -3, 0, 0, 0);
+                addConnection(time, putWord(235) +" "+ localStorage.LM + ", " + putWord(220)+": " + localStorage.level + ", " + putWord(234) +" "+ localStorage.quesID, "", -1, 0, 0, 0);
                 $('#mainDiv').show();
                 $('#answerDiv').hide();
             }
             else {
-                addConnection(time, putWord(236) +" "+ localStorage.LM + ", " + putWord(220)+": " + localStorage.level + ", " + putWord(234) +" "+ localStorage.quesID, "", -3, 0, 0, 0);
+                addConnection(time, putWord(236) +" "+ localStorage.LM + ", " + putWord(220)+": " + localStorage.level + ", " + putWord(234) +" "+ localStorage.quesID, "", -1, 0, 0, 0);
                 $('#mainDiv').show();
                 $('#answerDiv').hide();
             }
