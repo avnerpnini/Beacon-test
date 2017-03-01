@@ -1841,14 +1841,20 @@ function startsNavRegister(text, source) {
         //-----------------------------------------------------------------------
         else if (questionType == 12){
             var userAnswer = ($("#userAnswer").val());
+        console.log("userAnswer: "+userAnswer);//debug
             var get = sClean(userAnswer);
+        console.log("get: "+get);//debug
             var userPostion = JSON.parse(userAnswer);
+        console.log("userPostion: "+userPostion);//debug
             var rightLat = theQuestion.row.lat;
             var rightLong = theQuestion.row.long;
+        console.log("pos" + rightLat +","+rightLong);//debug
             var maxDistance = theQuestion.row.right_answer;
-            
+        console.log("maxDistance" + maxDistance);//debug   
             var theDistance = getDistanceFromLatLonInMeters(rightLat,rightLong, userPostion.coords.latitude, userPostion.coords.longitude) 
+        console.log("theDistance" + theDistance);//debug   
             var isRight = theDistance <= maxDistance ; 
+        console.log("isRight" + isRight);//debug   
             
             if(isRight){
                 
