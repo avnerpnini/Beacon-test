@@ -851,7 +851,7 @@ function onType12GeolocationSuccess(position){
         Longitude = position.coords.longitude;
         $("#userAnswer").val(JSON.stringify(position));
         setTimeout('$("#feedbackPopup").popup("close");', 1000);
-        checkAnswer();
+        checkAnswer(position);
     }
 }
  

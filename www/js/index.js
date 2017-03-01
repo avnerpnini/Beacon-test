@@ -1840,12 +1840,10 @@ function startsNavRegister(text, source) {
         }
         //-----------------------------------------------------------------------
         else if (questionType == 12){
-            var userAnswer = ($("#userAnswer").val());
-        console.log("userAnswer: "+userAnswer);//debug
+            var userPostion = arguments[0]//get the position as the first  argument;
+        console.log("userPostion: "+userPostion);//debug
             var get = sClean(userAnswer);
         console.log("get: "+get);//debug
-            var userPostion = JSON.parse(userAnswer);
-        console.log("userPostion: "+userPostion);//debug
             var rightLat = theQuestion.row.lat;
             var rightLong = theQuestion.row.long;
         console.log("pos" + rightLat +","+rightLong);//debug
