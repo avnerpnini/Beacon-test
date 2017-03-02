@@ -1869,6 +1869,50 @@ function startsNavRegister(text, source) {
             }
         }
         //-----------------------------------------------------------------------
+-        else if (questionType == 14){		
+-            var rightAnsArr = (theQuestion.row.right_answer).split(";")		
+-            var userAnsArr =  ($("#userAnswer").val()).split(";");		
+-            var rightAnsCount = 0;		
+-            var showRightAns = "";		
+-            if ($("#userAnswer").val() == ""){		
+-                var send = "<br>"+putWord(186)+"<br><br>"+putWord(187);		
+-                inAnswerDivSet(theQuestion, false, send);		
+-            }		
+-		
+-            else{		
+-                var arr1 = (theQuestion.row.p1).split(";");		
+-                showRightAns += '<ul id="sortable" style="position: relative;margin: auto">';		
+-		
+-                for (var i = 0; i < rightAnsArr.length-1; i++){		
+-                    if (rightAnsArr[i] == userAnsArr[i])		
+-                        rightAnsCount++;		
+-                    showRightAns += '<li value="'+i+'" class="ui-state-default">'+arr1[rightAnsArr[i]-1]+'</li>';		
+-                }		
+-		
+-                showRightAns += '</ul>';		
+-                showRightAns = putWord(188)+"<br><br><table style='margin:auto'>" + showRightAns + "</table>";		
+-                		
+-                if (rightAnsCount / (rightAnsArr.length - 1) <= 0.333)		
+-                    var send = "<img src='images/X.png' id='VXimg'/><br>"+putWord(168);		
+-                else if (rightAnsCount / (rightAnsArr.length - 1) <= 0.666)		
+-                    var send = "<img src='images/V.png' id='VXimg'/><br>"+putWord(169);		
+-                else {		
+-                    var send = "<img src='images/V.png' id='VXimg'/><br>"+putWord(170);		
+-                    showRightAns = "";		
+-                }		
+-		
+-               localStorage.mistakeCounter = Math.floor((rightAnsArr.length - 1 - rightAnsCount) / 2);		
+-		
+-                send += " "+putWord(171)+" "+ rightAnsCount +" "+putWord(172)+" "+(rightAnsArr.length-1)+".<br><br>"+showRightAns;		
+-		
+-		
+-                var get = $("#userAnswer").val();		
+-                inAnswerDivSet(theQuestion, true, send);		
+-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);		
+-           		
+-            }		
+         }
+        //-----------------------------------------------------------------------		
         else if (questionType == 101){
             if ($("#userAnswer").val() == "") {
                 var send = putWord(158);
