@@ -1849,7 +1849,7 @@ function startsNavRegister(text, source) {
             var rightLat = theQuestion.row.lat;
             var rightLong = theQuestion.row.long;
             var maxDistance = theQuestion.row.right_answer;
-            var theDistance =  Math.round( getDistanceFromLatLonInMeters(rightLat,rightLong, userPostion.coords.latitude, userPostion.coords.longitude) );
+            var theDistance =  Math.round( getDistanceFromLatLonInMeters(rightLat,rightLong, userPostion.latitude, userPostion.longitude) );
             var isRight = theDistance <= maxDistance ; 
             
             if(isRight){

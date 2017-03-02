@@ -857,20 +857,18 @@ function onType12GeolocationSuccess(position){
         Longitude = position.coords.longitude;
         setTimeout('$("#feedbackPopup").popup("close");', 1000);
         if (type12IsRun)
-            checkAnswer(position);
+            checkAnswer(position.coords);
         type12IsRun = false;
     }
 }
  
-function onType12GeolocationError(){
-    console.log('code: ' + error.code + '\n' +
+function onType12GeolocationError(error){
+    console.error('GPS ERROR on type 12 - code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
-    alert("Location failed");
-    setTimeout('$("#feedbackPopup").popup("close");', 1000);
-    type12IsRun = false;
  }
  
 function cancelGetLocationForType12(){
+    //im here!!!!!!!!!!!!!
     navigator.geolocation.clearWatch(watchIDForType12);
     alert("זיהוי מיקום נכשל :(");
     setTimeout('$("#feedbackPopup").popup("close");', 1000);
