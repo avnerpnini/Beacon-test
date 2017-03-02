@@ -824,18 +824,24 @@ function getAzimuth(lat1,lon1,lat2,lon2) {
 
 //this functions for get postion for question type 12
 {//start
-var watchIDForType12;
-var locationTimoutForType12;
+var watchIDForType12= null;
+var locationTimoutForType12 = null;
 var positionForType12 = null;
+var intervalForType12 = null;
 var type12IsRun = false;//preventDoubleClick
 function getLocationForType12(){
+ 
     if (!type12IsRun){
         type12IsRun = true;
-        watchIDForType12 = navigator.geolocation.watchPosition(
-            onType12GeolocationSuccess,
-            onType12GeolocationError,
-           {maximumAge: 10000, enableHighAccuracy: true, timeout: 5000 }
-        );
+        intervalForType12 = setInterval(function(){
+            navigator.geolocation.clearWatch(watchIDForType12);
+            watchIDForType12 = navigator.geolocation.watchPosition(
+                onType12GeolocationSuccess,
+                onType12GeolocationError,
+                {maximumAge: 10000, enableHighAccuracy: true, timeout: 5000 }
+            );
+        },5000);
+       
         locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 30* 1000);
     }
     
@@ -845,36 +851,54 @@ function getLocationForType12(){
     //                '<a id="sendAnswer" onclick="cancelSendLocation()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(222)+'</a>';
     $('#inFeedbackPopup').html(inHtml);
     $("#feedbackPopup").popup("open");
-}
     
-//on success
+}    
+
+ //on success
 function onType12GeolocationSuccess(position){
-    positionForType12 = position;//save postion if we get not accuracy position
+    //save the potision in a normal object
+    var d2 = new Date();
+    var time2 = d2.getTime() / 1000;
+    positionForType12 = {
+        time: time2,
+        timestamp: position.timestamp,
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        altitude: position.coords.altitude,
+        accuracy: position.coords.accuracy,
+        altitudeAccuracy: position.coords.altitudeAccuracy,
+        heading: position.coords.heading,
+        speed: position.coords.speed
+    };
+
     if (position.coords.accuracy <= 25){
+        $("#userAnswer").val(JSON.stringify(positionForType12));
         navigator.geolocation.clearWatch(watchIDForType12);
         clearTimeout(locationTimoutForType12);
         Latitude = position.coords.latitude;
         Longitude = position.coords.longitude;
-        setTimeout('$("#feedbackPopup").popup("close");', 1000);
+        $("#feedbackPopup").popup("close");
         if (type12IsRun)
-            checkAnswer(position.coords);
+            checkAnswer();
         type12IsRun = false;
+        
     }
 }
  
 function onType12GeolocationError(error){
     console.error('GPS ERROR on type 12 - code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
-    alert("onType12GeolocationError");
  }
  
 function cancelGetLocationForType12(){
-    //im here!!!!!!!!!!!!!
+    var d = new Date();
+    var time = d.getTime() / 1000;
+    alert("המערכת לא הצליחה לקבל מיקום - אנא וודאו שיש גישה לשירותי מיקום ושאתם מתחת לכיפת השמים ונסו שנית");
+    clearInterval(intervalForType12);
     navigator.geolocation.clearWatch(watchIDForType12);
-    alert("זיהוי מיקום נכשל :(");
-    setTimeout('$("#feedbackPopup").popup("close");', 1000);
+    addConnection(time, 'last position detieals: ' + JSON.stringify(positionForType12), " [get location for type 12 failed]", -3, 0, 0, 0);
+    $("#feedbackPopup").popup("close");
     type12IsRun = false;
-}
- 
+} 
 }//end
 
