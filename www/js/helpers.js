@@ -834,7 +834,7 @@ function getLocationForType12(){
         watchIDForType12 = navigator.geolocation.watchPosition(
             onType12GeolocationSuccess,
             onType12GeolocationError,
-           {maximumAge: 10000, enableHighAccuracy: true, timeout: 20000 }
+           {maximumAge: 10000, enableHighAccuracy: true, timeout: 5000 }
         );
         locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 30* 1000);
     }
@@ -865,6 +865,7 @@ function onType12GeolocationSuccess(position){
 function onType12GeolocationError(error){
     console.error('GPS ERROR on type 12 - code: ' + error.code + '\n' +
         'message: ' + error.message + '\n');
+    alert("onType12GeolocationError");
  }
  
 function cancelGetLocationForType12(){
