@@ -789,11 +789,14 @@ function callToGuide(){
     window.open('tel:'+localStorage.guidePhone, '_system')
 }
 
-
+///////////////////////////////////////////
+////////location calculate functions///////
+//////////////////////////////////////////
+{
 //this script [in Javascript] calculates great-circle distances between the two points – that is, 
 //the shortest distance over the earth’s surface – using the ‘Haversine’ formula.
 //from http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula?noredirect=1&lq=1
-function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+function getDistanceFromLatLonInMeters(lat1,lon1,lat2,lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
   var dLon = deg2rad(lon2-lon1); 
@@ -804,9 +807,98 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     ; 
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   var d = R * c; // Distance in km
-  return d;
+  return d*1000;
 }
 
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }
+
+//this function return the azimut between latlong1 to latlong2
+function getAzimuth(lat1,lon1,lat2,lon2) {
+    return Math.atan2(lon2 - lon1, lat2 - lat1) * 180 / Math.PI;
+}
+
+
+}
+
+//this functions for get postion for question type 12
+{//start
+var watchIDForType12= null;
+var locationTimoutForType12 = null;
+var positionForType12 = null;
+var intervalForType12 = null;
+var type12IsRun = false;//preventDoubleClick
+function getLocationForType12(){
+ 
+    if (!type12IsRun){
+        type12IsRun = true;
+        intervalForType12 = setInterval(function(){
+            navigator.geolocation.clearWatch(watchIDForType12);
+            watchIDForType12 = navigator.geolocation.watchPosition(
+                onType12GeolocationSuccess,
+                onType12GeolocationError,
+                {maximumAge: 10000, enableHighAccuracy: true, timeout: 5000 }
+            );
+        },5000);
+       
+        locationTimoutForType12 = setTimeout("cancelGetLocationForType12();", 30* 1000);
+    }
+    
+    //set the popup
+     var inHtml = '<img alt="pic1" src="images/logo_opacity.png" style="width: 200px;   margin: auto;display: block;margin-bottom: 20px"/>' + "<img id =\"feedbackPopupAjaxLoader\" src=\"css/images/ajax-loader.gif\" style=\"height: 30px;\" alt=\""+putWord(113)+"\"/><h4>"+putWord(218)+"</h4><br><div id='acc'></div><br>";
+
+    //                '<a id="sendAnswer" onclick="cancelSendLocation()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(222)+'</a>';
+    $('#inFeedbackPopup').html(inHtml);
+    $("#feedbackPopup").popup("open");
+    
+}    
+
+ //on success
+function onType12GeolocationSuccess(position){
+    //save the potision in a normal object
+    var d2 = new Date();
+    var time2 = d2.getTime() / 1000;
+    positionForType12 = {
+        time: time2,
+        timestamp: position.timestamp,
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        altitude: position.coords.altitude,
+        accuracy: position.coords.accuracy,
+        altitudeAccuracy: position.coords.altitudeAccuracy,
+        heading: position.coords.heading,
+        speed: position.coords.speed
+    };
+
+    if (position.coords.accuracy <= 25){
+        $("#userAnswer").val(JSON.stringify(positionForType12));
+        navigator.geolocation.clearWatch(watchIDForType12);
+        clearTimeout(locationTimoutForType12);
+        Latitude = position.coords.latitude;
+        Longitude = position.coords.longitude;
+        $("#feedbackPopup").popup("close");
+        if (type12IsRun)
+            checkAnswer();
+        type12IsRun = false;
+        
+    }
+}
+ 
+function onType12GeolocationError(error){
+    console.error('GPS ERROR on type 12 - code: ' + error.code + '\n' +
+        'message: ' + error.message + '\n');
+ }
+ 
+function cancelGetLocationForType12(){
+    var d = new Date();
+    var time = d.getTime() / 1000;
+    alert("המערכת לא הצליחה לקבל מיקום - אנא וודאו שיש גישה לשירותי מיקום ושאתם מתחת לכיפת השמים ונסו שנית");
+    clearInterval(intervalForType12);
+    navigator.geolocation.clearWatch(watchIDForType12);
+    addConnection(time, 'last position detieals: ' + JSON.stringify(positionForType12), " [get location for type 12 failed]", -3, 0, 0, 0);
+    $("#feedbackPopup").popup("close");
+    type12IsRun = false;
+} 
+}//end
+

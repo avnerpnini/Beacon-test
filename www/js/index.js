@@ -1,8 +1,7 @@
-var navID = null,appVersion, isSlidebarOpen, timerLeftPanelTimeout,timerForQuestionsTimeout, hash, interval, requireRoute, requirePassword, password, pageInView = 1, url = window.location.href, isOpenScanner = false, agreeToUpdates = true,
-routeNum, Dcordova, Dplatform, Duuid, Dversion, Dmodel, requireAdditionalData, qrSource, levelsArr, connection_table = [], cameraImageURI, ft, firstOrientation, watchID, baseUrl = "http://www.nivut.net";
+var navID = null, appVersion, isSlidebarOpen, timerLeftPanelTimeout, timerForQuestionsTimeout, hash, interval, requireRoute, requirePassword, password, pageInView = 1, url = window.location.href, isOpenScanner = false, agreeToUpdates = true, routeNum, Dcordova, Dplatform, Duuid, Dversion, Dmodel, requireAdditionalData, qrSource, levelsArr, connection_table = [], cameraImageURI, ft, firstOrientation, watchID, baseUrl = "http://www.nivut.net";
 //localStorage.endOfLoadQuestion = false;
 
-var NUMOFPRIORITYS = 4, HOURSFORGAME = 24;SECONDS_FOR_CHECK_COMMAND = 30;
+var NUMOFPRIORITYS = 4, HOURSFORGAME = 24, SECONDS_FOR_CHECK_COMMAND = 30;
 var myQueue = new makeQueue(NUMOFPRIORITYS);//propryty queue withe 4 levels
 var navIDkey = "";//אשפרות להעביר יום אחד פרמטר נוסף לסריקת ברקוד התחלה כרגע לא ממומש
 "use strict";
@@ -18,6 +17,7 @@ else {
     document.addEventListener("menubutton", menuKey, false);
     
 }
+
 
 //called function whan device is ready 
 function onDeviceReady(){
@@ -1392,6 +1392,22 @@ function startsNavRegister(text, source) {
                     $( window ).on("resize", paintLineResize);//fix the lines whan window size changed
 
                 }
+                //---------------סוג 12 זיהוי מיקום----------------------------------------
+                else if(questionType  == 12){
+                    $("#userAnswer").parent().hide();
+                    $("#sendAnswer").hide();
+                    $("#scanQRBut2").hide();
+                    $("#cantScanQr").hide();
+                    text += theQuestion.row.main_text;
+                    text += '<div style="text-align:center" onclick="getLocationForType12()">';
+                    text += '<img id="sendLocationImg" style="width:200px;box-shadow: none;margin-bottom:-40px" src="images/sendLocation1.png">';
+                    text += '<h5>('+putWord(250)+')</h5>';
+                    text += '</div>';
+                    text += '<style>#sendLocationImg:hover{-webkit-filter: contrast(200%);filter: contrast(200%);}#sendLocationImg:active{    -webkit-filter: contrast(300%); filter: contrast(300%);}</style>'
+                    text += theQuestion.row.after_text;
+                    text = text.replace("[point]", theQuestion.point);
+                    $("#changeContentInMainDiv").html(text);
+                }
                 //---------------סוג 14 מיון של רשימה----------------------------------------
                 else if (questionType == 14) {
                     $("#userAnswer").parent().hide();
@@ -1742,7 +1758,7 @@ function startsNavRegister(text, source) {
             var max = parseInt(theQuestion.row.right_answer) + parseInt(theQuestion.row.p1);
             if (min<0)
                 min = (min) + 360;
-            if (max>360)
+            if (max>360) 
                max = (max) - 360;
             if((min>max && (arr[0] >= min || arr[0]<=max)) || (min<max && arr[0]>=min && arr[0]<=max)  ){
                 var send = "<img src='images/V.png' id='VXimg'/>";
@@ -1828,6 +1844,32 @@ function startsNavRegister(text, source) {
                 addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
                 $(".mulAns").listview();
                 $( window ).off("resize", paintLineResize);//off the fix the lines whan window size changed
+            }
+        }
+        //-----------------------------------------------------------------------
+        else if (questionType == 12){
+            var userPostion = $("#userAnswer").val();
+            var userPostionObject = JSON.parse(userPostion);
+            var get = sClean(userAnswer);
+            var rightLat = theQuestion.row.lat;
+            var rightLong = theQuestion.row.long;
+            var maxDistance = theQuestion.row.right_answer;
+            var theDistance =  Math.round( getDistanceFromLatLonInMeters(rightLat,rightLong, userPostionObject.latitude, userPostionObject.longitude) );
+            var isRight = theDistance <= maxDistance ; 
+            
+            if(isRight){
+                var get = "[type 12 location]" + userPostion + "[The distance was: "+theDistance+" meters]";
+                var send = "<img src='images/V.png' id='VXimg'/><br><br>"+'יפה מאוד, הגעתם למקום הנכון!';
+                inAnswerDivSet(theQuestion, true, send);
+                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
+                    //$('#inAnswerDiv').html("<h4>" + send + "<h4>" + '<a id="continueButton" onclick="toggleAnswer();" class="ui-btn ui-corner-all ui-shadow ui-btn-b">putWord(145)</a>');
+            }
+            else{
+                addMistake();
+                var get = "[type 12 location]" + userPostion;
+                var send = "<img src='images/X.png' id='VXimg'/><br><br>"+'אופס, אתם לא במקום הנכון'+"<br><br>"+'המרחק שלכם מהנקודה הוא כ-'+theDistance+" מטרים";
+                inAnswerDivSet(theQuestion, false, send);
+                addConnection(time, get, send, -2, 0, 0, theQuestion.row.ID);
             }
         }
         //-----------------------------------------------------------------------
@@ -2618,7 +2660,6 @@ function startsNavRegister(text, source) {
         //למחוק נתונים כדי שיטען משחק חדש להבא
 
     }
-
 
     function guideFinishGame(){
     if (localStorage.userID > 0 && !localStorage.gameFinished) {
