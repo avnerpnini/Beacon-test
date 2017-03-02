@@ -1844,16 +1844,17 @@ function startsNavRegister(text, source) {
         }
         //-----------------------------------------------------------------------
         else if (questionType == 12){
-            var userPostion = arguments[0]//get the position as the first  argument;
+            var userPostion = $("#userAnswer").val();
+            var userPostionObject = JSON.parse(userPostion);
             var get = sClean(userAnswer);
             var rightLat = theQuestion.row.lat;
             var rightLong = theQuestion.row.long;
             var maxDistance = theQuestion.row.right_answer;
-            var theDistance =  Math.round( getDistanceFromLatLonInMeters(rightLat,rightLong, userPostion.latitude, userPostion.longitude) );
+            var theDistance =  Math.round( getDistanceFromLatLonInMeters(rightLat,rightLong, userPostionObject.latitude, userPostionObject.longitude) );
             var isRight = theDistance <= maxDistance ; 
             
             if(isRight){
-                var get = JSON.stringify(userPostion) + "[The distance was: "+theDistance+" meters]";
+                var get = "[type 12 location]" + userPostion + "[The distance was: "+theDistance+" meters]";
                 var send = "<img src='images/V.png' id='VXimg'/><br><br>"+'יפה מאוד, הגעתם למקום הנכון!';
                 inAnswerDivSet(theQuestion, true, send);
                 addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
@@ -1861,55 +1862,10 @@ function startsNavRegister(text, source) {
             }
             else{
                 addMistake();
-                var get = JSON.stringify(userPostion);
+                var get = "[type 12 location]" + userPostion;
                 var send = "<img src='images/X.png' id='VXimg'/><br><br>"+'אופס, אתם לא במקום הנכון'+"<br><br>"+'המרחק שלכם מהנקודה הוא כ-'+theDistance+" מטרים";
                 inAnswerDivSet(theQuestion, false, send);
                 addConnection(time, get, send, -2, 0, 0, theQuestion.row.ID);
-            }
-            return ;
-        }
-        //-----------------------------------------------------------------------
-        else if (questionType == 14){
-            var rightAnsArr = (theQuestion.row.right_answer).split(";")
-            var userAnsArr =  ($("#userAnswer").val()).split(";");
-            var rightAnsCount = 0;
-            var showRightAns = "";
-            if ($("#userAnswer").val() == ""){
-                var send = "<br>"+putWord(186)+"<br><br>"+putWord(187);
-                inAnswerDivSet(theQuestion, false, send);
-            }
-
-            else{
-                var arr1 = (theQuestion.row.p1).split(";");
-                showRightAns += '<ul id="sortable" style="position: relative;margin: auto">';
-
-                for (var i = 0; i < rightAnsArr.length-1; i++){
-                    if (rightAnsArr[i] == userAnsArr[i])
-                        rightAnsCount++;
-                    showRightAns += '<li value="'+i+'" class="ui-state-default">'+arr1[rightAnsArr[i]-1]+'</li>';
-                }
-
-                showRightAns += '</ul>';
-                showRightAns = putWord(188)+"<br><br><table style='margin:auto'>" + showRightAns + "</table>";
-                
-                if (rightAnsCount / (rightAnsArr.length - 1) <= 0.333)
-                    var send = "<img src='images/X.png' id='VXimg'/><br>"+putWord(168);
-                else if (rightAnsCount / (rightAnsArr.length - 1) <= 0.666)
-                    var send = "<img src='images/V.png' id='VXimg'/><br>"+putWord(169);
-                else {
-                    var send = "<img src='images/V.png' id='VXimg'/><br>"+putWord(170);
-                    showRightAns = "";
-                }
-
-               localStorage.mistakeCounter = Math.floor((rightAnsArr.length - 1 - rightAnsCount) / 2);
-
-                send += " "+putWord(171)+" "+ rightAnsCount +" "+putWord(172)+" "+(rightAnsArr.length-1)+".<br><br>"+showRightAns;
-
-
-                var get = $("#userAnswer").val();
-                inAnswerDivSet(theQuestion, true, send);
-                addConnection(time, get, send, theQuestion.LM, theQuestion.level, localStorage.mistakeCounter, theQuestion.row.ID);
-           
             }
         }
         //-----------------------------------------------------------------------
