@@ -85,7 +85,7 @@
         width: 100px;
     }
     
-    #didYouKnow{
+    #didYouKnow, .didYouKnow{
         background-color: rgb(141, 209, 225);
         border-style: solid;
         -webkit-border-radius: 10px;
