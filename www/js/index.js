@@ -512,10 +512,6 @@ function startsNavRegister(text, source) {
         var dataArr = JSON.parse(data);
         localStorage.setItem("navID", navID);
         localStorage.setItem("memory", dataArr["memory"]);
-        if (dataArr['isOldVersion'] == 1)
-            localStorage.setItem("oldVersion", "true");
-        else
-            localStorage.setItem("oldVersion", "false");
         localStorage.setItem("memory", dataArr["memory"]);
         localStorage.setItem("navName", dataArr.navName);
         $(".navID").html(navID);
@@ -875,19 +871,16 @@ function startsNavRegister(text, source) {
             $(".startTime").html(d.toLocaleString());
             $(".userName").html(localStorage.fName + " " + localStorage.lName);
 
-            if (localStorage.getItem("oldVersion") == "true")
-                goToOldVersion();
-            else {
-                localStorage.setItem("levelName", "LM0l0");
-                audio[STARTGAME].play();
-                $('#inFeedbackPopup').html("<h2>"+putWord(132)+"</h2>");
-                setTimeout(function(){
-                    showNextQuestion();
-                    for (var i = 1; i <= parseInt(localStorage.memory) + 1; i++) {
-                        askForQuestion(i);
-                    }
-                },6000)
-            }
+            
+            localStorage.setItem("levelName", "LM0l0");
+            audio[STARTGAME].play();
+            $('#inFeedbackPopup').html("<h2>"+putWord(132)+"</h2>");
+            setTimeout(function(){
+                showNextQuestion();
+                for (var i = 1; i <= parseInt(localStorage.memory) + 1; i++) {
+                    askForQuestion(i);
+                }
+            },6000)
             //alert(data);
             //play sound
            
@@ -1752,6 +1745,7 @@ function startsNavRegister(text, source) {
         }
         //-----------------------------------------------------------------------
         else if (questionType == 8){
+            $("#compasArrowDiv").attr('onclick','');
             var arr = ($("#userAnswer").val()).split(";");
             var get = sClean($("#userAnswer").val());
             var min = parseInt(theQuestion.row.right_answer) - parseInt(theQuestion.row.p1);
@@ -2148,26 +2142,10 @@ function startsNavRegister(text, source) {
     }
 
 
-    //function to change the app to the old version
-    function goToOldVersion() {
-        /*
-        if (typeof (StatusBar) != "undefined" && Dplatform != "iOS")
-            StatusBar.show();*/
-        localStorage.needToRefresh = 1;
-        location.href = "oldVersion/way-to-go-14.4/index.html";
-    }
-
     //this function check if we are during a game if we are go to the game (In addition checking uf the game in the new/old version)
     function isDuringeGame() {
         var d = new Date(); var nowTime = Math.round(d.getTime() / 1000); var startTime = parseInt(localStorage.getItem("startTime"));
-        if (localStorage.getItem("oldVersion") == "true" && localStorage.getItem("userID") > 0 && startTime > 0) {
-            var ff = (startTime + (3600 * HOURSFORGAME));
-            if (startTime + (3600 * HOURSFORGAME) > nowTime) {
-                goToOldVersion();
-            }
-        }
-
-        else if (localStorage.getItem("userID") > 0 && startTime > 0 && !localStorage.gameFinished) {
+        if (localStorage.getItem("userID") > 0 && startTime > 0 && !localStorage.gameFinished) {
             if (startTime + (3600 * HOURSFORGAME) > nowTime) {
                 //alert("resume game in new version"); //debug nedd to be function the go back to the game in the new version
 
