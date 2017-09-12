@@ -26,7 +26,7 @@ var ImgCache = {
             usePersistentCache: true,               /* false = use temporary cache storage */
             cacheClearSize: 0,                      /* size in MB that triggers cache clear on init, 0 to disable */
             headers: {},                            /* HTTP headers for the download requests -- e.g: headers: { 'Accept': 'application/jpg' } */
-            skipURIencoding: false                  /* enable if URIs are already encoded (skips call to sanitizeURI) */
+            skipURIencoding: true                  /* enable if URIs are already encoded (skips call to sanitizeURI) */
         },
         overridables: {
             hash: function (s) {
