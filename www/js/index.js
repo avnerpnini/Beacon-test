@@ -1183,7 +1183,7 @@ function startsNavRegister(text, source) {
                     if (theQuestion.row.p2 == -1){//סרטון ללא שאלה
                         $("#userAnswer").parent().hide();
                         $("#sendAnswer").hide();
-                        var conBut = '<br><a id="continue" style=""  onclick="checkAnswer()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">המשך...</a>';
+                        var conBut = '<br><a id="continue" style=""  onclick="checkAnswer()" class="ui-btn ui-corner-all ui-shadow ui-btn-b">'+putWord(145)+'</a>';
                     }
                     else{
                         $("#userAnswer").parent().show();
