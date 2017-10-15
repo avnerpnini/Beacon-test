@@ -276,7 +276,7 @@ function checkRegisterValues(showMsg){
 
     if (localStorage.getItem("lName") == null || (localStorage.getItem("lName")).length < 2){
         redBorder("lName");
-        msg += putWord(101) + "/n";
+        msg += putWord(101) + "\n";
     }
     else
         RemoveRedBorder("lName");
