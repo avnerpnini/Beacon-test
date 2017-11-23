@@ -1,4 +1,4 @@
-var navID = null, appVersion, isSlidebarOpen, timerLeftPanelTimeout, timerForQuestionsTimeout, hash, interval, requireRoute, requirePassword, password, pageInView = 1, url = window.location.href, isOpenScanner = false, agreeToUpdates = true, routeNum, Dcordova, Dplatform, Duuid, Dversion, Dmodel, requireAdditionalData, qrSource, levelsArr, connection_table = [], cameraImageURI, ft, firstOrientation, watchID, baseUrl = "http://www.nivut.net";
+var navID = null, appVersion, isSlidebarOpen, timerLeftPanelTimeout, timerForQuestionsTimeout, hash, interval, requireRoute, requirePassword, password, pageInView = 1, url = window.location.href, isOpenScanner = false, agreeToUpdates = true, routeNum, Dcordova, Dplatform, Duuid, Dversion, Dmodel, requireAdditionalData, qrSource, levelsArr, connection_table = [], cameraImageURI, ft, firstOrientation, watchID, baseUrl = "https://www.nivut.net";
 //localStorage.endOfLoadQuestion = false;
 
 var NUMOFPRIORITYS = 4, HOURSFORGAME = 24, SECONDS_FOR_CHECK_COMMAND = 30;
