@@ -4,9 +4,10 @@ function markAnswer(i, j){
     $('#userAnswer').val(i);
     var g = 0;
     while($('#mulAns'+g).length > 0){
-        $('#mulAns' + g).removeClass("ui-group-theme-e");//fix bug cant change theme
+        $('#mulAns' + g).removeClass("ui-group-theme-c");//fix bug cant change theme
+        $('#mulAns' + g).removeClass("ui-group-theme-a");//fix bug cant change theme
         if (g == j) {
-            $('#mulAns' + g).listview("option", "theme", "e");
+            $('#mulAns' + g).listview("option", "theme", "c");
         }
         else {
             $('#mulAns' + g).listview("option", "theme", "a");
@@ -32,9 +33,9 @@ function markAnswerFortype11(j,side){
     }
 
     while($(list+g).length > 0){
-        $(list + g).removeClass("ui-group-theme-e");//fix bug cant change theme
+        $(list + g).removeClass("ui-group-theme-c");//fix bug cant change theme
         if (g == j) {
-            $(list + g).listview("option", "theme", "e");
+            $(list + g).listview("option", "theme", "c");
         }
         else {
             $(list + g).listview("option", "theme", "a");
@@ -48,7 +49,8 @@ function markAnswerFortype11(j,side){
         connect(rightClicked, leftClicked, 2);
         rightClicked = leftClicked = null;
         setTimeout(function () {
-            $('.mulAns').removeClass("ui-group-theme-e"); //fix bug cant change theme
+            $('.mulAns').removeClass("ui-group-theme-c"); //fix bug cant change theme
+            $('#mulAns' + g).removeClass("ui-group-theme-a");//fix bug cant change theme
             $('.mulAns').listview("option", "theme", "a");
             $('.mulAns').listview("refresh");
         }, 500);
