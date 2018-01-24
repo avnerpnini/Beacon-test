@@ -875,6 +875,7 @@ function startsNavRegister(text, source) {
             localStorage.setItem("levelName", "LM0l0");
             audio[STARTGAME].play();
             $('#inFeedbackPopup').html("<h2>"+putWord(132)+"</h2>");
+            $('#feedbackPopup').popup("reposition", {positionTo: 'window'});
             setTimeout(function(){
                 showNextQuestion();
                 for (var i = 1; i <= parseInt(localStorage.memory) + 1; i++) {
