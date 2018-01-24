@@ -1,5 +1,5 @@
  //helper function to type 1 - mark answer
-function markAnswer(i, j){
+ function markAnswer(i, j){
     audio[SELECT].play();
     $('#userAnswer').val(i);
     var g = 0;
@@ -34,6 +34,7 @@ function markAnswerFortype11(j,side){
 
     while($(list+g).length > 0){
         $(list + g).removeClass("ui-group-theme-c");//fix bug cant change theme
+        $(list + g).removeClass("ui-group-theme-a");//fix bug cant change theme
         if (g == j) {
             $(list + g).listview("option", "theme", "c");
         }
@@ -50,7 +51,7 @@ function markAnswerFortype11(j,side){
         rightClicked = leftClicked = null;
         setTimeout(function () {
             $('.mulAns').removeClass("ui-group-theme-c"); //fix bug cant change theme
-            $('#mulAns' + g).removeClass("ui-group-theme-a");//fix bug cant change theme
+            $('.mulAns').removeClass("ui-group-theme-a"); //fix bug cant change theme
             $('.mulAns').listview("option", "theme", "a");
             $('.mulAns').listview("refresh");
         }, 500);
