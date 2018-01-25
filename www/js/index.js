@@ -115,7 +115,6 @@ function onDeviceReady(){
     //panel left events
     $("#panel-left").panel({
         beforeopen: function (event, ui) {leftPanelOpen();},
-        beforeclose: function( event, ui ) { clearTimeout(timerLeftPanelTimeout) }
     });
 
     //prevent duoble click on buttons - because it make bug
@@ -884,7 +883,7 @@ function startsNavRegister(text, source) {
             },6000)
             //alert(data);
             //play sound
-           
+            setTimer();
         }
         else {
             //alert(data);
@@ -1042,6 +1041,8 @@ function startsNavRegister(text, source) {
 
                 $(".userStatus").html(theQuestion.point + "|" + localStorage.LM + "|" + localStorage.level + "|" + localStorage.quesID + "</h5>");
                 $(".LM").html(localStorage.LM);
+                $(".lm_from_sum").html(localStorage.LM+" "+putWord(245) + " "+localStorage.numOfPoints);
+                $("#uper-progress-bar").css("width", (parseInt(localStorage.LM) / parseInt(localStorage.numOfPoints)) * 100 + "%");
                 $(".level").html(localStorage.level);
                 $(".quesID").html(localStorage.quesID);
                 $(".point").html(theQuestion.point);
@@ -2135,6 +2136,9 @@ function startsNavRegister(text, source) {
                     setTimeout('audio[FINISHGAME].play()', 500)//play sound;
                     setTimeout("endOfGmaeAlert()", 10000);
                     localStorage.finishTime = date;
+                    setTimer();
+                    $(".lm_from_sum").html("");
+                    $("#uper-progress-bar").css("width", ("100%"));
                     clearInterval(finishInterval);
                 }
             }, 1000)
@@ -2167,6 +2171,7 @@ function startsNavRegister(text, source) {
                 routeNum = localStorage.routeNum;
                 levelsArr = JSON.parse(localStorage.levelsArr);
                 $(".only_on_nav_runing").show();
+                setTimer();
                 var checkForCommandsInterval = setInterval("checkForCommands()", SECONDS_FOR_CHECK_COMMAND * 1000); //check for commend from the server evrey SECONDS_FOR_CHECK_COMMAND seconds
                 showNextQuestion(true);
                 runCom(myQueue);
@@ -2672,7 +2677,6 @@ function startsNavRegister(text, source) {
     
     //what to do wjan opening the left panel
     function leftPanelOpen(){
-        setTimer();
         $("#totalMistakes").html("&nbsp;&nbsp;&nbsp;"+localStorage.totalMistakeCounter);
         if (localStorage.level == 1)
             var LM = parseInt(localStorage.LM) - 1;
@@ -2680,8 +2684,8 @@ function startsNavRegister(text, source) {
             var LM = localStorage.numOfPoints;
         else
             var LM = parseInt(localStorage.LM);
-        $("#lm").html("&nbsp;&nbsp;&nbsp;"+LM+" "+putWord(245) + " "+localStorage.numOfPoints);
-        $(".progress-bar").css("right", (LM / parseInt(localStorage.numOfPoints)) * 100 + "%");
+        $(".lm_from_sum").html("&nbsp;&nbsp;&nbsp;"+LM+" "+putWord(245) + " "+localStorage.numOfPoints);
+        $("#uper-progress-bar").css("width", (LM / parseInt(localStorage.numOfPoints)) * 100 + "%");
     }
 
     //helper function that checkin if string is a json string

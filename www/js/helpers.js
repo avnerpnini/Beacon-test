@@ -514,7 +514,10 @@ function doSortable(){
  //set timer in the left panel widget
 function setTimer() {
     if (localStorage.gameFinished == "true") {
-        var d1 = new Date((localStorage.finishTime) * 1000);
+        if (typeof localStorage.finishTime == 'undefined')
+            var d1 = new Date();
+        else
+            var d1 = new Date((localStorage.finishTime) * 1000);
         var d2 = new Date((localStorage.startTime)  * 1000)
     }
     else {
@@ -535,7 +538,7 @@ function setTimer() {
         var h = addZero(d3.getUTCHours());
         var m = addZero(d3.getUTCMinutes());
         var s = addZero(d3.getUTCSeconds());
-        $("#timer").html("&nbsp;&nbsp;&nbsp;" + h + ":" + m + ":" + s);
+        $(".timer").html(h + ":" + m + ":" + s);
 
 
 

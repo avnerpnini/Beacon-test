@@ -17,6 +17,7 @@
     {
         background-color: rgba(255, 255, 255, 0.5);
         max-width: 800px;
+        padding-top: 10px;
         margin: auto;
     }
 
@@ -168,6 +169,13 @@
         opacity: 0.99;
     }
     
+    #uper-progress-bar {
+        background-image: -webkit-linear-gradient(135deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-image: -o-linear-gradient(135deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-image: linear-gradient(135deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    -webkit-background-size: 40px 40px;
+    background-size: 40px 40px;
+    }
     /*for sortable list*/    
     #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
     #sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; min-height: 1.5em; }
