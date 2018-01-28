@@ -172,6 +172,12 @@
                     }
                     return result;
                 }
+                function htmlDistance(beacon){
+                        var distance = evothings.eddystone.calculateAccuracy(beacon.txPower, beacon.rssi);
+                        return distance ?
+                        'distance: ' + distance + '<br/>' :  '';
+                }
+
                 function showMessage(text)
                 {
                     document.querySelector('#message').innerHTML = text;
