@@ -108,8 +108,7 @@
     <plugin name="cordova-plugin-whitelist" spec="~1.3.3" />
 
         
-        <plugin spec="https://github.com/bluecats/bluecats-phonegap.git" source="git"  />
-        <plugin spec="https://github.com/petermetz/cordova-plugin-ibeacon.git" source="git"  />
+        <plugin spec="https://github.com/evothings/cordova-eddystone.git" source="git"  />
 
 
 </widget>
