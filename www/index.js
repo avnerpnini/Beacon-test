@@ -18,7 +18,7 @@
  */
 
 //Update with the api token for your app from https://app.bluecats.com
-var blueCatsAppToken = 'BLUECATS-APP-TOKEN';
+var blueCatsAppToken = '00caffac-9ecd-42b9-8b75-1bd46a02f58c';
 
 var app = {
     // Application Constructor
