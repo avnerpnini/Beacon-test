@@ -109,6 +109,7 @@
 
         
         <plugin spec="https://github.com/bluecats/bluecats-phonegap.git" source="git"  />
+        <plugin spec="https://github.com/petermetz/cordova-plugin-ibeacon.git" source="git"  />
 
 
 </widget>
