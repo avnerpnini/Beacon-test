@@ -103,6 +103,7 @@
             <platform name="ios">
                 <preference name="StatusBarOverlaysWebView" value="false" />
             </platform>
+        <plugin spec="https://github.com/bluecats/bluecats-phonegap.git" />
 
 
 </widget>
