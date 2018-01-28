@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "nivut.net.wtg"
+        id        = "nivut2.net.wtg"
         versionCode = "3006"
         version   = "2.1.6">
-    <name>יש לאן</name>
+    <name>יש ביקון</name>
 
     <description>
         משחקי ניווט סלולרים
