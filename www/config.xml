@@ -85,7 +85,7 @@
             <splash src="images/splash/ios/2048_1536.png" width="2048" height="1536" />
         </platform>
        
-        <plugin spec="https://github.com/bluecats/bluecats-phonegap.git" />
+        <plugin spec="https://github.com/bluecats/bluecats-phonegap.git" source="git"  />
 
 
 </widget>
