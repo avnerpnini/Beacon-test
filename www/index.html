@@ -3,383 +3,192 @@
     <head>
         <title>יש לאן</title>
         <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <!-- the original thme i changed it /*Change to customize*/<link rel="stylesheet" href="css/jqeury.mobile.theme.min.css" />    -->
-        <!-- w3 css--><link rel="stylesheet" href="css/w3.css">
-        <!-- jQueryMobileCSS - styling--><link rel="stylesheet" href="css/myFirstTheme.min.css" />
-		<!-- jQueryMobile icons --><link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
-		<!-- jQueryMobile core CSS --><link rel="stylesheet" href="css/jquery.mobile.min.css" />
-		<!-- Owl stylesheet --><link rel="stylesheet" href="css/owl.carousel.css">
-		<!-- Owl Theme --><link rel="stylesheet" href="css/owl.theme.css">
-		<!-- NIGHTLY style --><link rel="stylesheet" href="css/nightly.css" />
-		<!-- Load Font Awesome Icons --><link rel="stylesheet" href="css/font-awesome.min.css">
-		<!-- jQuery --><script src="js/jquery.min.js"></script>
-		<!-- jQueryMobile --><script src="js/jquery.mobile.min.js"></script>
-        <!-- jQuery-ui stylesheet --><link rel="stylesheet" href="css/jquery-ui.min.css">
-        <!--- language styling--><link rel="stylesheet" href="css/lang_ltr.css" />
-        <!--- styling--><link rel="stylesheet" href="css/index.css" />
-        <!-- jQuery-ui --><script src="js/jquery-ui.min.js"></script>
-        <!-- jQuery-ui for toch --><script src="js/jquery.ui.touch-punch.min.js"></script>
-        
-        
-		<!-- Owl Carousel --><script src="js/owl.carousel.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <!-- phone gap --><script src="cordova.js"></script>
-        <!--cach images--><script src="js/imgcache.js"></script>
-        <!-- app javascripts --><script src="js/queue.js"></script>
-        <!-- app javascripts --><script src="js/helpers.js"></script>
-        <!-- app javascripts --><script src="js/index.js"></script>
-        <!-- app javascripts --><script src="js/audio.js"></script>
-        <!-- app javascripts --><script src="js/dictionary.js"></script>
+        <script src="index.js"></script>
     </head>
-    <body onresize="resize();" style="min-height: 100%">
-        <div data-role="page" id="mainPage" data-theme='c' ><!-- פתיחה לכל העמוד בתוך דיב -->
-            <!-- תפריט צד  ימין-->
-            <div data-role="panel" data-display="overlay" data-position="right" id="sidebar" data-theme="b">
-                <ul data-role="listview">
-                    <li data-icon='false' onclick="dataRefresh(false)"><a class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-refresh only_on_nav_runing" data-ajax="false" href="#" data-word="1"></a></li><!--רענון נתונים-->
-                    <li data-icon='false' onclick="cantScanQr()" id="cantScanQr"><a class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-grid" data-ajax="false" href="#" data-word="2"></a></li><!--איני מצליח לסרוק-->
-                    <li data-icon='false' onclick="callToGuide()"  style="display:none" id="callToGuide"><a class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-phone" href="#" data-word="9"></a><!--חייג לעזרה-->
-                    <li data-icon='false' class="menu-item-has-children"><a class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-user" href="#" data-word="3"></a><!--נתוני משתמש-->
-                    <ul data-role="listview" class="sub-menu">
-                            <li data-icon='false'><a id="userName" href="#" style="text-align: left; text-transform: capitalize;font-size: 1em" data-ajax="false">Name: <p class="userName" style="display: inline">Not define</p></a></li>
-                        	<li data-icon='false'><a id="userID" href="#" style="text-align: left; text-transform: capitalize;font-size: 1em" data-ajax="false">User ID: <p class="userID" style="display: inline">Not define</p></a></li>
-                            <li data-icon='false'><a id="navID" href="#" style="text-align: left ; text-transform: capitalize;font-size: 1em">nav Site: <p class="navName" style="display: inline">Not define</p></a></li>
-                            <li data-icon='false'><a id="memory" href="#" style="text-align: left ; text-transform: capitalize;font-size: 1em">memory: <p class="memory" style="display: inline">Not define</p></a></li>
-                            <li data-icon='false'><a id="userStatus" href="#" style="text-align: left; text-transform: capitalize;font-size: 1em">Status: <p class="userStatus" style="display: inline">Not define</p></a></li>
-                            <li id="javaFix" data-icon='false' style="display:none;"><a href="#" style="color: #ffd800;text-align: left; text-transform: capitalize;font-size: 1em ">Java Updated</a></li>
-                        </ul>
-                    </li>
-                    <li data-icon='false'><a onclick="sendLocation('user')" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-location only_on_nav_runing" data-ajax="false" href="#" data-word="4"></a></li><!--שלח מיקום נוכחי-->
-                    <li id="askSkipPhotoTaskLi" style="display:none" data-icon='false'><a onclick="askSkipPhotoTask()" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-forward" data-ajax="false" href="" data-word="5"></a></li><!--דלג על צילום-->
-                    <li data-icon='false'><a onclick="removNav()" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-delete" data-ajax="false" href="#" data-word="6"></a></li><!--מחק ניווט-->
-                    <li data-icon='false'><a id="muteBut" onclick="toogleMute()" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-audio" data-ajax="false" href="#" data-word="7"></a></li><!--השתק צליל-->
-                    <li id="languageLi" data-icon='false'><a onclick="$('#lnkLanguagePopupPass').click();" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-right ui-icon-gear" data-ajax="false" href="#">Language</a></li>
-                    <li id="globalInfoLi" data-icon='false' ><a href="#" onclick="$('#lnkInfoPopup').click();" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-info" data-ajax="false" data-word="36"></a></li><!--מידע כללי-->
-                    <li data-icon='false'><a onclick="$('#lnkGuidePopupPass').click();" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-forbidden" data-ajax="false" href="#" data-word="8"></a></li><!--הפעל מדריך-->
-                </ul>
-            </div>
-            <!-- תפריט צד  שמאל-->
-            <div data-role="panel" data-display="overlay" data-position="left" id="panel-left" data-theme="b">
-                <a href="#popupInfo1" data-rel="popup" data-transition="pop" style="text-decoration: none" class="" title="Learn more">
-                    <img alt="timer" src="images\timer_icon.png" style="height: 40px; width: auto;position: relative;top:4px; "/>
-                    <h2 style="display: inline;color: rgb(255, 255, 255)" class="timer"></h2>
-                </a>
-                <br><br>
-                <a href="#popupInfo2" data-rel="popup" data-transition="pop" style="text-decoration: none" class="" title="Learn more">
-                    <img alt="mistakes" src="images\X_icon.png" style="height: 40px; width: auto;position: relative;top:6px; "/>
-                    <h2 style="display: inline;color: rgb(255, 255, 255)" id="totalMistakes"></h2>
-                </a>
-                <br><br>
-                <a href="#popupInfo3" data-rel="popup" data-transition="pop" style="text-decoration: none" class="" title="Learn more">
-                    <img alt="mistakes" src="images\map_marker.png" style="height: 40px; width: auto;position: relative;top:6px; "/>
-                    <h2 style="display: inline;color: rgb(255, 255, 255)" class="lm_from_sum" ></h2>
-                </a>
-                <br>
-                <h5 data-word="10"></h5><!--עצה:גע בציור להסבר-->
+    <body>
+        <button onclick="startPuring()">startPuring</button>
+        <img class="evo-image" src="https://evomedia.evothings.com/2013/11/evothings_logo_large_white1.png" />
 
-                <div data-role="popup" id="popupInfo1" class="ui-content" data-theme="a" style="max-width:350px;">
-                    <h4 data-word="11"></h4><!--זמן מתחילת המשחק-->
-                </div>
-                <div data-role="popup" id="popupInfo2" class="ui-content" data-theme="a" style="max-width:350px;">
-                    <h4 data-word="12"></h4></h4><!--כמות הטעויות-->
-                </div>
-                <div data-role="popup" id="popupInfo3" class="ui-content" data-theme="a" style="max-width:350px;">
-                    <h4 data-word="13"></h4></h4><!--מספר נקודות הציון שעברתם-->
-                </div>
-            </div>
-            <!-- header -->
-            <div data-role="header" id="pageHeader" data-position="fixed" data-tap-toggle="false" data-theme='c'   >
-                <a href="#" id="backHeaderButton" onclick="onBackHeaderButtonClicked();" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext ui-btn-e ui-btn-inline" style="top: 9px;"><span data-word="14"></span></a><!--חזרה-->
-                <h1 class="header-title" id="header-title" data-word=0></h1>
-                <a href="#sidebar" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-e ui-btn-inline" style="top: 9px;"><span data-word="15"></span></a><!--תפריט-->
-                <!-- status bar -->
-                <div class="w3 w3-cell-row">
-                    <!-- progress bar -->
-                    <div class="w3 w3-light-grey only_on_nav_runing w3-cell" style="box-sizing:border-box;border-color: #4569a7;border-width: 0px 0px 0px 0px;border-style: solid;">
-                        <div class="w3 w3-container w3-center" id="uper-progress-bar" style="height:20px;width:0px;background-color:#73b53a"></div>
-                        <div class="w3 w3-containers w3-center w3-opacity lm_from_sum" style="height:20px;margin-top:-20px;font-size:14px;font-weight:600" ></div>
-                    </div>
-                    <!-- timer bar -->
-                    <div class="w3 w3-light-blue only_on_nav_runing w3-container w3-cell" style="width:90px;text-align: center;border-color: #4569a7;border-width: 0px 2px 0px 0px;border-style: solid;">
-                        <span class="timer w3-opacity" style="font-size:14px;font-weight:550;"> 00:00:00</span>
-                        <img class=" w3-opacity" alt="timer" src="images\timer_icon.png" style="height: 15px; width: auto;position: relative;top:-1px;-webkit-filter: invert(100%);filter: invert(100%) ">
-                    </div>
-                </div>
-            </div>
-            
-            <div id="content" data-role="content">
-                <!----gate---------------------------------------------------------------------------------------------------------------------------------------->
-                <div id="gate">
-                    <!--סליידר תמונות להתחלה-->
-                    <div data-role="none" id="slider" class="owl-carousel owl-theme nightly-inline-slider">
-                        <div class="item" style="margin: 5px">
-                            <!--logo-->
-                            <img class="owl-pic" alt="pic1" src="images\logo.jpg" style="width: 90%;  max-width: 600px; margin: auto;display: block;margin-bottom: 20px"/>
-                        </div> 
-                        <div class="item" style="margin: 5px">
-                            <img class="owl-pic_l" alt="pic1" src="images\slider\1_l.jpg"/>
-                            <img class="owl-pic_p" alt="pic1" src="images\slider\1_p.jpg"/>
-                        </div> 
-                        <div class="item" style="margin: 5px">
-                            <img class="owl-pic_l" alt="pic1" src="images\slider\2_l.jpg"/>
-                            <img class="owl-pic_p" alt="pic1" src="images\slider\2_p.jpg"/>
-                        </div>
-                        <div class='item' style="margin: 5px">
-    	                    <img class="owl-pic_l" alt="pic1" src="images\slider\3_l.jpg"/>
-                            <img class="owl-pic_p" alt="pic1" src="images\slider\3_p.jpg"/>
-                        </div>              
-                        <div class='item' style="margin: 5px">
-    	                    <img class="owl-pic_l" alt="pic1" src="images\slider\4_l.jpg"/>
-                            <img class="owl-pic_p" alt="pic1" src="images\slider\4_p.jpg"/>
-                        </div>    
-                        <div class='item' style="margin: 5px">
-    	                    <img class="owl-pic_l" alt="pic1" src="images\slider\5_l.jpg"/>
-                            <img class="owl-pic_p" alt="pic1" src="images\slider\5_p.jpg"/>
-                        </div>                        
-                    </div>
-                    <div style="display: table;margin: auto">
-                        <div id="registerBut" style="width: 45%;min-width: 140px;margin: auto;display:table-cell">
-                            <a onclick="changePage(2)" style="text-decoration: none;" href="#" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-b ui-icon-edit ui-btn-icon-left ui-corner-all">
-                                <span data-word="16"></span><br><span data-word="17"></span>
-                            </a>
-                        </div>
-                        <div>  </div>
-                        <div id="scanQRBut" style ="width: 45%;min-width: 160px;margin: auto;display: table-cell">
-                            <a id="aScanQR" onclick="scan('navID');" style="text-decoration: none" href="#" class="qrScannerButton ui-btn ui-btn-b ui-icon-grid ui-btn-icon-left ui-corner-all">
-                                <span data-word="18"></span><br><span data-word="19"></span>
-                            </a>
-                        </div>
+        <h1>Eddystone Demo</h1>
 
-                    </div>
-     
-                </div>
-                <!-- חלון ההרשמה לפני סריקת הברקוד-->
-                <div data-role="popup" data-history="false" id="massagePopup" data-overlay-theme="b" data-theme="a" class="ui-corner-all ui-content" data-dismissible="false">
-                    <h4 data-word="20"></h4></h4></h4>
-                    <div id="inMassagePopup"></div>
-                    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b" data-rel="back" data-word="24"></a><!--אישור-->
-                </div>
-                <!--חלון אישור קליטת פרטים וקישור נסתר שפותח אותו-->
-                <a id="lnkpopupRegisterReceived" style="text-decoration: none;display: none" href="#popupRegisterReceived" data-rel="popup" data-position-to="window" data-transition="pop"></a>
-                <div data-role="popup" data-history="false" id="popupRegisterReceived" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="max-width:400px;">
-                    <div role="main" class="ui-content" style="text-align: center">
-                        <br>
-                       <h4><span data-word="21"></span><!--הרישום נקלט בהצלחה!-->
-                            <br><br>
-                            <span data-word="22"></span></h4><!--כעת עליך לסרוק את הברקוד-->
-                      <p data-word="23"></p><!--(הברקוד מחכה ככל הנראה בנקודת ההתחלה-->
-                        <br>
-                        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-c" data-rel="back" data-word="24"></a><!--אישור-->
-                    </div>
-                </div>
-                    
-                <!--חלון תגובה למציאת אתר הניווט -->
-                <a id="lnkfeedbackPopup"  data-transition="flow" style="text-decoration: none;display:none " href="#feedbackPopup" data-rel="popup" data-position-to="window" data-transition="pop">feedback</a>
-                <div data-role="popup" data-history="false" id="feedbackPopup" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="width:300px;">
-                    <a onclick="$('#backInFeedbackPopup').fadeOut();" id="backInFeedbackPopup" style="display: none" href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
-                    <div id="inFeedbackPopup" role="main" class="ui-content" style="text-align: center">
-                    </div>
-                </div>
-                
-            
-         <!----register---------------------------------------------------------------------------------------------------------------------------------------->
-            <div id="registerDiv" style="display: none">
-                <form id="register" action="#" method="get">
-                    <div style="text-align: center;width: 80%;margin: auto">
-                        <form action="#" method="get">
-                        <h3 id="h3ForRegister"><span data-word="25"></span></h3><!--רישום פרטים-->
-                        <input class="register text" id="fName" type="text" name="fName" value="" placeholder=""    data-word-placeholder='26' data-theme="a"><!--שם פרטי-->
-                        <input class="register text" id="lName" type="text" name="lName" value="" placeholder=""    data-word-placeholder='27' data-theme="a"><!--שם משפחה-->
-                        <input class="register text" id="phone"  type="tel" name="phone" value="" placeholder=""    data-word-placeholder='28' data-theme="a"><!--מספר פלאפון-->
-                        <input class="register text" id="address" type="number" max="15" min="1" name="address" value="" placeholder="" data-word-placeholder='50' data-theme="a"><!--כתובת מגורים-->
-                        <input class="register text" id="email" type="email" name="email" value="" placeholder=""   data-word-placeholder='29' data-theme="a"><!--כתובת דוא"ל-->
-                        
-                        <div style="padding: 1px">
-                            <input onchange="agreeToUpdates = this.checked" type="checkbox" data-theme="a" checked name="checkbox-mini-0" id="checkbox-mini-0" data-mini="true" data-iconpos="right">
-                            <label for="checkbox-mini-0"><span data-word="31"></span></label><!--אני מעוניין.ת לקבל עדכונים בפלאפון או במייל-->
-                        </div>
-                        <a id="resisterSave" onclick="checkRegisterValues(true)" class="ui-btn ui-corner-all ui-shadow ui-btn-b" data-word="32"></a><!--שמור-->
-                        <a id="resisterContinue" style="display: none" onclick="checkRegisterValues(true) ? changePage(3) : false;" class="ui-btn ui-corner-all ui-shadow ui-btn-b" data-word="33"></a>
-                        <a id="resisterStart" style="display: none" onclick="checkRegisterValues(true) ? checkPasswordDivValues(): false" class="ui-btn ui-corner-all ui-shadow ui-btn-b" data-word="34"></a>
-                            <br>
-                        </form>
-                    </div>
-                </form>
-            </div>
-        <!----register---------------------------------------------------------------------------------------------------------------------------------------->
-            <div id="passwordDiv" style="display: none">
-                <form id="passwordForm" action="#" method="get">
-                <div style="width: 80%; margin: auto; ">
-                    <div id="passInputDiv" style="display: none">
-                        <h4 data-word="35"></h4> <!--הקש סיסמא-->
-                        <input class="register text" id="password" type="password" name="password" value="" placeholder="" data-theme="a">
-                    </div>
-                    <div class="ui-field-contain" id="routeInputDiv" style="display: none;border-bottom-width: 0px">
-                        <select name="selectRoute" id="selectRoute" data-native-menu="false" data-theme="a"></select>
-                    </div>
-                    <div id="additionalDataDiv" style="display: none">
-                        <h4></h4> <!--במידה ורוצים להעביר מידע נוסף כלשהוא-צריך להיות מוסתר-->
-                        <input class="register text" id="additionalData" type="text" value="" placeholder="" data-theme="a">
-                    </div>
-                    <br>
-                    <a id="passwordDivStart" onclick="checkPasswordDivValues()" class="ui-btn ui-corner-all ui-shadow ui-btn-b"><span data-word="34"></span></a>
-                </div>
-                </form>
-            </div>
-            <!----main---------------------------------------------------------------------------------------------------------------------------------------->   
-            <div id="mainDiv" style="display: none">
-                <div id="changeContentInMainDiv">
-                    <img alt="pic1" src="images/logo_opacity.png" style="width: 200px;-webkit-box-shadow:none;box-shadow:none;margin: auto;display: block;margin-bottom: 20px"/>
-                </div>
-                <div id="scanQRBut2" style ="width: 45%;min-width: 160px;margin: auto;display: none">
-                    <img alt="scanQR" src="images\scanQR.jpg" style="max-width: 600px; margin: auto;-webkit-box-shadow:none;box-shadow:none"/>
-                    <br><br>
+        <p id="message">Preparing...</p>
 
-                    <a id="aScanQR2" onclick="scan('code');" style="text-decoration: none" href="#" class="qrScannerButton ui-btn ui-btn-b ui-icon-grid ui-btn-icon-left ui-corner-all" data-word='37'></a><!--סרוק ברקוד-->
-                    
-                </div>
-                <input class="text" id="userAnswer" type="text" name="userAnswer" value="" placeholder="" data-theme="a"><br>
-                <a id="sendAnswer" style="display: none"  onclick="checkAnswer()" class="ui-btn ui-corner-all ui-shadow ui-btn-b"><span data-word="38"></span></a><!--שלח תשובה-->
-            </div>
-            
-            <!-- חלון משוב לתשובות-->
-            <div id="answerDiv" style="display: none;">
-                <div id="frameAnswerDiv">
-                    <div id="inAnswerDiv" style="text-align: center">
-                    </div>
-                    <a id="continueButton" onclick="toggleAnswer();" class="ui-btn ui-corner-all ui-shadow ui-btn-b"><span data-word="33"></span></a><!--המשך..-->
-                </div>
-            </div>
+        <div id="found-beacons"></div>
 
-            <!-- חלון סיסמא לפני אפשרויות מדריך-->
-            <a id="lnkGuidePopupPass"  data-transition="flow" style="text-decoration: none;display:none " href="#guidePopupPass" data-rel="popup" data-position-to="window" data-transition="pop">feedback</a>
-            <div data-role="popup" data-history="false" id="guidePopupPass" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="width:300px;">
-                <a id="backInGuidePopupPass" href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
-                <div id="inGuidePopupPass" role="main" class="ui-content" style="text-align: center">
-                    <ul data-role="listview" data-inset="true">
-                        <li data-icon='false'><a onclick="guideFinishGame()"><h5 data-word="39"></h5></a></li><!--סיים ניווט-->
-                        <li data-icon='false'><a href="#" onclick="sendBugReport()">Send bug report</h5></a></li><!--שלח דוח שגיאה-->
-                        <li data-icon='false'><a href="#" onclick="checkGuidePass()">
-                        <h5 data-word="40"></h5> </a><!--אפשרויות מתקדמות-->
-                        <input id="guidePopupPassInput" type="password" placeholder="" data-word-placeholder="41"/>
-                       
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <script>
+            // Application code starts here. The code is wrapped in a
+            // function closure to prevent overwriting global objects.
+            (function()
+            {
+                // Dictionary of beacons.
+                var beacons = {};
+                // Timer that displays list of beacons.
+                var timer = null;
+                function onDeviceReady()
+                {
+                    // Start tracking beacons!
+                    setTimeout(startScan, 500);
+                    // Timer that refreshes the display.
+                    timer = setInterval(updateBeaconList, 500);
+                }
+                function onBackButtonDown()
+                {
+                    evothings.eddystone.stopScan();
+                    navigator.app.exitApp();
+                }
+                function startScan()
+                {
+                    showMessage('Scan in progress.');
+                    evothings.eddystone.startScan(
+                        function(beacon)
+                        {
+                            // Update beacon data.
+                            beacon.timeStamp = Date.now();
+                            beacons[beacon.address] = beacon;
+                        },
+                        function(error)
+                        {
+                            showMessage('Eddystone scan error: ' + error);
+                        });
+                }
+                // Map the RSSI value to a value between 1 and 100.
+                function mapBeaconRSSI(rssi)
+                {
+                    if (rssi >= 0) return 1; // Unknown RSSI maps to 1.
+                    if (rssi < -100) return 100; // Max RSSI
+                    return 100 + rssi;
+                }
+                function getSortedBeaconList(beacons)
+                {
+                    var beaconList = [];
+                    for (var key in beacons)
+                    {
+                        beaconList.push(beacons[key]);
+                    }
+                    beaconList.sort(function(beacon1, beacon2)
+                    {
+                        return mapBeaconRSSI(beacon1.rssi) < mapBeaconRSSI(beacon2.rssi);
+                    });
+                    return beaconList;
+                }
+                function updateBeaconList()
+                {
+                    removeOldBeacons();
+                    displayBeacons();
+                }
+                function removeOldBeacons()
+                {
+                    var timeNow = Date.now();
+                    for (var key in beacons)
+                    {
+                        // Only show beacons updated during the last 60 seconds.
+                        var beacon = beacons[key];
+                        if (beacon.timeStamp + 60000 < timeNow)
+                        {
+                            delete beacons[key];
+                        }
+                    }
+                }
+                function displayBeacons()
+                {
+                    var html = '';
+                    var sortedList = getSortedBeaconList(beacons);
+                    for (var i = 0; i < sortedList.length; ++i)
+                    {
+                        var beacon = sortedList[i];
+                        var htmlBeacon =
+                            '<p>'
+                            +	htmlBeaconName(beacon)
+                            +	htmlBeaconURL(beacon)
+                            +	htmlBeaconNID(beacon)
+                            +	htmlBeaconBID(beacon)
+                            +	htmlBeaconEID(beacon)
+                            +	htmlBeaconVoltage(beacon)
+                            +	htmlBeaconTemperature(beacon)
+                            +	htmlBeaconRSSI(beacon)
+                            +	htmlDistance(beacon)
+                            + '</p>';
+                        html += htmlBeacon
+                    }
+                    document.querySelector('#found-beacons').innerHTML = html;
+                }
+                function htmlBeaconName(beacon)
+                {
+                    var name = beacon.name || 'no name';
+                    return '<strong>' + name + '</strong><br/>';
+                }
+                function htmlBeaconURL(beacon)
+                {
+                    return beacon.url ?
+                        'URL: ' + beacon.url + '<br/>' :  '';
+                }
+                function htmlBeaconURL(beacon)
+                {
+                    return beacon.url ?
+                        'URL: ' + beacon.url + '<br/>' :  '';
+                }
+                function htmlBeaconNID(beacon)
+                {
+                    return beacon.nid ?
+                        'NID: ' + uint8ArrayToString(beacon.nid) + '<br/>' :  '';
+                }
+                function htmlBeaconBID(beacon)
+                {
+                    return beacon.bid ?
+                        'BID: ' + uint8ArrayToString(beacon.bid) + '<br/>' :  '';
+                }
+                function htmlBeaconEID(beacon)
+                {
+                    return beacon.eid ?
+                        'EID: ' + uint8ArrayToString(beacon.eid) + '<br/>' :  '';
+                }
+                function htmlBeaconVoltage(beacon)
+                {
+                    return beacon.voltage ?
+                        'Voltage: ' + beacon.voltage + '<br/>' :  '';
+                }
+                function htmlBeaconTemperature(beacon)
+                {
+                    return beacon.temperature && beacon.temperature != 0x8000 ?
+                        'Temperature: ' + beacon.temperature + '<br/>' :  '';
+                }
+                function htmlBeaconRSSI(beacon)
+                {
+                    return beacon.rssi ?
+                        'RSSI: ' + beacon.rssi + '<br/>' :  '';
+                }
+                function uint8ArrayToString(uint8Array)
+                {
+                    function format(x)
+                    {
+                        var hex = x.toString(16);
+                        return hex.length < 2 ? '0' + hex : hex;
+                    }
+                    var result = '';
+                    for (var i = 0; i < uint8Array.length; ++i)
+                    {
+                        result += format(uint8Array[i]) + ' ';
+                    }
+                    return result;
+                }
+                function htmlDistance(beacon){
+                        var distance = evothings.eddystone.calculateAccuracy(beacon.txPower, beacon.rssi);
+                        return distance ?
+                        'distance: ' + distance + '<br/>' :  '';
+                }
 
-            <!-- חלון בחירת שפות -->
-            <a id="lnkLanguagePopupPass"  data-transition="flow" style="text-decoration: none;display:none " href="#languagePopupPass" data-rel="popup" data-position-to="window" data-transition="pop">feedback</a>
-            <div data-role="popup" data-history="false" id="languagePopupPass" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="width:300px;">
-                <a id="backInGuidePopupPass" href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
-                <div id="inGuidePopupPass" role="main" class="ui-content" style="text-align: center">
-                    <ul data-role="listview" data-inset="true">
-                        <li data-role="list-divider">Select Language</li>
-                        <li><a href="#" onclick="selectLanguage(ENGLISH)" style="text-align: left"><img src="images\usa_flag.png" alt="English" class="ui-li-icon ui-corner-none">English</a></li>
-                        <li><a href="#" onclick="selectLanguage(FRENCH)"  style="text-align: left"><img src="images\france_flag.png" alt="France" class="ui-li-icon">français</a></li>
-                        <li><a href="#" onclick="selectLanguage(HEBREW)"  style="text-align: left"><img src="images\israel_flag.png" alt="Hebrew" class="ui-li-icon ui-corner-none">עברית</a></li>
-                    </ul>
-           
-                </div>
-            </div>
-
-            <!-- חלון מידע כללי -->
-            <a id="lnkInfoPopup"  data-transition="flow" style="text-decoration: none;display:none " href="#infoPopup" data-rel="popup" data-position-to="window" data-transition="pop">feedback</a>
-            <div data-role="popup" data-history="false" id="infoPopup" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="max-width: 400px">
-                <a id="backInGuidePopupPass" href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
-                <div id="inGuidePopupPass" role="main" class="ui-content" style="text-align: center">
-                   <h3 data-word="45"></h3>
-                    <h4>
-                        <span data-word="46"></span>
-                        <br><br>
-                        <span data-word="47"></span>
-                        <br><br>
-                        <span data-word="48"></span>
-                        <br><br>
-                    </h4>
-                    <ul data-role="listview" data-inset="true" style="width: 200px;margin: auto" data-theme="c" >
-                        <li data-icon="cloud"><a href="#" onclick="window.open('http://www.nivut.org', '_system');" style="text-align: center" > www.Nivut.org</a></li>
-                        <li data-icon="phone"><a href="#" onclick="window.open('tel:1700-502-512', '_system')"  style="text-align: center">1700-502-512</a></li>
-                    </ul>
-                    <br><br>
-                    <img alt="copy right" style="width: 18px;margin-bottom: -4px;" src="images/copyright.jpg"/> <h5 style="display: inline" data-word="49"></h5>
-                    <br>
-                    version: <span class="appVersion" style="display: inline">Not define</span>
-                </div>
-            </div>
-
-            <!-- חלון לאפשרויות מדריך-->
-            <a id="lnkGuidePopup"  data-transition="flow" style="text-decoration: none;display:none " href="#guidePopup" data-rel="popup" data-position-to="window" data-transition="pop">feedback</a>
-            <div data-role="popup" data-history="false" id="guidePopup" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="width:300px;">
-                <a id="backInGuidePopup" href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
-                <div id="inGuidePopup" role="main" class="ui-content" style="text-align: center">
-                    <ul>
-                        <li data-icon='false'><a onclick="guideFinishGame()" data-word="39"></a></li><!--סיים ניווט-->
-                        <li data-icon='false'><a onclick="jumpLevel()" href="#" data-word="42"></a></li><!--דילוג על משימה-->
-                        <li data-icon='false'><a onclick="openSwitchFromAnotherUserPopup()" data-word="43"></a></li><!-- צריך ליצור פונקציה שמבקשת את מספר המשתמש שממנו רוצים להחליף - מוודא שהמתמש החדש והמוחלף באותו מזהה ובמידה וכן מבצעת שכלוף ללא מחיקת נתונים של הישן --><!--המשך ניווט של מכשיר אחר-->
-                        <li data-icon='false' ><a href="#developerDiv" onclick="$('#developerDiv').show();$('#content').css('margin-top', '35px');" data-word="44"></a></li><!--הצג מסך מתכנת-->
-                    </ul>
-                </div>
-            </div>
-
-            <!-----developer div------------------------------------------------------------------------------>
-            <div id="developerDiv" style="text-align: center; min-height: 100%;width: 100%;background-color: #000;color: rgb(255, 255, 255);display: none;font-weight: bold;position: absolute;top: 0;right: 0;" >
-                <div id="inDeveloperDiv" style="width: 90%;margin: auto">
-                    <br><br><br><br><br><br>
-                    <a href="#" onclick="$('#developerDiv').css('position','absolute');">absolute</a> | <a href="#" onclick="$('#developerDiv').css('position','initial');">initial</a>
-                    <div style="text-align: center">
-                        <a href="#" onclick="$('#developerDiv').hide();" class="ui-btn ui-btn-b ui-btn-inline ui-icon-delete ui-btn-icon-left ui-corner-all" >סגור</a>
-                    </div>
-                    <span id="dataToBugRepoet">
-                    מספר משתמש: <p class="userID" style="display: inline">Not define</p>
-                    <br>מזהה ושם הניווט: <p class="navID" style="display: inline">Not define</p>, <p class="navName" style="display: inline">Not define</p>
-                    <br>שעת התחלה: <p class="startTime" style="display: inline">Not define</p>
-                    <br>מספר מסלול: <p class="routeNum" style="display: inline">Not define</p>
-                    <br>מספר הנקודה: <p class="point" style="display: inline">Not define</p>
-                    <br>תחנה: <p class="LM" style="display: inline">Not define</p>
-                    <br>שלב: <p class="level" style="display: inline">Not define</p>
-                    <br>מזהה השאלה:<p class="quesID" style="display: inline">Not define</p>
-                    <br>גרסת אפליקציה:<p class="appVersion" style="display: inline">Not define</p>
-                    <br>כמות תחנות לטעינה(זכרון קדימה): <p class="memory" style="display: inline">Not define</p>
-                    <br>כמות תחנות טעונות כרגע: <p class="inStuck" style="display:inline ">0</p>
-                    <br><a onclick='$(".queueStatus").html(localStorage.prior)'>מצב התור: </a><div class="queueStatus" style="direction: ltr">Not define</div>
-                    <br>עדכון ajax אחרון (<a href="#" onclick="checkForFixes()">בקש עדכון ajax כעת</a>): <p class="lastAjax" style="display: inline">Not define</p>
-                    </span>
-                    <br>יומן:( <a href="" onclick="showConsoleText()" >הצג יומן</a> | <a href="" onclick="localStorage.consoleText=null;showConsoleText()" >נקה יומן</a> ) <br>
-                    <div id="console" style="text-align: left; direction: ltr"></div>
-
-                </div>
-            </div>
-
-            <!-- חלון להחלפת משתמש ממכשיר אחר -->
-            <a id="lnkSwitchPopup"  data-transition="flow" style="text-decoration: none;display:none " href="#switchPopup" data-rel="popup" data-position-to="window" data-transition="pop">feedback</a>
-            <div data-role="popup" data-history="false" id="switchPopup" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="max-width: 400px">
-                <a id="backInSwitchPopup" href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
-                <div id="inSwitchDivStep1" role="main" class="ui-content" style="text-align: center">
-                    <h3>החלפת משתמש</h3>
-                    <h4>רשום כאן את מזהה המשתמש אותו תרצה להעביר למכשיר זה:</h4>
-                    <input id="switchPopupInput1">
-                    <h4>רשום שוב את מזהה המשתמש אותו תרצה להעביר:</h4>
-                    <input id="switchPopupInput2">
-                    <h4 style="color: #f00">שים לב! זוהי פעולה בלתי הפיכה, יש לוודא היטב את הנתונים!</h4>
-                    <a id="switcContinueButton1" onclick="askForSwitchFromAnotherUser();" class="ui-btn ui-corner-all ui-shadow ui-btn-b"><span data-word="38"></span></a><!--המשך..-->
-                </div>
-                <div id="inSwitchDivStep2" role="main" class="ui-content" style="text-align: center">
-                    <h3 id="H3InSwitchDivStep2"></h3>
-                    <h4 style="color: #f00">שים לב! זוהי פעולה בלתי הפיכה, יש לוודא היטב את הנתונים!</h4>
-                    <br><br>
-                    <a id="switcContinueButton2" style="display: inline;margin: 20px" onclick="" class="ui-btn ui-corner-all ui-shadow ui-btn-b">אישור</a>
-                    <a id="" href="#" data-rel="back" style="display: inline;margin: 20px" onclick="" class="ui-btn ui-corner-all ui-shadow ui-btn-b">ביטול</a>
-                </div>
-                <div id="inSwitchDivStep3" role="main" class="ui-content" style="text-align: center">
-                    <h3>מבצע עדכון...</h3>
-                    <img src="css/images/ajax-loader.gif" style="height: 30px;" alt="טוען"/>
-                </div>
-            </div>
-        </div><!--content-->
-        <!-- back ground image-->
-        <img id="backgroundImage" src="" alt="bg" style="width: 100%; position: fixed; bottom: 0px; z-index: -1 "/>    
-    </div>
+                function showMessage(text)
+                {
+                    document.querySelector('#message').innerHTML = text;
+                }
+                // This calls onDeviceReady when Cordova has loaded everything.
+                document.addEventListener('deviceready', onDeviceReady, false);
+                // Add back button listener (for Android).
+                document.addEventListener('backbutton', onBackButtonDown, false);
+            })(); // End of closure.
+            </script>
         
     </body>
-</html>
+</html> 
