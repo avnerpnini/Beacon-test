@@ -78,11 +78,11 @@
             <splash src="images/splash/ios/640_1136.png" width="640" height="1136" />
             <splash src="images/splash/ios/750_1334.png" width="750" height="1334" />
             <splash src="images/splash/ios/1242_2208.png" width="1242" height="2208" />
-            <splash src="images/splash/ios/2204_1242.png" width="2208" height="1242" />
+            <!-- <splash src="images/splash/ios/2204_1242.png" width="2208" height="1242" />
             <splash src="images/splash/ios/768_1024.png" width="768" height="1024" />
             <splash src="images/splash/ios/1024_768.png" width="1024" height="768" />
             <splash src="images/splash/ios/1536_2048.png" width="1536" height="2048" />
-            <splash src="images/splash/ios/2048_1536.png" width="2048" height="1536" />
+            <splash src="images/splash/ios/2048_1536.png" width="2048" height="1536" /> -->
         </platform>
        
         
