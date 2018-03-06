@@ -44,6 +44,7 @@
                 beaconScanCounter++;
                 
                 //איפוס לאחר 30 שניות ללא מציאה
+                clearTimeout(beaconScanTimeout);
                 beaconScanTimeout =  setTimeout(function(){
                     calculateDistanceData();
                     beaconStopScan();
