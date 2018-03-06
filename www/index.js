@@ -15,6 +15,7 @@
     
   var beaconScanCounter;
   var beaconsCounter;
+  var beaconScanTimeout;
   function beaconStartScan()
       {
       beaconScanCounter = 0;
@@ -43,7 +44,7 @@
                 beaconScanCounter++;
                 
                 //איפוס לאחר 30 שניות ללא מציאה
-                var myTimeout =  setTimeout(function(){
+                var beaconScanTimeout =  setTimeout(function(){
                     calculateDistanceData();
                     beaconStopScan();
                     displayBeacons();
@@ -56,7 +57,6 @@
                     calculateDistanceData();
                     beaconStopScan();
                     displayBeacons();
-                    clearTimeout(myTimeout);
                     console.log(beacons);
                 }
             },
@@ -68,7 +68,8 @@
 
     function beaconStopScan()
     {
-         showMessage('Scan stoped.');
+        showMessage('Scan stoped.');
+        clearTimeout(beaconScanTimeout);
         evothings.eddystone.stopScan();
     }
 
