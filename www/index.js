@@ -142,6 +142,7 @@
                 +	minDistance(beacon)
                 +	maxDistance(beacon)
                 +	avgDistance(beacon)
+                +	numOfScans(beacon)
                 + '</p>';
             html += htmlBeacon
         }
@@ -225,6 +226,12 @@
     {
         return beacon['ditsnace-avg'] ?
             'ditsnace-avg: ' + beacon['ditsnace-avg'] + '<br/>' :  '';
+    }
+
+    function numOfScans()
+    {
+         return beacon['distancePerScan'] ?
+            'num-Of-Scans: ' + beacon['distancePerScan'].length + '<br/>' :  '';
     }
 
     function showMessage(text)
