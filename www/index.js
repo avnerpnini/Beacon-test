@@ -13,15 +13,40 @@
         // timer = setInterval(updateBeaconList, 500);
     }
     
-    function beaconStartScan()
-    {
+  var beaconScanCounter;
+  var beaconsCounter;
+  function beaconStartScan()
+      {
+      beaconScanCounter = 0;
+      beaconsCounter = 0;
+      beacons = {};
         showMessage('Scan in progress.');
         evothings.eddystone.startScan(
             function(beacon)
             {
                 // Update beacon data.
                 beacon.timeStamp = Date.now();
+                //distance calculate 
+                if (typeof(beacon.distancePerScan) == "undefined"){//a new beacon
+                    beacon.distancePerScan = [];
+                    beaconsCounter++;
+                }
+                beacon.distancePerScan.push(evothings.eddystone.calculateAccuracy(beacon.txPower, beacon.rssi)); 
+                
+                if (typeof(beacon.timesOfScaning) == "undefined")
+                    beacon.timesOfScaning = 1;
+                else
+                    beacon.timesOfScaning++;
+                
                 beacons[beacon.address] = beacon;
+                updateBeaconList();
+                beaconScanCounter++;
+                
+                if (beaconScanCounter >= 10 && beaconScanCounter >= beaconsCounter*15 ){
+                    calculateDistanceData();
+                    beaconStopScan();
+                    console.log(beacons);
+                }
             },
             function(error)
             {
@@ -31,10 +56,23 @@
 
     function beaconStopScan()
     {
+         showMessage('Scan stoped.');
         evothings.eddystone.stopScan();
     }
 
-    
+
+     function calculateDistanceData(){
+         for (var key in beacons)
+         {
+             beacons[key]["ditsnace-min"] = Math.min(...beacons[key]['distancePerScan']);
+             beacons[key]["ditsnace-max"] = Math.max(...beacons[key]['distancePerScan']);
+             var total = 0;
+             for(var i = 0; i < beacons[key]['distancePerScan'].length; i++) {
+                 total += beacons[key]['distancePerScan'][i];
+             }
+             beacons[key]["ditsnace-avg"] = total / beacons[key]['distancePerScan'].length;
+         }
+    }
     
     
 
@@ -45,6 +83,9 @@
         if (rssi < -100) return 100; // Max RSSI
         return 100 + rssi;
     }
+
+   
+
     function getSortedBeaconList(beacons)
     {
         var beaconList = [];
@@ -62,26 +103,14 @@
 
     function updateBeaconList()
     {
-        removeOldBeacons();
-        displayBeacons();
+        var html = 'אותרו '+beaconsCounter+' ביקונים<br>מספר סריקות: '+beaconScanCounter;
+        document.querySelector('#found-beacons').innerHTML = html
     }
     
-    function removeOldBeacons()
-    {
-        var timeNow = Date.now();
-        for (var key in beacons)
-        {
-            // Only show beacons updated during the last 60 seconds.
-            var beacon = beacons[key];
-            if (beacon.timeStamp + 60000 < timeNow)
-            {
-                delete beacons[key];
-            }
-        }
-    }
+   
     function displayBeacons()
     {
-        var html = '';
+        var html = '<h3>אותרו '+beaconsCounter+' ביקונים</h3>';
         var sortedList = getSortedBeaconList(beacons);
         for (var i = 0; i < sortedList.length; ++i)
         {
@@ -96,7 +125,9 @@
                 +	htmlBeaconVoltage(beacon)
                 +	htmlBeaconTemperature(beacon)
                 +	htmlBeaconRSSI(beacon)
-                +	htmlDistance(beacon)
+                +	minDistance(beacon)
+                +	maxDistanceDistance(beacon)
+                +	avgDistanceDistance(beacon)
                 + '</p>';
             html += htmlBeacon
         }
@@ -165,6 +196,21 @@
             var distance = evothings.eddystone.calculateAccuracy(beacon.txPower, beacon.rssi);
             return distance ?
             'distance: ' + distance + '<br/>' :  '';
+    }
+    function minDistance(beacon)
+    {
+        return beacon.ditsnace-min ?
+            'ditsnace-min: ' + beacon.ditsnace-min + '<br/>' :  '';
+    }
+    function maxDistance(beacon)
+    {
+        return beacon.ditsnace-max ?
+            'ditsnace-max: ' + beacon.ditsnace-max + '<br/>' :  '';
+    }
+    function avgDistance(beacon)
+    {
+        return beacon.ditsnace-avg ?
+            'ditsnace-avg: ' + beacon.ditsnace-avg + '<br/>' :  '';
     }
 
     function showMessage(text)
