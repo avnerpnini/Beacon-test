@@ -177,5 +177,4 @@
     // This calls onDeviceReady when Cordova has loaded everything.
     document.addEventListener('deviceready', onDeviceReady, false);
     // Add back button listener (for Android).
-    document.addEventListener('backbutton', onBackButtonDown, false);
 })(); // End of closure.
