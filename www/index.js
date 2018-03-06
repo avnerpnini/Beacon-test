@@ -228,7 +228,7 @@
             'ditsnace-avg: ' + beacon['ditsnace-avg'] + '<br/>' :  '';
     }
 
-    function numOfScans()
+    function numOfScans(beacon)
     {
          return beacon['distancePerScan'] ?
             'num-Of-Scans: ' + beacon['distancePerScan'].length + '<br/>' :  '';
