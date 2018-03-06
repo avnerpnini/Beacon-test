@@ -1,7 +1,4 @@
-// Application code starts here. The code is wrapped in a
-// function closure to prevent overwriting global objects.
-(function()
-{
+
     // Dictionary of beacons.
     var beacons = {};
     // Timer that displays list of beacons.
@@ -174,7 +171,4 @@
     {
         document.querySelector('#message').innerHTML = text;
     }
-    // This calls onDeviceReady when Cordova has loaded everything.
-    document.addEventListener('deviceready', onDeviceReady, false);
-    // Add back button listener (for Android).
-})(); // End of closure.
+
