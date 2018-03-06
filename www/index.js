@@ -10,17 +10,13 @@
     
     function onDeviceReady()
     {
-        // Start tracking beacons!
-        setTimeout(startScan, 500);
-        // Timer that refreshes the display.
-        timer = setInterval(updateBeaconList, 500);
+        // // Start tracking beacons!
+        // setTimeout(startScan, 500);
+        // // Timer that refreshes the display.
+        // timer = setInterval(updateBeaconList, 500);
     }
-    function onBackButtonDown()
-    {
-        evothings.eddystone.stopScan();
-        navigator.app.exitApp();
-    }
-    function startScan()
+    
+    function beaconStartScan()
     {
         showMessage('Scan in progress.');
         evothings.eddystone.startScan(
@@ -32,9 +28,18 @@
             },
             function(error)
             {
-                showMessage('Eddystone scan error: ' + error);
+                alert('Eddystone scan error: ' + error);
             });
     }
+
+    function beaconStopScan()
+    {
+        evothings.eddystone.stopScan();
+    }
+
+    
+    
+    
 
     // Map the RSSI value to a value between 1 and 100.
     function mapBeaconRSSI(rssi)
