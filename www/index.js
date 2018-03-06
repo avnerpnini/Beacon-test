@@ -42,9 +42,21 @@
                 updateBeaconList();
                 beaconScanCounter++;
                 
-                if (beaconScanCounter >= 10 && beaconScanCounter >= beaconsCounter*15 ){
+                //איפוס לאחר 30 שניות ללא מציאה
+                var myTimeout =  setTimeout(function(){
                     calculateDistanceData();
                     beaconStopScan();
+                    displayBeacons();
+                    console.log(beacons);
+                    
+                }, 30000);
+                
+                //איפוס לאחר 60 סריקות או 15 סריקות לפחות כפול מספר הביקונים שאותרו 
+                if ((beaconScanCounter >= 10 && beaconScanCounter >= beaconsCounter*15) || beaconScanCounter >= 60){
+                    calculateDistanceData();
+                    beaconStopScan();
+                    displayBeacons();
+                    clearTimeout(myTimeout);
                     console.log(beacons);
                 }
             },
@@ -95,7 +107,7 @@
         }
         beaconList.sort(function(beacon1, beacon2)
         {
-            return mapBeaconRSSI(beacon1.rssi) < mapBeaconRSSI(beacon2.rssi);
+            return mapBeaconRSSI(beacon1['distance-min']) < mapBeaconRSSI['distance-min'];
         });
         return beaconList;
     }
@@ -103,7 +115,7 @@
 
     function updateBeaconList()
     {
-        var html = 'אותרו '+beaconsCounter+' ביקונים<br>מספר סריקות: '+beaconScanCounter;
+        var html = 'אותרו '+beaconsCounter+' ביקונים<br>מספר סריקות: '+ ((beaconScanCounter)+1);
         document.querySelector('#found-beacons').innerHTML = html
     }
     
@@ -126,8 +138,8 @@
                 +	htmlBeaconTemperature(beacon)
                 +	htmlBeaconRSSI(beacon)
                 +	minDistance(beacon)
-                +	maxDistanceDistance(beacon)
-                +	avgDistanceDistance(beacon)
+                +	maxDistance(beacon)
+                +	avgDistance(beacon)
                 + '</p>';
             html += htmlBeacon
         }
@@ -199,18 +211,18 @@
     }
     function minDistance(beacon)
     {
-        return beacon.ditsnace-min ?
-            'ditsnace-min: ' + beacon.ditsnace-min + '<br/>' :  '';
+        return beacon['ditsnace-min'] ?
+            'ditsnace-min: ' + beacon['ditsnace-min']+ '<br/>' :  '';
     }
     function maxDistance(beacon)
     {
-        return beacon.ditsnace-max ?
-            'ditsnace-max: ' + beacon.ditsnace-max + '<br/>' :  '';
+        return beacon['ditsnace-max'] ?
+            'ditsnace-max: ' + beacon['ditsnace-max'] + '<br/>' :  '';
     }
     function avgDistance(beacon)
     {
-        return beacon.ditsnace-avg ?
-            'ditsnace-avg: ' + beacon.ditsnace-avg + '<br/>' :  '';
+        return beacon['ditsnace-avg'] ?
+            'ditsnace-avg: ' + beacon['ditsnace-avg'] + '<br/>' :  '';
     }
 
     function showMessage(text)
