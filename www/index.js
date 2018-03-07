@@ -117,7 +117,7 @@
     {
         beaconScanOutput.numOfFoundsBeacons = beaconsCounter;
         beaconScanOutput.numOfSucessScans = beaconScanCounter;
-        var html = 'אותרו '+beaconsCounter+' ביקונים<br>מספר סריקות: '+ ((beaconScanCounter)+1);
+        var html = 'אותרו '+beaconsCounter+' ביקונים<br>מספר סריקות: '+ ((beaconScanCounter));
         document.querySelector('#found-beacons').innerHTML = html+JSON.stringify(beaconScanOutput);
     }
     
@@ -126,7 +126,7 @@
     {   
         eaconScanOutput.numOfFoundsBeacons = beaconsCounter;
         beaconScanOutput.numOfSucessScans = beaconScanCounter;
-        beaconScanOutput.resualt = {};
+        beaconScanOutput.resualt = [];
         
         var html = '<h3>אותרו '+beaconsCounter+' ביקונים</h3>';
         //var sortedList = getSortedBeaconList(beacons);
@@ -139,22 +139,27 @@
             var beacon = beacons[key];
             var htmlBeacon =
                 '<p>'
-                +	'<strong>' + htmlBeaconName(beacon) + '</strong><br/>' 
-                +	'URL: ' + htmlBeaconURL(beacon) + '<br/>'
-                +	htmlBeaconNID(beacon)
-                +	htmlBeaconBID(beacon)
-                +	htmlBeaconEID(beacon)
-                +	htmlBeaconVoltage(beacon)
-                +	htmlBeaconTemperature(beacon)
-                +	htmlBeaconRSSI(beacon)
-                +	minDistance(beacon)
-                +	maxDistance(beacon)
-                +	avgDistance(beacon)
-                +	numOfScans(beacon)
+                +	'<strong>'          + htmlBeaconName(beacon)    + '</strong><br/>' 
+                +	'URL: '             + htmlBeaconURL(beacon)     + '<br/>'
+                +	'RSSI: '            + htmlBeaconRSSI(beacon)    + '<br/>'
+                +	 'ditsnace-min: '   + minDistance(beacon)       + '<br/>'
+                +	 'ditsnace-max: '   + maxDistance(beacon)       + '<br/>'
+                +	'ditsnace-avg: '    + avgDistance(beacon)       + '<br/>'
+                +	'num-Of-Scans: '    + numOfScans(beacon)        + '<br/>' 
                 + '</p>';
-            html += htmlBeacon
+            html += htmlBeacon;
+
+            var currentBeaconResualt = {};
+            currentBeaconResualt.URL = htmlBeaconURL(beacon);
+            currentBeaconResualt.RSSI = htmlBeaconRSSI(beacon);
+            currentBeaconResualt.ditsnaceMin = minDistance(beacon);
+            currentBeaconResualt.ditsnaceMax = maxDistance(beacon);
+            currentBeaconResualt.ditsnaceAvg = avgDistance(beacon);
+            currentBeaconResualt.numOfScans = numOfScans(beacon);
+            
+            beaconScanOutput.resualt.push(currentBeaconResualt);
         }
-        document.querySelector('#found-beacons').innerHTML = html;
+        document.querySelector('#found-beacons').innerHTML = html+JSON.stringify(beaconScanOutput);
     }
 
     function htmlBeaconName(beacon){
@@ -162,85 +167,37 @@
         return name;
     }
 
-    function htmlBeaconURL(beacon)
-    {
+    function htmlBeaconURL(beacon){
         return beacon.url ?
              beacon.url  :  null;
     }
     
-    function htmlBeaconNID(beacon)
-    {
-        return beacon.nid ?
-            'NID: ' + uint8ArrayToString(beacon.nid) + '<br/>' :  '';
-    }
-    function htmlBeaconBID(beacon)
-    {
-        return beacon.bid ?
-            'BID: ' + uint8ArrayToString(beacon.bid) + '<br/>' :  '';
-    }
-    function htmlBeaconEID(beacon)
-    {
-        return beacon.eid ?
-            'EID: ' + uint8ArrayToString(beacon.eid) + '<br/>' :  '';
-    }
-    function htmlBeaconVoltage(beacon)
-    {
-        return beacon.voltage ?
-            'Voltage: ' + beacon.voltage + '<br/>' :  '';
-    }
-    function htmlBeaconTemperature(beacon)
-    {
-        return beacon.temperature && beacon.temperature != 0x8000 ?
-            'Temperature: ' + beacon.temperature + '<br/>' :  '';
-    }
-    function htmlBeaconRSSI(beacon)
-    {
+    function htmlBeaconRSSI(beacon){
         return beacon.rssi ?
-            'RSSI: ' + beacon.rssi + '<br/>' :  '';
+            beacon.rssi  :  null;
     }
-    function uint8ArrayToString(uint8Array)
-    {
-        function format(x)
-        {
-            var hex = x.toString(16);
-            return hex.length < 2 ? '0' + hex : hex;
-        }
-        var result = '';
-        for (var i = 0; i < uint8Array.length; ++i)
-        {
-            result += format(uint8Array[i]) + ' ';
-        }
-        return result;
-    }
-    function htmlDistance(beacon){
-            var distance = evothings.eddystone.calculateAccuracy(beacon.txPower, beacon.rssi);
-            return distance ?
-            'distance: ' + distance + '<br/>' :  '';
-    }
-    function minDistance(beacon)
-    {
+
+    function minDistance(beacon){
         return beacon['ditsnace-min'] ?
-            'ditsnace-min: ' + beacon['ditsnace-min']+ '<br/>' :  '';
+            beacon['ditsnace-min'] :  null;
     }
-    function maxDistance(beacon)
-    {
+
+    function maxDistance(beacon){
         return beacon['ditsnace-max'] ?
-            'ditsnace-max: ' + beacon['ditsnace-max'] + '<br/>' :  '';
+           beacon['ditsnace-max'] :  null;
     }
-    function avgDistance(beacon)
-    {
+
+    function avgDistance(beacon){
         return beacon['ditsnace-avg'] ?
-            'ditsnace-avg: ' + beacon['ditsnace-avg'] + '<br/>' :  '';
+            beacon['ditsnace-avg']: null;
     }
 
-    function numOfScans(beacon)
-    {
+    function numOfScans(beacon){
          return beacon['distancePerScan'] ?
-            'num-Of-Scans: ' + beacon['distancePerScan'].length + '<br/>' :  '';
+            beacon['distancePerScan'].length: null;
     }
 
-    function showMessage(text)
-    {
+    function showMessage(text){
         document.querySelector('#message').innerHTML = text;
     }
 
