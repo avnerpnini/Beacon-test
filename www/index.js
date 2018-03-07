@@ -8,11 +8,13 @@
     var beaconScanOutput;
     function beaconStartScan()
         {
+        var MAXSCANTIME = 30 //in seconds
         beaconScanCounter = 0;
         beaconsCounter = 0;
         beacons = {};
         beaconScanOutput = {};
         beaconScanOutput.isScanning = 1;
+        beaconScanOutput.maxScanTime = MAXSCANTIME;
         
         showMessage('Scan in progress.');
         //איפוס לאחר 30 שניות ללא מציאה
@@ -23,7 +25,7 @@
             displayBeacons();
             console.log(beacons);
             
-        }, 30000);
+        }, MAXSCANTIME * 1000);
         
         //eddystone scan
         evothings.eddystone.startScan(
@@ -59,7 +61,8 @@
             },
             function(error)
             {
-                alert('Eddystone scan error: ' + error);
+                beaconScanOutput.error = 'Eddystone scan error: ' + error;
+                //alert('Eddystone scan error: ' + error);
             });
         }
 
@@ -120,16 +123,24 @@
     
    
     function displayBeacons()
-    {
+    {   
+        eaconScanOutput.numOfFoundsBeacons = beaconsCounter;
+        beaconScanOutput.numOfSucessScans = beaconScanCounter;
+        beaconScanOutput.resualt = {};
+        
         var html = '<h3>אותרו '+beaconsCounter+' ביקונים</h3>';
-        var sortedList = getSortedBeaconList(beacons);
-        for (var i = 0; i < sortedList.length; ++i)
+        //var sortedList = getSortedBeaconList(beacons);
+        for (var key in beacons)
         {
-            var beacon = sortedList[i];
+            // beaconList.push(beacons[key]);
+            // }
+            // for (var i = 0; i < sortedList.length; ++i)
+            // {
+            var beacon = beacons[key];
             var htmlBeacon =
                 '<p>'
-                +	htmlBeaconName(beacon)
-                +	htmlBeaconURL(beacon)
+                +	'<strong>' + htmlBeaconName(beacon) + '</strong><br/>' 
+                +	'URL: ' + htmlBeaconURL(beacon) + '<br/>'
                 +	htmlBeaconNID(beacon)
                 +	htmlBeaconBID(beacon)
                 +	htmlBeaconEID(beacon)
@@ -145,21 +156,18 @@
         }
         document.querySelector('#found-beacons').innerHTML = html;
     }
-    function htmlBeaconName(beacon)
-    {
+
+    function htmlBeaconName(beacon){
         var name = beacon.name || 'no name';
-        return '<strong>' + name + '</strong><br/>';
+        return name;
     }
+
     function htmlBeaconURL(beacon)
     {
         return beacon.url ?
-            'URL: ' + beacon.url + '<br/>' :  '';
+             beacon.url  :  null;
     }
-    function htmlBeaconURL(beacon)
-    {
-        return beacon.url ?
-            'URL: ' + beacon.url + '<br/>' :  '';
-    }
+    
     function htmlBeaconNID(beacon)
     {
         return beacon.nid ?
