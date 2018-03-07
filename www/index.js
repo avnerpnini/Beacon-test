@@ -124,7 +124,7 @@
    
     function displayBeacons()
     {   
-        eaconScanOutput.numOfFoundsBeacons = beaconsCounter;
+        beaconScanOutput.numOfFoundsBeacons = beaconsCounter;
         beaconScanOutput.numOfSucessScans = beaconScanCounter;
         beaconScanOutput.resualt = [];
         
