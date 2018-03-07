@@ -15,14 +15,11 @@
         beaconScanOutput = {};
         beaconScanOutput.isScanning = 1;
         beaconScanOutput.maxScanTime = MAXSCANTIME;
-        
-        showMessage('Scan in progress.');
         //איפוס לאחר 30 שניות ללא מציאה
         clearTimeout(beaconScanTimeout);
         beaconScanTimeout =  setTimeout(function(){
             calculateDistanceData();
             beaconStopScan();
-            displayBeacons();
             console.log(beacons);
             
         }, MAXSCANTIME * 1000);
@@ -47,7 +44,7 @@
                 
                 beacons[beacon.address] = beacon;
                 beaconScanCounter++;
-                updateBeaconList();
+                updateBeaconOutput();
                 
                 
                 
@@ -55,7 +52,7 @@
                 if ((beaconScanCounter >= 10 && beaconScanCounter >= beaconsCounter*15) || beaconScanCounter >= 60){
                     calculateDistanceData();
                     beaconStopScan();
-                    displayBeacons();
+                    saveScanResualt();
                     console.log(beacons);
                 }
             },
@@ -69,9 +66,9 @@
         function beaconStopScan()
         {
             beaconScanOutput.isScanning = 0;
-            showMessage('Scan stoped.');
             clearTimeout(beaconScanTimeout);
             evothings.eddystone.stopScan();
+            updateBeaconOutput();
     }
 
 
@@ -113,29 +110,24 @@
     }
 
 
-    function updateBeaconList()
+    function updateBeaconOutput()
     {
         beaconScanOutput.numOfFoundsBeacons = beaconsCounter;
         beaconScanOutput.numOfSucessScans = beaconScanCounter;
-        var html = 'אותרו '+beaconsCounter+' ביקונים<br>מספר סריקות: '+ ((beaconScanCounter));
-        document.querySelector('#found-beacons').innerHTML = html+JSON.stringify(beaconScanOutput);
+        //var html = 'אותרו '+beaconsCounter+' ביקונים<br>מספר סריקות: '+ ((beaconScanCounter));
+        document.querySelector('#found-beacons').innerHTML = JSON.stringify(beaconScanOutput);
     }
     
    
-    function displayBeacons()
+    function saveScanResualt()
     {   
         beaconScanOutput.numOfFoundsBeacons = beaconsCounter;
         beaconScanOutput.numOfSucessScans = beaconScanCounter;
         beaconScanOutput.resualt = [];
         
-        var html = '<h3>אותרו '+beaconsCounter+' ביקונים</h3>';
-        //var sortedList = getSortedBeaconList(beacons);
+        var log = '<h3>אותרו '+beaconsCounter+' ביקונים</h3>';
         for (var key in beacons)
         {
-            // beaconList.push(beacons[key]);
-            // }
-            // for (var i = 0; i < sortedList.length; ++i)
-            // {
             var beacon = beacons[key];
             var htmlBeacon =
                 '<p>'
@@ -147,7 +139,7 @@
                 +	'ditsnace-avg: '    + avgDistance(beacon)       + '<br/>'
                 +	'num-Of-Scans: '    + numOfScans(beacon)        + '<br/>' 
                 + '</p>';
-            html += htmlBeacon;
+            log += htmlBeacon;
 
             var currentBeaconResualt = {};
             currentBeaconResualt.URL = htmlBeaconURL(beacon);
@@ -159,7 +151,8 @@
             
             beaconScanOutput.resualt.push(currentBeaconResualt);
         }
-        document.querySelector('#found-beacons').innerHTML = html+JSON.stringify(beaconScanOutput);
+        console.log("scan success and finised", log);
+        updateBeaconOutput()
     }
 
     function htmlBeaconName(beacon){
@@ -195,9 +188,5 @@
     function numOfScans(beacon){
          return beacon['distancePerScan'] ?
             beacon['distancePerScan'].length: null;
-    }
-
-    function showMessage(text){
-        document.querySelector('#message').innerHTML = text;
     }
 
