@@ -1,13 +1,10 @@
-
-    // Dictionary of beacons.
-    
     var beacons = {};    
     var beaconScanCounter;
     var beaconsCounter;
     var beaconScanTimeout;
     var beaconScanOutput;
-    function beaconStartScan()
-        {
+
+    function beaconStartScan(){
         var MAXSCANTIME = 30 //in seconds
         beaconScanCounter = 0;
         beaconsCounter = 0;
@@ -19,13 +16,12 @@
         clearTimeout(beaconScanTimeout);
         beaconScanTimeout =  setTimeout(function(){
             beaconScanOutput.MaxTimeIsOver = 1;
-            sacnFinished();
+            beaconScanFinished();
         }, MAXSCANTIME * 1000);
         
         //eddystone scan
         evothings.eddystone.startScan(
-            function(beacon)
-            {
+            function(beacon){
                 // Update beacon data.
                 beacon.timeStamp = Date.now();
                 //distance calculate 
@@ -48,26 +44,25 @@
                 
                 //איפוס לאחר 60 סריקות או 15 סריקות לפחות כפול מספר הביקונים שאותרו 
                 if ((beaconScanCounter >= 10 && beaconScanCounter >= beaconsCounter*15) || beaconScanCounter >= 60){
-                    sacnFinished();
-                }
-                
-                //function that caled whan scan finished after beaconScanCounter reached destination or the max time is over
-                function sacnFinished(){
-                    beaconCalculateDistanceData();
-                    beaconStopScan();
-                    saveScanResualt();
-                    console.log(beacons);
+                    beaconScanFinished();
                 }
             },
-            function(error)
-            {
+            function(error){
                 beaconScanOutput.error = 'Eddystone scan error: ' + error;
                 //alert('Eddystone scan error: ' + error);
             });
         }
 
-        function beaconStopScan()
-        {
+    //function that caled whan scan finished after beaconScanCounter reached destination or the max time is over
+    
+    function beaconScanFinished(){
+        beaconCalculateDistanceData();
+        beaconStopScan();
+        beaconSaveScanResualt();
+        console.log(beacons);
+    }
+
+    function beaconStopScan(){
             beaconScanOutput.isScanning = 0;
             clearTimeout(beaconScanTimeout);
             evothings.eddystone.stopScan();
@@ -96,25 +91,7 @@
         return 100 + rssi;
     }
 
-   
-
-    function getSortedBeaconList(beacons)
-    {
-        var beaconList = [];
-        for (var key in beacons)
-        {
-            beaconList.push(beacons[key]);
-        }
-        beaconList.sort(function(beacon1, beacon2)
-        {
-            return mapBeaconRSSI(beacon1['distance-min']) < mapBeaconRSSI['distance-min'];
-        });
-        return beaconList;
-    }
-
-
-    function updateBeaconOutput()
-    {
+    function updateBeaconOutput(){
         beaconScanOutput.numOfFoundsBeacons = beaconsCounter;
         beaconScanOutput.numOfSucessScans = beaconScanCounter;
         //var html = 'אותרו '+beaconsCounter+' ביקונים<br>מספר סריקות: '+ ((beaconScanCounter));
@@ -122,8 +99,7 @@
     }
     
    
-    function saveScanResualt()
-    {   
+    function beaconSaveScanResualt(){   
         beaconScanOutput.numOfFoundsBeacons = beaconsCounter;
         beaconScanOutput.numOfSucessScans = beaconScanCounter;
         beaconScanOutput.resualt = [];
@@ -137,20 +113,20 @@
                 +	'<strong>'          + htmlBeaconName(beacon)    + '</strong><br/>' 
                 +	'URL: '             + htmlBeaconURL(beacon)     + '<br/>'
                 +	'RSSI: '            + htmlBeaconRSSI(beacon)    + '<br/>'
-                +	 'ditsnace-min: '   + minDistance(beacon)       + '<br/>'
-                +	 'ditsnace-max: '   + maxDistance(beacon)       + '<br/>'
-                +	'ditsnace-avg: '    + avgDistance(beacon)       + '<br/>'
-                +	'num-Of-Scans: '    + numOfScans(beacon)        + '<br/>' 
+                +	 'ditsnace-min: '   + beaconMinDistance(beacon)       + '<br/>'
+                +	 'ditsnace-max: '   + beaconMaxDistance(beacon)       + '<br/>'
+                +	'ditsnace-avg: '    + beaconAvgDistance(beacon)       + '<br/>'
+                +	'num-Of-Scans: '    + beaconNumOfScans(beacon)        + '<br/>' 
                 + '</p>';
             log += htmlBeacon;
 
             var currentBeaconResualt = {};
             currentBeaconResualt.URL = htmlBeaconURL(beacon);
             currentBeaconResualt.RSSI = htmlBeaconRSSI(beacon);
-            currentBeaconResualt.ditsnaceMin = minDistance(beacon);
-            currentBeaconResualt.ditsnaceMax = maxDistance(beacon);
-            currentBeaconResualt.ditsnaceAvg = avgDistance(beacon);
-            currentBeaconResualt.numOfScans = numOfScans(beacon);
+            currentBeaconResualt.ditsnaceMin = beaconMinDistance(beacon);
+            currentBeaconResualt.ditsnaceMax = beaconMaxDistance(beacon);
+            currentBeaconResualt.ditsnaceAvg = beaconAvgDistance(beacon);
+            currentBeaconResualt.numOfScans = beaconNumOfScans(beacon);
             
             beaconScanOutput.resualt.push(currentBeaconResualt);
         }
@@ -173,22 +149,22 @@
             beacon.rssi  :  null;
     }
 
-    function minDistance(beacon){
+    function beaconMinDistance(beacon){
         return beacon['ditsnace-min'] ?
             beacon['ditsnace-min'] :  null;
     }
 
-    function maxDistance(beacon){
+    function beaconMaxDistance(beacon){
         return beacon['ditsnace-max'] ?
            beacon['ditsnace-max'] :  null;
     }
 
-    function avgDistance(beacon){
+    function beaconAvgDistance(beacon){
         return beacon['ditsnace-avg'] ?
             beacon['ditsnace-avg']: null;
     }
 
-    function numOfScans(beacon){
+    function beaconNumOfScans(beacon){
          return beacon['distancePerScan'] ?
             beacon['distancePerScan'].length: null;
     }
