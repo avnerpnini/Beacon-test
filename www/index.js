@@ -18,10 +18,8 @@
         //איפוס לאחר 30 שניות ללא מציאה
         clearTimeout(beaconScanTimeout);
         beaconScanTimeout =  setTimeout(function(){
-            calculateDistanceData();
-            beaconStopScan();
-            console.log(beacons);
-            
+            beaconScanOutput.MaxTimeIsOver = 1;
+            sacnFinished();
         }, MAXSCANTIME * 1000);
         
         //eddystone scan
@@ -50,7 +48,12 @@
                 
                 //איפוס לאחר 60 סריקות או 15 סריקות לפחות כפול מספר הביקונים שאותרו 
                 if ((beaconScanCounter >= 10 && beaconScanCounter >= beaconsCounter*15) || beaconScanCounter >= 60){
-                    calculateDistanceData();
+                    sacnFinished();
+                }
+                
+                //function that caled whan scan finished after beaconScanCounter reached destination or the max time is over
+                function sacnFinished(){
+                    beaconCalculateDistanceData();
                     beaconStopScan();
                     saveScanResualt();
                     console.log(beacons);
@@ -71,8 +74,8 @@
             updateBeaconOutput();
     }
 
-
-     function calculateDistanceData(){
+    //calculate min, max & ang ditance
+    function beaconCalculateDistanceData(){
          for (var key in beacons)
          {
              beacons[key]["ditsnace-min"] = Math.min(...beacons[key]['distancePerScan']);
