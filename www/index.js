@@ -1,37 +1,31 @@
 
     // Dictionary of beacons.
-    var beacons = {};
-    // Timer that displays list of beacons.
-    var timer = null;
-
     
-    function onDeviceReady()
-    {
-        // // Start tracking beacons!
-        // setTimeout(startScan, 500);
-        // // Timer that refreshes the display.
-        // timer = setInterval(updateBeaconList, 500);
-    }
-    
-  var beaconScanCounter;
-  var beaconsCounter;
-  var beaconScanTimeout;
-  function beaconStartScan()
-      {
-      beaconScanCounter = 0;
-      beaconsCounter = 0;
-      beacons = {};
-    showMessage('Scan in progress.');
-    //איפוס לאחר 30 שניות ללא מציאה
-    clearTimeout(beaconScanTimeout);
-    beaconScanTimeout =  setTimeout(function(){
-        calculateDistanceData();
-        beaconStopScan();
-        displayBeacons();
-        console.log(beacons);
+    var beacons = {};    
+    var beaconScanCounter;
+    var beaconsCounter;
+    var beaconScanTimeout;
+    var beaconScanOutput;
+    function beaconStartScan()
+        {
+        beaconScanCounter = 0;
+        beaconsCounter = 0;
+        beacons = {};
+        beaconScanOutput = {};
+        beaconScanOutput.isScanning = 1;
         
-    }, 30000);
-
+        showMessage('Scan in progress.');
+        //איפוס לאחר 30 שניות ללא מציאה
+        clearTimeout(beaconScanTimeout);
+        beaconScanTimeout =  setTimeout(function(){
+            calculateDistanceData();
+            beaconStopScan();
+            displayBeacons();
+            console.log(beacons);
+            
+        }, 30000);
+        
+        //eddystone scan
         evothings.eddystone.startScan(
             function(beacon)
             {
@@ -50,8 +44,8 @@
                     beacon.timesOfScaning++;
                 
                 beacons[beacon.address] = beacon;
-                updateBeaconList();
                 beaconScanCounter++;
+                updateBeaconList();
                 
                 
                 
@@ -67,13 +61,14 @@
             {
                 alert('Eddystone scan error: ' + error);
             });
-    }
+        }
 
-    function beaconStopScan()
-    {
-        showMessage('Scan stoped.');
-        clearTimeout(beaconScanTimeout);
-        evothings.eddystone.stopScan();
+        function beaconStopScan()
+        {
+            beaconScanOutput.isScanning = 0;
+            showMessage('Scan stoped.');
+            clearTimeout(beaconScanTimeout);
+            evothings.eddystone.stopScan();
     }
 
 
@@ -89,8 +84,6 @@
              beacons[key]["ditsnace-avg"] = total / beacons[key]['distancePerScan'].length;
          }
     }
-    
-    
 
     // Map the RSSI value to a value between 1 and 100.
     function mapBeaconRSSI(rssi)
@@ -119,8 +112,10 @@
 
     function updateBeaconList()
     {
+        beaconScanOutput.numOfFoundsBeacons = beaconsCounter;
+        beaconScanOutput.numOfSucessScans = beaconScanCounter;
         var html = 'אותרו '+beaconsCounter+' ביקונים<br>מספר סריקות: '+ ((beaconScanCounter)+1);
-        document.querySelector('#found-beacons').innerHTML = html
+        document.querySelector('#found-beacons').innerHTML = html+JSON.stringify(beaconScanOutput);
     }
     
    
