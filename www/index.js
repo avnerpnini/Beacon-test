@@ -18,7 +18,7 @@
             beaconScanOutput.MaxTimeIsOver = 1;
             beaconScanFinished();
         }, MAXSCANTIME * 1000);
-        
+        updateBeaconOutput();
         //eddystone scan
         evothings.eddystone.startScan(
             function(beacon){
@@ -53,8 +53,8 @@
             });
         }
 
-    //function that caled whan scan finished after beaconScanCounter reached destination or the max time is over
     
+    //function that caled whan scan finished after beaconScanCounter reached destination or the max time is over
     function beaconScanFinished(){
         beaconCalculateDistanceData();
         beaconStopScan();
