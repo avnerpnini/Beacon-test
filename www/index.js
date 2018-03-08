@@ -50,10 +50,10 @@
             function(error){
                 beaconScanOutput.error = 'Eddystone scan error: ' + error;
                 //alert('Eddystone scan error: ' + error);
-            });
-        }
+            }
+        );
+    }
 
-    
     //function that caled whan scan finished after beaconScanCounter reached destination or the max time is over
     function beaconScanFinished(){
         beaconCalculateDistanceData();
