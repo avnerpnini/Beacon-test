@@ -73,8 +73,9 @@
     function beaconCalculateDistanceData(){
          for (var key in beacons)
          {
-             beacons[key]["ditsnace-min"] = Math.min(...beacons[key]['distancePerScan']);
-             beacons[key]["ditsnace-max"] = Math.max(...beacons[key]['distancePerScan']);
+            //the ... way dont work on old devices
+            beacons[key]["ditsnace-min"] = Math.max.apply(null, beacons[key]['distancePerScan'])//(...beacons[key]['distancePerScan']);
+            beacons[key]["ditsnace-max"] = Math.max.apply(null, beacons[key]['distancePerScan'])//(...beacons[key]['distancePerScan']);
              var total = 0;
              for(var i = 0; i < beacons[key]['distancePerScan'].length; i++) {
                  total += beacons[key]['distancePerScan'][i];
